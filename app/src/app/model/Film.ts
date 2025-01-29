@@ -10,6 +10,7 @@ export interface Film extends BaseEntity {
     title: string;
     image: string;
     oscars: number;
+    language: string;
     duration: string;
     directors: string;
     producers: string;
@@ -27,6 +28,7 @@ export interface FilmCategoryGroup {
 export interface FilmRequest {
     cast: string;
     title: string;
+    language: string;
     duration: string;
     imdb: number | 0;
     directors: string;

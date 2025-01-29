@@ -15,7 +15,7 @@ import NumericFieldsSection from './section/NumericFieldsSection';
 const CreateFilmPage: React.FC = () => {
     const {
         commonStore: { language },
-        filmFormStore: { onSubmit, formatDuration, getCategoryOptions, setFormValues, initialFormValues, ageOptions, formValues, validationSchema },
+        filmFormStore: { onSubmit, formatDuration, getCategoryOptions, getLanguageOptions, setFormValues, initialFormValues, ageOptions, formValues, validationSchema },
     } = useStore();
 
     const handleSubmit = (request: FilmRequest, resetForm: () => void) => {
@@ -55,6 +55,7 @@ const CreateFilmPage: React.FC = () => {
                                     ageOptions={ageOptions}
                                     setFieldValue={setFieldValue}
                                     categoryOptions={getCategoryOptions()}
+                                    languageOptions={getLanguageOptions()}
                                 />
                                 <FileUploadSection values={values} setFieldValue={setFieldValue} language={language} />
                                 <ActionButtonsSection isValid={isValid} language={language} />

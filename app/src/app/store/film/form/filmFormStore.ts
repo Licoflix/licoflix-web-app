@@ -28,6 +28,7 @@ export default class FilmFormStore {
         film: null,
         image: null,
         duration: '',
+        language: '',
         directors: '',
         producers: '',
         categories: [],
@@ -48,6 +49,7 @@ export default class FilmFormStore {
         year: null,
         film: null,
         image: null,
+        language: '',
         duration: '',
         directors: '',
         producers: '',
@@ -90,11 +92,46 @@ export default class FilmFormStore {
         { key: 'sports', text: 'Sports', value: 'Sports' },
         { key: 'musical', text: 'Musical', value: 'Musical' },
         { key: 'noir', text: 'Noir', value: 'Noir' },
-        { key: 'talk-show', text: 'Talk Show', value: 'Talk Show' },
-        { key: 'reality-tv', text: 'Reality TV', value: 'Reality TV' },
         { key: 'experimental', text: 'Experimental', value: 'Experimental' },
         { key: 'cult', text: 'Cult', value: 'Cult' },
     ];
+
+    getLanguageOptions = (): { key: string, text: string, value: string }[] => {
+        return [
+            { key: 'arabic', text: 'Arabic', value: 'Arabic' },
+            { key: 'german', text: 'German', value: 'German' },
+            { key: 'bengali', text: 'Bengali', value: 'Bengali' },
+            { key: 'chinese', text: 'Chinese', value: 'Chinese' },
+            { key: 'korean', text: 'Korean', value: 'Korean' },
+            { key: 'danish', text: 'Danish', value: 'Danish' },
+            { key: 'spanish', text: 'Spanish', value: 'Spanish' },
+            { key: 'french', text: 'French', value: 'French' },
+            { key: 'greek', text: 'Greek', value: 'Greek' },
+            { key: 'hebrew', text: 'Hebrew', value: 'Hebrew' },
+            { key: 'english', text: 'English', value: 'English' },
+            { key: 'hindi', text: 'Hindi', value: 'Hindi' },
+            { key: 'dutch', text: 'Dutch', value: 'Dutch' },
+            { key: 'hungarian', text: 'Hungarian', value: 'Hungarian' },
+            { key: 'indonesian', text: 'Indonesian', value: 'Indonesian' },
+            { key: 'italian', text: 'Italian', value: 'Italian' },
+            { key: 'japanese', text: 'Japanese', value: 'Japanese' },
+            { key: 'norwegian', text: 'Norwegian', value: 'Norwegian' },
+            { key: 'persian', text: 'Persian', value: 'Persian' },
+            { key: 'polish', text: 'Polish', value: 'Polish' },
+            { key: 'portuguesePortugal', text: 'portuguesePortugal', value: 'portuguesePortugal' },
+            { key: 'romanian', text: 'Romanian', value: 'Romanian' },
+            { key: 'russian', text: 'Russian', value: 'Russian' },
+            { key: 'swedish', text: 'Swedish', value: 'Swedish' },
+            { key: 'thai', text: 'Thai', value: 'Thai' },
+            { key: 'tamil', text: 'Tamil', value: 'Tamil' },
+            { key: 'telugu', text: 'Telugu', value: 'Telugu' },
+            { key: 'turkish', text: 'Turkish', value: 'Turkish' },
+            { key: 'ukrainian', text: 'Ukrainian', value: 'Ukrainian' },
+            { key: 'urdu', text: 'Urdu', value: 'Urdu' },
+            { key: 'vietnamese', text: 'Vietnamese', value: 'Vietnamese' },
+            { key: 'portugueseBrazil', text: 'portugueseBrazil', value: 'portugueseBrazil' }
+        ];
+    };
 
     handleEditClick = (entity: any) => {
         this.setSelectedFilm(entity);
@@ -114,6 +151,7 @@ export default class FilmFormStore {
             title: entity.title,
             oscars: entity.oscars,
             subtitle: entity.subtitle,
+            language: entity.language,
             duration: entity.duration,
             background: backgroundBlob,
             directors: entity.directors,
@@ -189,7 +227,6 @@ export default class FilmFormStore {
 
     getCategoryOptions = (): CategoryOption[] => {
         return this.categoryOptions
-            .sort((a, b) => a.text.localeCompare(b.text))
             .map(option => ({
                 key: option.key,
                 text: option.text,
@@ -237,6 +274,7 @@ export default class FilmFormStore {
         formData.append('cast', request.cast);
         formData.append('title', request.title);
         formData.append('duration', request.duration);
+        formData.append('language', request.language);
         formData.append('directors', request.directors);
         formData.append('producers', request.producers);
         formData.append('description', request.description);
