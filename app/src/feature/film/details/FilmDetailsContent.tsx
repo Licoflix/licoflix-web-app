@@ -131,7 +131,7 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                 <p className='film-details-info-desc'>Portuguese (Brazil)</p>
 
                                 <p className='film-details-info-title'>{findTranslation('audioLanguages', language)}</p>
-                                <p className='film-details-info-desc'>{film.language} - Original</p>
+                                <p className='film-details-info-desc'>{findTranslation(film.language, language)} - Original</p>
 
                                 <p className='film-details-info-title'>{findTranslation('directors', language)}</p>
                                 <p className='film-details-info-desc'>{film.directors}</p>
