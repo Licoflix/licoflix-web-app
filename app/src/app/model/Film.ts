@@ -1,0 +1,45 @@
+import { BaseEntity } from "./BaseEntity";
+
+export interface Film extends BaseEntity {
+    id: number;
+    age: number;
+    year: number;
+    imdb: string;
+    path: string;
+    cast: string;
+    title: string;
+    image: string;
+    oscars: number;
+    duration: string;
+    directors: string;
+    producers: string;
+    background: string;
+    description: string;
+    baftaAwards: number;
+    categories: string[];
+}
+
+export interface FilmCategoryGroup {
+    category: string;
+    films: Film[];
+}
+
+export interface FilmRequest {
+    cast: string;
+    title: string;
+    duration: string;
+    imdb: number | 0;
+    directors: string;
+    producers: string;
+    oscars: number | 0;
+    id?: number | null;
+    age: number | null;
+    year: number | null;
+    description: string;
+    categories: string[];
+    subtitle: File | null;
+    baftaAwards: number | 0;
+    film: File | null | undefined;
+    image: File | null | undefined;
+    background: File | null | undefined;
+}
