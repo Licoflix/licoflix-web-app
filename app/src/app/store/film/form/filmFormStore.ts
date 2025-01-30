@@ -209,6 +209,7 @@ export default class FilmFormStore {
             title: Yup.string().required('Title is required'),
             age: Yup.number().required('Age rating is required'),
             duration: Yup.string().required('Duration is required'),
+            language: Yup.string().required('Language are required'),
             directors: Yup.string().required('Directors are required'),
             producers: Yup.string().required('Producers are required'),
             description: Yup.string().required('Description is required'),
