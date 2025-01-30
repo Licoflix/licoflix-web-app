@@ -25,10 +25,9 @@ export default class CommonStore {
     }
 
     initApp = async () => {
-        await store.filmStore.getFilmCategories();
-
         if (this.token) {
             await Promise.all([
+                store.filmStore.getFilmCategories(),
                 store.filmStore.listUserFilmList(),
                 store.filmStore.listGroupedFilms(),
                 store.filmStore.listContinueWathingFilms(),

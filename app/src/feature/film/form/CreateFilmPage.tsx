@@ -11,6 +11,7 @@ import RatingAndCategorySection from './section/RatingAndCategorySection';
 import TeamFilmSection from './section/TeamFilmSection';
 import TitleDescriptionSection from './section/TitleDescriptionSection';
 import NumericFieldsSection from './section/NumericFieldsSection';
+import SubsUploadSection from './section/SubsUploadSection';
 
 const CreateFilmPage: React.FC = () => {
     const {
@@ -19,7 +20,6 @@ const CreateFilmPage: React.FC = () => {
     } = useStore();
 
     const handleSubmit = (request: FilmRequest, resetForm: () => void) => {
-        console.log('Submit Request:', request);
         onSubmit(request, language)
             .finally(() => {
                 resetForm();
@@ -29,7 +29,7 @@ const CreateFilmPage: React.FC = () => {
 
     return (
         <Segment className="create-film-segment" style={{ maxWidth: 800, margin: '0 auto', marginTop: '11vh' }}>
-            <div style={{marginRight: '5vw'}}>
+            <div style={{ marginRight: '5vw' }}>
                 <h1 className="create-film-title">{findTranslation('createFilm', language)}</h1>
                 <Formik<FilmRequest>
                     validateOnMount
@@ -58,6 +58,7 @@ const CreateFilmPage: React.FC = () => {
                                     languageOptions={getLanguageOptions()}
                                 />
                                 <FileUploadSection values={values} setFieldValue={setFieldValue} language={language} />
+                                <SubsUploadSection values={values} setFieldValue={setFieldValue} language={language} />
                                 <ActionButtonsSection isValid={isValid} language={language} />
                             </Form>
                         );

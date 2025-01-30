@@ -22,7 +22,7 @@ const FilmPlayerPage: React.FC = () => {
                 tooltips: { controls: true, seek: true },
                 captions: { active: true, language: 'pt' },
                 settings: ['captions', 'quality', 'speed', 'pip', 'airplay', 'playback-rate'],
-                controls: ['play-large',  'play', 'current-time', 'progress', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
+                controls: ['play-large', 'play', 'current-time', 'progress', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
             });
 
             const savedTime = playerStore.loadProgress(title);
@@ -46,20 +46,27 @@ const FilmPlayerPage: React.FC = () => {
             playerStore.destroyPlayer();
         };
     }, [playerStore, title]);
-
     return (
         <div style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}>
             <video ref={videoRef} className="plyr-react plyr" crossOrigin="anonymous">
                 <source
                     type="video/mp4"
-                    src={encodeURI(`http://26.128.44.247:8080/film/${playerStore.convertToTitleCase(title || '')}/video`)}
+                    src={encodeURI(`http://26.128.44.247:8080/film/${(title || '')}/video`)}
                 />
+
                 <track
                     default
                     srcLang="pt"
                     kind="subtitles"
                     label="Português"
-                    src={`http://26.128.44.247:8080/film/${playerStore.convertToTitleCase(title || '')}/ptbr/subtitle`}
+                    src={`http://26.128.44.247:8080/film/${(title || '')}/ptbr/subtitle`}
+                />
+
+                <track
+                    srcLang="en"
+                    kind="subtitles"
+                    label="Inglês"
+                    src={`http://26.128.44.247:8080/film/${(title || '')}/en/subtitle`}
                 />
             </video>
         </div>

@@ -35,6 +35,7 @@ export default class FilmFormStore {
         baftaAwards: 0,
         subtitle: null,
         description: '',
+        subtitleEn: null,
         background: null,
     };
 
@@ -57,6 +58,7 @@ export default class FilmFormStore {
         categories: [],
         subtitle: null,
         description: '',
+        subtitleEn: null,
         background: null,
     };
 
@@ -292,6 +294,7 @@ export default class FilmFormStore {
         if (request.image) formData.append('image', request.image);
         if (request.subtitle) formData.append('subtitle', request.subtitle);
         if (request.background) formData.append('background', request.background);
+        if (request.subtitleEn) formData.append('subtitleEn', request.subtitleEn);
 
         return formData;
     }

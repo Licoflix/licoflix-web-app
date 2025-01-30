@@ -40,6 +40,7 @@ export interface FilmRequest {
     description: string;
     categories: string[];
     subtitle: File | null;
+    subtitleEn: File | null;
     baftaAwards: number | 0;
     film: File | null | undefined;
     image: File | null | undefined;

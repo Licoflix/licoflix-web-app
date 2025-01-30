@@ -11,9 +11,9 @@ interface FileUploadSectionProps {
 
 const FileUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldValue, language }) => {
     return (
-        <Grid columns={4} stackable>
+        <Grid columns={3} stackable>
             <Grid.Row>
-                <GridColumn width={4}>
+                <GridColumn>
                     <UploadComponent
                         fieldName="image"
                         language={language}
@@ -25,7 +25,7 @@ const FileUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldV
                         errorMessage="Please upload a valid image file (.jpg, .jpeg, .png)."
                     />
                 </GridColumn>
-                <GridColumn width={4}>
+                <GridColumn>
                     <UploadComponent
                         language={language}
                         fieldName="background"
@@ -37,7 +37,7 @@ const FileUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldV
                         errorMessage="Please upload a valid background file (.jpg, .jpeg, .png)."
                     />
                 </GridColumn>
-                <GridColumn width={4}>
+                <GridColumn>
                     <UploadComponent
                         label="Video"
                         accept=".mp4"
@@ -47,18 +47,6 @@ const FileUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldV
                         validTypes={['video/mp4']}
                         setFieldValue={setFieldValue}
                         errorMessage="Please upload a valid video file (.mp4)."
-                    />
-                </GridColumn>
-                <GridColumn width={4}>
-                    <UploadComponent
-                        accept=".vtt"
-                        language={language}
-                        fieldName="subtitle"
-                        validTypes={['text/vtt']}
-                        setFieldValue={setFieldValue}
-                        value={values.subtitle || ''}
-                        label={findTranslation("Subtitle", language)}
-                        errorMessage="Please upload a valid subtitle file (.vtt)."
                     />
                 </GridColumn>
             </Grid.Row>
