@@ -229,6 +229,51 @@ html {
 # Home Page Component
 --------------------------------------------------------------*/
 
+.brown.chevron.right.large.icon,
+.brown.chevron.left.large.icon {
+    color: white !important;
+}
+
+.film-carousel-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-arrow-left,
+.carousel-arrow-right {
+    top: 50%;
+    padding: 0;
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+    display: flex;
+    cursor: pointer;
+    position: absolute;
+    align-items: center;
+    pointer-events: none;
+    border-radius: 100px;
+    justify-content: center;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.541);
+}
+
+.carousel-arrow-left {
+    left: 10px;
+}
+
+.carousel-arrow-right {
+    right: 10px;
+}
+
+.carousel-arrow-left.show,
+.carousel-arrow-right.show {
+    pointer-events: auto;
+}
+
+.film-card.disabled-hover {
+    pointer-events: none;
+}
+
 .home-page {
     width: 100vw;
     height: 100vh;

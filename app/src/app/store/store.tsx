@@ -1,6 +1,5 @@
 import { createContext, useContext } from "react";
 import CommonStore from "./common/commonStore";
-import CarrousselFilmStore from "./film/carrousselFilmStore";
 import FilmStore from "./film/filmStore";
 import FilmFormStore from "./film/form/filmFormStore";
 import PlayerStore from "./player/playerStore";
@@ -14,7 +13,6 @@ export default interface Store {
     playerStore: PlayerStore,
     profileStore: ProfileStore,
     filmFormStore: FilmFormStore,
-    carrousselFilmStore: CarrousselFilmStore;
 }
 
 export const store: Store = {
@@ -24,7 +22,6 @@ export const store: Store = {
     playerStore: new PlayerStore(),
     profileStore: new ProfileStore(),
     filmFormStore: new FilmFormStore(),
-    carrousselFilmStore: new CarrousselFilmStore(),
 }
 
 export const StoreContext = createContext(store)
