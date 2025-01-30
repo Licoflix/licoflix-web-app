@@ -18,7 +18,6 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
     const { commonStore: { language }, playerStore: { loadProgress, getFilmDuration, isWatching } } = useStore();
 
     const [showLeftArrow, setShowLeftArrow] = useState(false);
-    const [arrowOverCard, setArrowOverCard] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
 
     const handleFilmClick = (film: Film) => {
@@ -35,8 +34,8 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
             const rightEdge = carouselRect.right;
             const cardRight = filmCardRect.right;
 
-            if (cardRight > rightEdge && !arrowOverCard) {
-                const scrollDistance = cardRight - rightEdge;
+            if (cardRight > rightEdge - 50) {
+                const scrollDistance = cardRight - rightEdge + 50;
                 carousel.scrollBy({ left: scrollDistance, behavior: 'smooth' });
             }
         }
@@ -52,32 +51,9 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
         }
     };
 
-    const checkArrowOverlap = () => {
-        const carousel = carouselRef.current;
-        if (carousel) {
-            const carouselRect = carousel.getBoundingClientRect();
-
-            const leftArrow = document.querySelector('.carousel-arrow-left');
-            const rightArrow = document.querySelector('.carousel-arrow-right');
-
-            const leftArrowRect = leftArrow?.getBoundingClientRect();
-            const rightArrowRect = rightArrow?.getBoundingClientRect();
-
-            const isArrowOverlapping =
-                (leftArrowRect && leftArrowRect.right > carouselRect.left && leftArrowRect.left < carouselRect.right) ||
-                (rightArrowRect && rightArrowRect.left < carouselRect.right && rightArrowRect.right > carouselRect.left);
-
-            setArrowOverCard(isArrowOverlapping || false);
-        }
-    };
-
     useEffect(() => {
         checkArrowsVisibility();
     }, [films]);
-
-    useEffect(() => {
-        checkArrowOverlap();
-    }, [showLeftArrow, showRightArrow]);
 
     return (
         <Segment className="film-carousel-segment">
