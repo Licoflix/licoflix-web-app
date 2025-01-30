@@ -25,18 +25,17 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
         navigate(`/film/${film.id}`);
     };
 
-    const handleMouseEnter = (_e: React.MouseEvent<HTMLDivElement, MouseEvent>, filmCard: HTMLElement) => {
-        if (arrowOverCard) return;
-
+    const handleMouseEnter = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         const carousel = carouselRef.current;
         if (carousel) {
+            const filmCard = e.currentTarget as HTMLElement;
             const filmCardRect = filmCard.getBoundingClientRect();
             const carouselRect = carousel.getBoundingClientRect();
 
             const rightEdge = carouselRect.right;
             const cardRight = filmCardRect.right;
 
-            if (cardRight > rightEdge) {
+            if (cardRight > rightEdge && !arrowOverCard) {
                 const scrollDistance = cardRight - rightEdge;
                 carousel.scrollBy({ left: scrollDistance, behavior: 'smooth' });
             }
@@ -102,7 +101,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 key={index}
                                 className="film-card"
                                 onClick={() => handleFilmClick(film)}
-                                onMouseEnter={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleMouseEnter(e, e.currentTarget as HTMLElement)}
+                                onMouseEnter={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => handleMouseEnter(e)}
                             >
                                 <Image
                                     className="film-image"
