@@ -253,15 +253,16 @@ html {
     pointer-events: none;
     justify-content: center;
     transform: translateY(-50%);
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
 }
 
 .carousel-arrow-left {
     left: 0px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
 }
 
 .carousel-arrow-right {
     right: 0px;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
 }
 
 .carousel-arrow-left.show,
