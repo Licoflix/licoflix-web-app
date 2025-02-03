@@ -28,14 +28,17 @@ export default class UserStore implements IBaseStore<UserResponse> {
         store.commonStore.setLoading(true);
         store.commonStore.setToken(null);
 
-        const entity = await service.auth.login(creds);
-        runInAction(() => this.entity = entity.data);
-        store.commonStore.setToken(entity.data.token);
-
-        router.navigate("/home");
-
-        store.commonStore.initApp()
-        store.commonStore.setLoading(false);
+        try {
+            const entity = await service.auth.login(creds);
+            runInAction(() => this.entity = entity.data);
+            store.commonStore.setToken(entity.data.token);
+            router.navigate("/home");
+        } catch {
+            store.commonStore.setLoading(false);
+        } finally {
+           await store.commonStore.initApp();
+           store.commonStore.setLoading(false);
+        }
     }
 
     logout = () => {
