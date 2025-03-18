@@ -137,6 +137,7 @@ export default class FilmFormStore {
 
     handleEditClick = (entity: any) => {
         this.setSelectedFilm(entity);
+        console.log(this.selectedFilm != null)
 
         const videoBlob = entity.film ? this.base64ToFile(entity.film, 'film.mp4', 'video') : null;
         const imageBlob = entity.image ? this.base64ToFile(entity.image, 'image.jpg', 'image') : null;
@@ -224,7 +225,7 @@ export default class FilmFormStore {
         this.setLoading(false);
     }
 
-    setSelectedFilm = (film: Film) => {
+    setSelectedFilm = (film: Film | null) => {
         this.selectedFilm = film;
     }
 

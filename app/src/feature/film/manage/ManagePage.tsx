@@ -8,7 +8,7 @@ import ManageFilmPage from "./section/ManageFilmPage";
 import ManageUserPage from "./section/ManageUserPage";
 
 const ManagePage: React.FC = () => {
-    const { filmStore: { setSearchTerm }, commonStore: { language }, filmFormStore: { activeItem, setActiveItem, setFormValues, initialFormValues } } = useStore();
+    const { filmStore: { setSearchTerm }, commonStore: { language }, filmFormStore: { setSelectedFilm, setActiveItem, setFormValues, initialFormValues, activeItem } } = useStore();
 
     const menuItems = [
         { key: 'manageUsers', label: findTranslation('manageUsers', language), component: <ManageUserPage /> },
@@ -20,6 +20,7 @@ const ManagePage: React.FC = () => {
 
     const handleItemClick = (key: string) => {
         setActiveItem(key);
+        setSelectedFilm(null);
         setFormValues(initialFormValues);
     };
 

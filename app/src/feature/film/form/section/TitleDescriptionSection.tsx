@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Form } from 'semantic-ui-react';
 import { findTranslation } from '../../../../app/common/language/translations';
@@ -5,16 +6,18 @@ import { findTranslation } from '../../../../app/common/language/translations';
 interface Props {
     values: any;
     language: any;
+    editFlow: boolean;
     handleChange: any;
 }
-const TitleDescriptionSection: React.FC<Props> = ({ values, language, handleChange }) => {
+const TitleDescriptionSection: React.FC<Props> = ({ values, language, handleChange, editFlow }) => {
 
     return (
         <>
             <Form.Input
                 name="title"
-                className='create-input'
+                disabled={editFlow}
                 onChange={handleChange}
+                className='create-input'
                 value={values.title || ''}
                 label={findTranslation("title", language)}
                 placeholder={findTranslation("titlePlaceholder", language)}
@@ -31,4 +34,4 @@ const TitleDescriptionSection: React.FC<Props> = ({ values, language, handleChan
     );
 };
 
-export default TitleDescriptionSection;
+export default observer(TitleDescriptionSection);

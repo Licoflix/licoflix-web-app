@@ -16,13 +16,14 @@ import SubsUploadSection from './section/SubsUploadSection';
 const CreateFilmPage: React.FC = () => {
     const {
         commonStore: { language },
-        filmFormStore: { onSubmit, formatDuration, getCategoryOptions, getLanguageOptions, setFormValues, initialFormValues, ageOptions, formValues, validationSchema },
+        filmFormStore: { onSubmit, formatDuration, getCategoryOptions, getLanguageOptions, setFormValues, setSelectedFilm, initialFormValues, ageOptions, formValues, validationSchema, selectedFilm },
     } = useStore();
 
     const handleSubmit = (request: FilmRequest, resetForm: () => void) => {
         onSubmit(request, language)
             .finally(() => {
                 resetForm();
+                setSelectedFilm(null);
                 setFormValues(initialFormValues);
             });
     };
@@ -40,7 +41,7 @@ const CreateFilmPage: React.FC = () => {
                     {({ values, handleChange, handleSubmit, setFieldValue, isValid }) => {
                         return (
                             <Form className="ui form error" onSubmit={handleSubmit} autoComplete="off">
-                                <TitleDescriptionSection values={values} handleChange={handleChange} language={language} />
+                                <TitleDescriptionSection editFlow={selectedFilm != null} values={values} handleChange={handleChange} language={language} />
                                 <NumericFieldsSection
                                     values={values}
                                     language={language}

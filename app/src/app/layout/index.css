@@ -952,6 +952,10 @@ img {
     background: transparent !important;
 }
 
+.ui.form .disabled.field, .ui.form .disabled.fields .field, .ui.form .field :disabled{
+    opacity: unset !important;
+}
+
 .ui.form .field>label {
     color: white !important;
     font-size: 1.2rem !important;
