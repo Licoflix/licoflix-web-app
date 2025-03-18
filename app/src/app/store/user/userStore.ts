@@ -36,8 +36,9 @@ export default class UserStore implements IBaseStore<UserResponse> {
         } catch {
             store.commonStore.setLoading(false);
         } finally {
-           await store.commonStore.initApp();
-           store.commonStore.setLoading(false);
+            store.commonStore.setLoading(true);
+            await store.commonStore.initApp();
+            store.commonStore.setLoading(false);
         }
     }
 
@@ -52,10 +53,12 @@ export default class UserStore implements IBaseStore<UserResponse> {
         if (overwriteToken)
             store.commonStore.setToken(null);
         const entity = await service.auth.register(creds);
+
         runInAction(() => {
             this.entity = entity.data;
             this.list(1, null);
         });
+
         if (overwriteToken)
             store.commonStore.setToken(entity.data.token);
         if (overwriteToken)

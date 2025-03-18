@@ -33,21 +33,21 @@ class ErrorHandler {
     }
 
     private static async handleRequestError(data: any, location: any): Promise<void> {
-        const title = data?.title || "";
+        const title = data.title || "";
         const translatedTitle = await this.translateTitle(title, location);
         const messageType = translatedTitle === "failedLogin" ? "error" : "warning";
         this.showToast(translatedTitle, location, messageType);
     }
 
     private static async handleUnauthorizedError(data: any, location: any): Promise<void> {
-        const title = data?.title || "";
+        const title = data.title || "";
         const translatedTitle = await this.translateTitle(title, location);
         this.showToast(translatedTitle, location, "warning");
         router.navigate('/login');
     }
 
     private static async handleServerError(data: any, location: any): Promise<void> {
-        const message = data?.message || "";
+        const message = data.message || "";
         const messageType = message.includes('JWT expired') ? "warning" : "error";
         this.showToast("tokenHasExpired", location, messageType);
         router.navigate('/login');

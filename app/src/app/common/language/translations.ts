@@ -341,6 +341,7 @@ const translations: TranslationSections = {
     },
     text: {
         ptbr: {
+            winner: 'vencedor',
             newAccount: 'Nova Conta',
             0: 'Apto para todas as idades',
             haveAccount: 'Já tem uma conta? ',
@@ -355,6 +356,7 @@ const translations: TranslationSections = {
             18: 'Conteúdo restrito a maiores de 18 anos, com sexo explícito ou violência extrema',
         },
         en: {
+            winner: 'winner',
             newAccount: 'New Account',
             0: 'Suitable for all ages',
             noData: 'No data available',

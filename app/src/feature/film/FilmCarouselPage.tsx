@@ -104,7 +104,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                             <p className="film-hover-year">{film.year}</p>
                                         </div>
                                         <div className="film-hover-desc">
-                                            {film.description.length > 180 ? `${film.description.substring(0, 180)}...` : film.description}
+                                            {film.description.length > 180 ? `${film.description.substring(0, 200)}...` : film.description}
                                         </div>
                                     </div>
                                 </div>
@@ -124,7 +124,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 e.stopPropagation();
                                 e.preventDefault();
                                 if (carouselRef.current) {
-                                    carouselRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+                                    carouselRef.current.scrollBy({ left: -600, behavior: 'smooth' });
                                 }
                             }}
                         >
@@ -138,7 +138,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 e.stopPropagation();
                                 e.preventDefault();
                                 if (carouselRef.current) {
-                                    carouselRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+                                    carouselRef.current.scrollBy({ left: 600, behavior: 'smooth' });
                                 }
                             }}
                         >

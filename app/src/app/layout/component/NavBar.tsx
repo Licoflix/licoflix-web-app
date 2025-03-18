@@ -1,9 +1,8 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { Container, Dropdown, Icon, Menu, Popup, Segment } from "semantic-ui-react";
+import { Container, Icon, Menu, Popup, Segment } from "semantic-ui-react";
 import { findTranslation } from '../../common/language/translations';
-import { Category } from '../../model/Category';
 import { useStore } from '../../store/store';
 
 const NavBar = () => {
@@ -11,7 +10,7 @@ const NavBar = () => {
     const navigate = useNavigate();
     const [activeItem, setActiveItem] = useState<string>(location.pathname.substring(location.pathname.lastIndexOf('/') + 1));
     const { commonStore: { language, scrollTop, setLoading }, userStore,
-        filmStore: { list, listGroupedFilms, listByCategory, setFilteringByCategory, getWatchingFilmsList, categories, entityList } } = useStore();
+        filmStore: { list, listGroupedFilms, getWatchingFilmsList, categories, entityList } } = useStore();
 
     const handleItemClick = async (name: string) => {
         setLoading(true)
@@ -26,26 +25,16 @@ const NavBar = () => {
             ]);
         }
 
-        setFilteringByCategory(false);
         setLoading(false)
     };
 
     const handleIconClick = () => {
         setLoading(true)
-        setFilteringByCategory(false);
 
         navigate('/home')
         setActiveItem('home');
         scrollTop(activeItem);
 
-        setLoading(false)
-    };
-
-    const handleCategoryClick = async (category: string) => {
-        setActiveItem('category');
-
-        setLoading(true)
-        await listByCategory(category)
         setLoading(false)
     };
 
@@ -87,19 +76,6 @@ const NavBar = () => {
                                 }}
                             />
                         ))}
-                        <Dropdown item active={activeItem === 'category'} text={findTranslation('Categories', language)} className='categories-navbar-dropdown'>
-                            <Dropdown.Menu className='categories-menu-navbar'>
-                                {categories.map((category: Category) => (
-                                    <Dropdown.Item
-                                        key={category.id}
-                                        value={category.name}
-                                        className='categories-item-navbar'
-                                        text={findTranslation(category.name, language)}
-                                        onClick={() => handleCategoryClick(category.name)}
-                                    />
-                                ))}
-                            </Dropdown.Menu>
-                        </Dropdown>
                     </div>
                     <div style={{ display: 'flex', justifyContent: 'center' }}>
                         {userStore.entity && (

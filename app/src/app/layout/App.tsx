@@ -1,11 +1,12 @@
 import { observer } from 'mobx-react-lite';
+import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Container } from 'semantic-ui-react';
 import { useStore } from '../store/store';
 import LoadingComponent from './component/LoadingComponent';
 import NavBar from './component/NavBar';
-import { useEffect } from 'react';
 
 const App = () => {
   const location = useLocation();

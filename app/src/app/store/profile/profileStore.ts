@@ -1,4 +1,6 @@
 import { makeAutoObservable } from "mobx";
+import { toast } from "react-toastify";
+import { findTranslation } from "../../common/language/translations";
 import { UserFormValues } from "../../model/UserResponse";
 import service from "../../service/service";
 import { store } from "../store";
@@ -108,6 +110,8 @@ export default class ProfileStore {
         }).finally(() => {
             this.setAllDisabled(false);
             this.setOldAvatar(this.avatar);
+            const translatedMessage = findTranslation("Sucesso", store.commonStore.language);
+            toast.success(translatedMessage);
         });
     };
 }

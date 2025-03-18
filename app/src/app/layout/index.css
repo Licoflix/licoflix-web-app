@@ -61,6 +61,10 @@ html {
     background-color: #260042 !important;
 }
 
+.ui.mini.vertical.navbar.menu>.item.navbar:hover {
+    background-color: rgba(44, 0, 75, 0.856) !important;
+}
+
 .ui.mini.vertical.navbar.menu>.item.navbar {
     display: flex !important;
     color: white !important;
@@ -318,7 +322,7 @@ html {
 .film-card {
     border: 0 !important;
     width: 12vw !important;
-    height: 36vh !important;
+    height: 38vh !important;
     margin: 0 30px !important;
     flex: 0 0 auto !important;
     overflow: hidden !important;
@@ -433,7 +437,7 @@ html {
     color: white;
     margin-top: 4vh;
     font-weight: bolder;
-    font-size: clamp(1.2rem, 2.5vh, 2.5rem);
+    font-size: clamp(1.4rem, 2.5vh, 2.7rem);
     text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.9);
 }
 
@@ -445,17 +449,17 @@ html {
     font-weight: bold;
     align-items: center;
     color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(0.7rem, 1.5vh, 0.9rem);
+    font-size: clamp(0.9rem, 1.5vh, 1.1rem);
     text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
 }
 
 .film-hover-desc {
-    width: 78%;
+    width: 85%;
     margin-top: 11vh;
     overflow: hidden;
     font-weight: bolder;
-    color: rgba(255, 255, 255, 0.9);
-    font-size: clamp(0.7rem, 1.5vh, 0.9rem);
+    color: rgba(255, 255, 255, 0.801);
+    font-size: clamp(0.9rem, 1.5vh, 1.1rem);
     text-shadow: 0px 0px 12px rgba(0, 0, 0, 0.8);
 }
 
@@ -468,8 +472,8 @@ html {
 }
 
 .film-age-hover {
-    width: clamp(0.8rem, 2vh, 1.2rem);
-    height: clamp(0.8rem, 2vh, 1.2rem);
+    width: clamp(1rem, 2vh, 1.4rem);
+    height: clamp(1rem, 2vh, 1.4rem);
 }
 
 .film-hover-container:hover .film-hover-content {
@@ -1026,6 +1030,11 @@ img {
 /*--------------------------------------------------------------
 # Search Page
 --------------------------------------------------------------*/
+
+.loader-search-films {
+    color: white !important;
+    margin-top: 30vh !important;
+}
 
 i.link.icon,
 .search-input>input {

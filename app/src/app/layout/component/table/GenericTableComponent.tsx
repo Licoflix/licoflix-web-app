@@ -47,24 +47,15 @@ const GenericTableComponent = <T extends BaseEntity>({
     const columns: string[] = storeMap ? storeMap?.flatMap(item => item.columns) ?? [] : entityColumns!;
     const currentStore = storeMap ? storeMap.find(item => item.activeItem === activeItem)?.store : store;
 
-    const {
-        xls = () => { },
-        list = () => { },
-        searchTerm = null,
-        entityList = null,
-        deleteEntity = () => { },
-        setSearchTerm = () => { },
-    } = currentStore || {};
-
     return (
         <>
             <HeaderComponent
-                xls={xls}
-                list={list}
-                searchTerm={searchTerm}
                 entityName={entityName}
-                setSearchTerm={setSearchTerm}
+                xls={currentStore?.xls}
+                list={currentStore?.list}
                 modalComponent={headerModalComponent}
+                setSearchTerm={currentStore?.setSearchTerm}
+                searchTerm={currentStore?.searchTerm || null}
             />
             {menuItems.length > 0 && (
                 <>
@@ -82,13 +73,13 @@ const GenericTableComponent = <T extends BaseEntity>({
                 </>
             )}
             <TableComponent
-                list={list}
+                list={currentStore?.list}
                 columns={columns}
-                entityList={entityList}
-                searchTerm={searchTerm}
                 renderCell={renderCell}
-                deleteEntity={deleteEntity}
                 handleEditClick={handleEditClick}
+                deleteEntity={currentStore?.deleteEntity}
+                entityList={currentStore?.entityList || null}
+                searchTerm={currentStore?.searchTerm || null}
                 confirmationModalComponent={confirmationModalComponent}
             />
         </>

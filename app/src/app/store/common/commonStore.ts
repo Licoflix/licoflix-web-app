@@ -63,7 +63,7 @@ export default class CommonStore {
 
     setLoading = async (loading: boolean) => {
         if (loading == false)
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 100));
         this.loading = loading;
     }
 

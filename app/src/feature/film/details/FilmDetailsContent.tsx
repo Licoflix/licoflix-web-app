@@ -45,9 +45,9 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                 <Header className="film-component-header">{film.title}</Header>
                                 {(film.oscars > 0 || film.baftaAwards > 0) && (
                                     <p className="film-component-oscar-text">
-                                        {film.oscars > 0 && `OSCARS® ${film.oscars}x winner`}
+                                        {film.oscars > 0 && `OSCARS® ${film.oscars}x ${findTranslation("winner", language)}`}
                                         {film.oscars > 0 && film.baftaAwards > 0 && " & "}
-                                        {film.baftaAwards > 0 && `BAFTA Awards® ${film.baftaAwards}x winner`}
+                                        {film.baftaAwards > 0 && `BAFTA Awards® ${film.baftaAwards}x ${findTranslation("winner", language)}`}
                                     </p>
                                 )}
 

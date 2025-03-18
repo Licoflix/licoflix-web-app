@@ -15,7 +15,6 @@ export default class FilmStore implements IBaseStore<Film> {
     categories: Category[] = [];
     continueWathingList: Film[] = [];
     autoCarrousselfilms: Film[] = [];
-    filteringByCategory: boolean = false;
     groupedFilms: FilmCategoryGroup[] | null = null;
     userListChanging: { [filmId: number]: boolean } = {};
     allFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
@@ -35,17 +34,13 @@ export default class FilmStore implements IBaseStore<Film> {
     };
 
     listGroupedFilms = async (force?: boolean) => {
-        if (this.groupedFilms === null || force || this.filteringByCategory) {
+        if (this.groupedFilms === null || force) {
             const response = await service.film.listGrouped();
             runInAction(() => {
                 this.groupedFilms = response.data;
             });
         }
     };
-
-    setFilteringByCategory = (state: boolean) => {
-        this.filteringByCategory = state;
-    }
 
     list = async (page?: any, pageSize?: any, search?: any, searchPage?: boolean, dontNeedLoad?: boolean, searchTable?: boolean | null) => {
         if (dontNeedLoad) this.setLoading(false);
@@ -72,15 +67,6 @@ export default class FilmStore implements IBaseStore<Film> {
             await this.getWatchingFilmsList(force);
         } else
             return
-    };
-
-    listByCategory = async (category: string) => {
-        this.filteringByCategory = true;
-        try {
-            await this.listGroupedFilms(true);
-        } finally {
-            this.groupedFilms = this.groupedFilms?.filter((x) => x.category === category) ?? [];
-        }
     };
 
     getFilm = async (long: string): Promise<void> => {
@@ -168,7 +154,7 @@ export default class FilmStore implements IBaseStore<Film> {
     }
 
     getWatchingFilmsList = (force?: boolean) => {
-        if (this.allFilms.totalElements > 0 || force || this.filteringByCategory) {
+        if (this.allFilms.totalElements > 0 || force) {
             this.continueWathingList = this.allFilms.data.filter((film) => {
                 return localStorage.getItem("film-duration-" + film.title);
             });

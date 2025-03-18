@@ -265,7 +265,6 @@ export default class FilmFormStore {
             .finally(async () => {
                 await store.filmStore.list(1, 10, undefined, undefined, undefined, true);
                 await store.filmStore.listGroupedFilms(true);
-                await new Promise(resolve => setTimeout(resolve, 200));
                 toast.success(`${title + findTranslation("createFilmSuccess", language)}`)
                 this.saving = false;
             });

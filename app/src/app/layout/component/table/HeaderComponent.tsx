@@ -20,10 +20,10 @@ const reducer = (_state: any, action: Action) => {
 export interface TableHeaderProps {
     list: any;
     xls?: () => void;
+    setSearchTerm: any;
     modalComponent?: ReactNode;
     searchTerm: string | null;
     entityName: string | null;
-    setSearchTerm: (search: string) => void;
 }
 
 const HeaderComponent: React.FC<TableHeaderProps> = ({ xls, list, setSearchTerm, searchTerm, entityName, modalComponent }) => {

@@ -36,9 +36,9 @@ const reducer = (state: ModalState, action: Action): ModalState => {
 interface TableProps<T extends BaseEntity> {
     list: any;
     columns: string[];
+    deleteEntity: any;
     handleEditClick?: any;
     searchTerm: string | null;
-    deleteEntity: (id: any) => void;
     entityList: DataListResponse<T> | null;
     confirmationModalComponent?: React.ReactElement<any>;
     renderCell?: (entity: T, column: string) => React.ReactNode;
@@ -61,7 +61,7 @@ const TableComponent = <T extends BaseEntity>({ entityList, deleteEntity, list, 
 
     const handlePaginationChange = (_e: React.MouseEvent, { activePage }: any) => {
         setActivePage(activePage);
-        list(activePage, 5, searchTerm, false, false, true);
+        list(activePage, 10, searchTerm, false, false, true);
     };
 
     const handleDeleteClick = (entityId: any) => {
