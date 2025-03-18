@@ -11,21 +11,9 @@ interface Props {
 }
 
 const NumericFieldsSection: React.FC<Props> = ({ values, language, handleChange, setFieldValue, formatDuration }) => {
-    const handleNumericInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9]/g, '');
-        e.target.value = value;
-        handleChange(e);
-    };
-
-    const handleImdbInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value.replace(/[^0-9.]/g, '');
-        e.target.value = value;
-        handleChange(e);
-    };
-
     return (
         <section className="year-duration-section">
-            <Grid columns={5} stackable>
+            <Grid columns={2} stackable>
                 <Grid.Row>
                     <Grid.Column>
                         <Form.Input
@@ -56,42 +44,6 @@ const NumericFieldsSection: React.FC<Props> = ({ values, language, handleChange,
                                 const formattedDuration = formatDuration(e.target.value);
                                 setFieldValue("duration", formattedDuration);
                             }}
-                        />
-                    </Grid.Column>
-
-                    <Grid.Column>
-                        <Form.Input
-                            type="number"
-                            name="baftaAwards"
-                            className="create-input"
-                            value={values.baftaAwards}
-                            onChange={handleNumericInput}
-                            label={findTranslation("baftaAwards", language)}
-                            placeholder={findTranslation("baftaAwardsPlaceholder", language)}
-                        />
-                    </Grid.Column>
-
-                    <Grid.Column>
-                        <Form.Input
-                            type="number"
-                            name="oscars"
-                            value={values.oscars}
-                            className="create-input"
-                            onChange={handleNumericInput}
-                            label={findTranslation("oscars", language)}
-                            placeholder={findTranslation("oscarsPlaceholder", language)}
-                        />
-                    </Grid.Column>
-
-                    <Grid.Column>
-                        <Form.Input
-                            name="imdb"
-                            type="number"
-                            value={values.imdb}
-                            className="create-input"
-                            onChange={handleImdbInput}
-                            label={findTranslation("imdb", language)}
-                            placeholder={findTranslation("imdbPlaceholder", language)}
                         />
                     </Grid.Column>
                 </Grid.Row>

@@ -943,6 +943,10 @@ img {
 # Create Film Page
 --------------------------------------------------------------*/
 
+.ui.table td.warning, .ui.table tr.warning{
+    background: #fbf3ff !important;
+}
+
 .ui.container {
     background: transparent !important;
 }

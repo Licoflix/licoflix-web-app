@@ -33,6 +33,7 @@ export default class FilmFormStore {
         producers: '',
         categories: [],
         baftaAwards: 0,
+        goldenGlobes: 0,
         subtitle: null,
         description: '',
         subtitleEn: null,
@@ -55,6 +56,7 @@ export default class FilmFormStore {
         directors: '',
         producers: '',
         baftaAwards: 0,
+        goldenGlobes: 0,
         categories: [],
         subtitle: null,
         description: '',
@@ -160,6 +162,7 @@ export default class FilmFormStore {
             directors: entity.directors,
             producers: entity.producers,
             baftaAwards: entity.baftaAwards,
+            goldenGlobes: entity.goldenGlobes,
             description: entity.description,
             categories: entity.categories || [],
         });
@@ -286,6 +289,7 @@ export default class FilmFormStore {
         formData.append('imdb', request.imdb ? request.imdb.toString() : '0');
         formData.append('oscars', request.oscars ? request.oscars.toString() : '0');
         formData.append('baftaAwards', request.baftaAwards ? request.baftaAwards.toString() : '0');
+        formData.append('goldenGlobes', request.goldenGlobes ? request.goldenGlobes.toString() : '0');
 
         request.categories.forEach(category => {
             formData.append('categories', category);

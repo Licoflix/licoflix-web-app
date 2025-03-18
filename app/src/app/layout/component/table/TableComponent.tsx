@@ -1,10 +1,11 @@
 import { observer } from "mobx-react-lite";
 import React, { useReducer, useState } from "react";
-import { Icon, Pagination, Popup, Table, TableFooter, TableHeaderCell } from "semantic-ui-react";
+import { Icon, Pagination, Table, TableFooter, TableHeaderCell } from "semantic-ui-react";
 import { findTranslation } from "../../../common/language/translations";
 import { BaseEntity } from "../../../model/BaseEntity";
 import { DataListResponse } from "../../../model/DataListResponse";
 import { useStore } from "../../../store/store";
+import CellContent from "./CellContent";
 
 interface ModalState {
     dimmer: any;
@@ -101,35 +102,12 @@ const TableComponent = <T extends BaseEntity>({ entityList, deleteEntity, list, 
                                 <Table.Cell></Table.Cell>
                                 {columns.map((column, columnIndex) => {
                                     return (
-                                        <Table.Cell key={columnIndex}>
+                                        <Table.Cell key={columnIndex} warning={renderCell && renderCell(entity, column) === ""}>
                                             {renderCell ? (
-                                                typeof renderCell(entity, column) === "string" ? (
-                                                    <Popup
-                                                        on="hover"
-                                                        hoverable
-                                                        content={
-                                                            <div
-                                                                dangerouslySetInnerHTML={{
-                                                                    __html: (renderCell(entity, column) as string).replace(/,/g, '<br />')
-                                                                }}
-                                                            />
-                                                        }
-                                                        trigger={
-                                                            <span>
-                                                                {(renderCell(entity, column) as string).substring(0, 24)}
-                                                                {(renderCell(entity, column) as string).length > 24 ? "..." : ""}
-                                                            </span>
-                                                        }
-                                                    />
-                                                ) : typeof renderCell(entity, column) === "boolean" ? (
-                                                    renderCell(entity, column) ? (
-                                                        <Icon name="circle" color="green" title={findTranslation("Active", language)} />
-                                                    ) : (
-                                                        <Icon name="circle" color="red" title={findTranslation("Inactive", language)} />
-                                                    )
-                                                ) : (
-                                                    renderCell(entity, column)
-                                                )
+                                                (() => {
+                                                    const renderCellValue = renderCell(entity, column);
+                                                    return <CellContent value={renderCellValue} language={language} />;
+                                                })()
                                             ) : null}
                                         </Table.Cell>
                                     );

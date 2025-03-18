@@ -12,6 +12,7 @@ import TeamFilmSection from './section/TeamFilmSection';
 import TitleDescriptionSection from './section/TitleDescriptionSection';
 import NumericFieldsSection from './section/NumericFieldsSection';
 import SubsUploadSection from './section/SubsUploadSection';
+import AwardsFieldsSection from './section/AwardsFieldsSection';
 
 const CreateFilmPage: React.FC = () => {
     const {
@@ -43,6 +44,13 @@ const CreateFilmPage: React.FC = () => {
                             <Form className="ui form error" onSubmit={handleSubmit} autoComplete="off">
                                 <TitleDescriptionSection editFlow={selectedFilm != null} values={values} handleChange={handleChange} language={language} />
                                 <NumericFieldsSection
+                                    values={values}
+                                    language={language}
+                                    handleChange={handleChange}
+                                    setFieldValue={setFieldValue}
+                                    formatDuration={formatDuration}
+                                />
+                                <AwardsFieldsSection
                                     values={values}
                                     language={language}
                                     handleChange={handleChange}

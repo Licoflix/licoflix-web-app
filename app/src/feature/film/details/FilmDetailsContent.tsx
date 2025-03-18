@@ -43,14 +43,22 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                         <Segment className="film-component-segment">
                             <Segment className="film-component-description-container">
                                 <Header className="film-component-header">{film.title}</Header>
-                                {(film.oscars > 0 || film.baftaAwards > 0) && (
-                                    <p className="film-component-oscar-text">
-                                        {film.oscars > 0 && `OSCARS® ${film.oscars}x ${findTranslation("winner", language)}`}
-                                        {film.oscars > 0 && film.baftaAwards > 0 && " & "}
-                                        {film.baftaAwards > 0 && `BAFTA Awards® ${film.baftaAwards}x ${findTranslation("winner", language)}`}
-                                    </p>
-                                )}
+                                {(film.oscars > 0 || film.baftaAwards > 0 || film.goldenGlobes > 0) && (() => {
+                                    const awards = [
+                                        { label: "OSCARS®", count: film.oscars },
+                                        { label: "BAFTA Awards®", count: film.baftaAwards },
+                                        { label: "Golden Globe®", count: film.goldenGlobes },
+                                    ];
 
+                                    return (
+                                        <p className="film-component-oscar-text">
+                                            {awards
+                                                .filter(award => award.count > 0)
+                                                .map(award => `${award.label} ${award.count}x ${findTranslation("winner", language)}`)
+                                                .join(" & ")}
+                                        </p>
+                                    );
+                                })()}
                                 <p className="film-component-description-text">{film.description}</p>
                                 <Header className="film-component-header-info">
                                     <p className="film-imdb">
