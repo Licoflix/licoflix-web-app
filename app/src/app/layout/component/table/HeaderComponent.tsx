@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import React, { ReactNode, useReducer } from "react";
+import React, { ReactNode, useReducer, useState } from "react";
 import { Button, Header, Icon, Input } from "semantic-ui-react";
 import { findTranslation } from "../../../common/language/translations";
 import { useStore } from "../../../store/store";
@@ -28,6 +28,7 @@ export interface TableHeaderProps {
 
 const HeaderComponent: React.FC<TableHeaderProps> = ({ xls, list, setSearchTerm, searchTerm, entityName, modalComponent }) => {
     const { commonStore: { language } } = useStore();
+    const [xlsLoading, setXlsLoading] = useState(false);
     const [modalState, modalDispatch] = useReducer(reducer, { open: false });
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,6 +38,18 @@ const HeaderComponent: React.FC<TableHeaderProps> = ({ xls, list, setSearchTerm,
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
             list(1, 10, searchTerm, true);
+        }
+    };
+
+    const handleXlsClick = async () => {
+        if (xls) {
+            setXlsLoading(true);
+            try {
+                await xls();
+            } finally {
+                await new Promise(resolve => setTimeout(resolve, 500));
+                setXlsLoading(false);
+            }
         }
     };
 
@@ -58,7 +71,7 @@ const HeaderComponent: React.FC<TableHeaderProps> = ({ xls, list, setSearchTerm,
                 </div>
                 <div>
                     {modalComponent && <Button style={{ marginRight: 12 }} icon='plus' content={`${findTranslation('Add', language)}`} color="vk" onClick={() => modalDispatch({ type: 'OPEN_MODAL', dimmer: 'blurring' })} />}
-                    {xls && <Button onClick={xls} icon='file excel' content='xls' color="green" />}
+                    {xls && <Button loading={xlsLoading} onClick={handleXlsClick} icon='file excel' content='xls' color="green" />}
                 </div>
             </div>
 
