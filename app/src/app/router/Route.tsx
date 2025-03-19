@@ -3,7 +3,7 @@ import { createBrowserRouter, Navigate, RouteObject } from "react-router-dom";
 import NotFoundPage from "../../feature/error/NotFoundPage";
 import FilmDetailsPage from "../../feature/film/details/FilmDetailsPage";
 import ManagePage from "../../feature/film/manage/ManagePage";
-import FilmPlayerPage from "../../feature/film/player/FilmPlayerPage";
+import FilmPlayerPage from "../../feature/player/FilmPlayerPage";
 import SearchPage from "../../feature/film/search/SearchPage";
 import HomePage from "../../feature/home/HomePage";
 import App from "../layout/App";
