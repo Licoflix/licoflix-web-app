@@ -1,4 +1,5 @@
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 import { Segment } from "semantic-ui-react";
 import { findTranslation } from "../../../../app/common/language/translations";
 import GenericTableComponent from "../../../../app/layout/component/table/GenericTableComponent";
@@ -40,6 +41,10 @@ const ManageFilmPage: React.FC = () => {
                 return null;
         }
     };
+
+    useEffect(() => {
+        filmStore.list(1, 10, undefined, true);
+    }, []);
 
     return (
         <Segment className="create-film-segment" id='manage' style={{ margin: 'auto', marginTop: '11vh' }}>

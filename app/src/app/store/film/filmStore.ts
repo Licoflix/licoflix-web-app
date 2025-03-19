@@ -5,7 +5,6 @@ import { DataListResponse } from "../../model/DataListResponse";
 import { Film, FilmCategoryGroup } from "../../model/Film";
 import service from "../../service/service";
 import { IBaseStore } from "../IBaseStore";
-import { store } from '../store';
 
 export default class FilmStore implements IBaseStore<Film> {
     searchTerm: any;
@@ -42,9 +41,7 @@ export default class FilmStore implements IBaseStore<Film> {
         }
     };
 
-    list = async (page?: any, pageSize?: any, search?: any, dontNeedLoad?: boolean, searchTable?: boolean | null) => {
-        if (dontNeedLoad) this.setLoading(false);
-
+    list = async (page?: any, pageSize?: any, search?: any, searchTable?: boolean | null) => {
         if (!this.entityList || this.entityList.data.length === 0 || searchTable) {
             const response = await service.film.list(page, pageSize, search);
             runInAction(() => {
@@ -91,7 +88,7 @@ export default class FilmStore implements IBaseStore<Film> {
     deleteEntity = async (id: any) => {
         await service.film.delete(id);
         await runInAction(async () => {
-            await this.list(1, 10, undefined, undefined, true);
+            await this.list(1, 10, undefined, true);
             await this.listGroupedFilms(true);
         });
     }
@@ -168,9 +165,4 @@ export default class FilmStore implements IBaseStore<Film> {
             });
         }
     }
-
-    private setLoading = (state: boolean) => {
-        store.commonStore.setLoading(state);
-    };
-
 }

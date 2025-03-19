@@ -62,7 +62,7 @@ const TableComponent = <T extends BaseEntity>({ entityList, deleteEntity, list, 
 
     const handlePaginationChange = (_e: React.MouseEvent, { activePage }: any) => {
         setActivePage(activePage);
-        list(activePage, 10, searchTerm, false, false, true);
+        list(activePage, 10, searchTerm, true);
     };
 
     const handleDeleteClick = (entityId: any) => {

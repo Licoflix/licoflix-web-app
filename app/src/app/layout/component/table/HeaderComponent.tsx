@@ -36,7 +36,7 @@ const HeaderComponent: React.FC<TableHeaderProps> = ({ xls, list, setSearchTerm,
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            list(1, 10, searchTerm, false, true, true);
+            list(1, 10, searchTerm, true);
         }
     };
 
