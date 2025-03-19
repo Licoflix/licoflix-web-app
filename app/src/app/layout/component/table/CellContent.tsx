@@ -26,12 +26,11 @@ const CellContent: React.FC<CellContentProps> = ({ value, language }) => {
                 />
             ) : typeof value === "boolean" ? (
                 value ? (
-                    <Icon name="circle" color="green" title={findTranslation("Active", language)} />
+                    <Icon style={{ display: 'flex', margin: 'auto' }} name="circle" color="green" title={findTranslation("Active", language)} />
                 ) : (
-                    <Icon name="circle" color="red" title={findTranslation("Inactive", language)} />
+                    <Icon style={{ display: 'flex', margin: 'auto' }} name="circle" color="red" title={findTranslation("Inactive", language)} />
                 )
             ) : isNumeric(value) ? (
-                // Se o valor for numérico, renderiza o valor centralizado
                 <span style={{ display: 'block', textAlign: 'center' }}>{value}</span>
             ) : (
                 value
