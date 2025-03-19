@@ -101,7 +101,7 @@ const NavBar = () => {
                                         <Menu vertical size="mini" className='navbar'>
                                             {/* <Menu.Item className='navbar' onClick={() => changeLanguage(language === 'ptbr' ? 'en' : 'ptbr')}><Image className='language-popup-icon' size='mini' src={language === 'ptbr' ? '../../../image/br-flag.png' : '../../../image/us-flag.png'} /> {findTranslation('Language', language)}</Menu.Item> */}
                                             <Menu.Item className='navbar' as={NavLink} to={`/profile`} onClick={() => setActiveItem('')}><Icon name='user circle' /> {findTranslation('profile', language)}</Menu.Item>
-                                            <Menu.Item className='navbar'><Icon name='cog' /> {findTranslation('settings', language)}</Menu.Item>
+                                            <Menu.Item className='navbar' as={NavLink} to={'/subtitle-style'} ><Icon name='cog' /> {findTranslation('settings', language)}</Menu.Item>
                                             <Menu.Item className='navbar' onClick={() => userStore.logout()}><Icon name='sign-out' /> {findTranslation('signout', language)}</Menu.Item>
                                         </Menu>
                                     }

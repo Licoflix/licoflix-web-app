@@ -7,13 +7,13 @@ import FilmAutoCarouselPage from "../film/FilmAutoCarouselPage";
 import FilmCarouselPage from "../film/FilmCarouselPage";
 
 const HomePage: React.FC = () => {
-    const { filmStore: { autoCarrousselfilms, groupedFilms, userFilmList, filteringByCategory, continueWathingList } } = useStore();
+    const { filmStore: { autoCarrousselfilms, groupedFilms, userFilmList, continueWathingList } } = useStore();
 
     return (
         <Segment className="home-page" id="home">
             {autoCarrousselfilms && autoCarrousselfilms.length > 0 && <FilmAutoCarouselPage films={autoCarrousselfilms} />}
 
-            {continueWathingList && continueWathingList.length > 0 && !filteringByCategory &&
+            {continueWathingList && continueWathingList.length > 0 &&
                 <Segment className="film-carousels-segment">
                     <div>
                         <FilmCarouselPage
@@ -25,7 +25,7 @@ const HomePage: React.FC = () => {
                 </Segment>
             }
 
-            {userFilmList && userFilmList.length > 0 && !filteringByCategory &&
+            {userFilmList && userFilmList.length > 0 &&
                 <Segment className="film-carousels-segment">
                     <div>
                         <FilmCarouselPage

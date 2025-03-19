@@ -9,7 +9,8 @@ import HomePage from "../../feature/home/HomePage";
 import App from "../layout/App";
 import RegisterForm from "../../feature/user/RegisterForm";
 import LoginForm from "../../feature/user/LoginForm";
-import ProfilePage from "../../feature/profile/ProfilePage";
+import ProfilePage from "../../feature/configuration/profile/ProfilePage";
+import SubtitleStylePage from "../../feature/configuration/subtitle/SubtitleStylePage";
 
 const sideBarRoutes: RouteObject[] = [
     { path: '/', element: <HomePage /> },
@@ -19,6 +20,7 @@ const sideBarRoutes: RouteObject[] = [
     { path: '/search', element: <SearchPage /> },
     { path: '/profile', element: <ProfilePage /> },
     { path: '/film/:id', element: <FilmDetailsPage /> },
+    { path: '/subtitle-style', element: <SubtitleStylePage /> },
     { path: '/film/watch/:title', element: <FilmPlayerPage /> },
 ];
 

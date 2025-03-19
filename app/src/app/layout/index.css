@@ -1253,6 +1253,130 @@ th {
 }
 
 /*--------------------------------------------------------------
+# Subtitle Page
+--------------------------------------------------------------*/
+
+.ui.center.aligned.header.subtitle-title {
+    margin-top: 15vh !important;
+    font-size: 2.5rem !important;
+    background-color: transparent !important;
+}
+
+.ui.center.aligned.header.subtitle-sub-title {
+    margin-top: 0vh !important;
+    font-size: 1.5rem !important;
+    margin-bottom: 5vh !important;
+    font-weight: lighter !important;
+    background-color: transparent !important;
+    color: rgba(255, 255, 255, 0.788) !important;
+}
+
+.subtitle-page {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: transparent !important;
+}
+
+.subtitle-style-container {
+    width: 80vw;
+    padding: 1rem;
+    margin: 0 auto;
+    background-color: transparent !important;
+}
+
+.preview-container {
+    margin: 0;
+    border: 0;
+    width: 70%;
+    display: flex;
+    min-height: 40vh;
+    position: relative;
+    align-items: flex-end;
+    background-size: cover;
+    justify-content: center;
+    background: url('/image/subtitle-background.png') no-repeat center center;
+}
+
+.preview-text {
+    padding: 1rem;
+    line-height: 1.2;
+    font-weight: bold;
+    margin-bottom: 3vh;
+    position: absolute;
+    text-align: center;
+    white-space: pre-wrap;
+    transition: all 0.5s ease;
+    text-shadow:
+        0px 0px 3px rgba(0, 0, 0, 0.8),
+        1px 1px 0 rgba(0, 0, 0, 0.8),
+        -1px -1px 0 rgba(0, 0, 0, 0.8),
+        1px -1px 0 rgba(0, 0, 0, 0.8),
+        -1px 1px 0 rgba(0, 0, 0, 0.8),
+        0px 0px 8px rgba(0, 0, 0, 0.8);
+}
+
+.form-container {
+    width: 70vw;
+    color: white;
+    background-color: transparent !important;
+}
+
+.form-grid {
+    gap: 2rem;
+    display: grid;
+    margin-bottom: 5vh;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+
+.form-title {
+    font-size: 2em;
+    margin-top: 4vh;
+    margin-bottom: 3vh;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.form-row-container {
+    gap: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-row.color-picker {
+    margin: 0 !important;
+    width: 5vw !important;
+    padding: 0 !important;
+}
+
+.form-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.color-picker {
+    width: 30vw;
+}
+
+.sliders {
+    gap: 05rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.slider-item {
+    width: 20vw;
+}
+
+.form-row label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/*--------------------------------------------------------------
 # Video Player
 --------------------------------------------------------------*/
 
@@ -1265,9 +1389,9 @@ th {
 .plyr__caption {
     line-height: 1.2 !important;
     font-weight: bold !important;
-    color: var(--subtitle-color) !important;
-    font-size: var(--subtitle-size) !important;
-    background: var(--subtitle-background) !important;
+    color: var(--subtitle-color, yellow) !important;
+    font-size: var(--subtitle-size, 3rem) !important;
+    background: var(--subtitle-background, none) !important;
     text-shadow:
         0px 0px 3px rgba(0, 0, 0, 0.8),
         1px 1px 0 rgba(0, 0, 0, 0.8),
@@ -1276,6 +1400,7 @@ th {
         -1px 1px 0 rgba(0, 0, 0, 0.8),
         0px 0px 8px rgba(0, 0, 0, 0.8) !important;
 }
+
 
 .plyr__video-wrapper {
     pointer-events: none !important;

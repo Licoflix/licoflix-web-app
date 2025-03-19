@@ -11,10 +11,6 @@ const FilmPlayerPage: React.FC = () => {
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
     useEffect(() => {
-        playerStore.setFontSize('3.5rem');
-        playerStore.setBackground('none');
-        playerStore.setSubtitleColor('yellow');
-
         if (videoRef.current) {
             playerRef.current = new Plyr(videoRef.current, {
                 muted: false,
@@ -65,20 +61,20 @@ const FilmPlayerPage: React.FC = () => {
             >
                 <source
                     type="video/mp4"
-                    src={encodeURI(`http://26.128.44.247:8080/film/${title || ''}/video`)}
+                    src={encodeURI(`http://localhost:8080/film/${title || ''}/video`)}
                 />
                 <track
                     default
                     srcLang="pt"
                     kind="subtitles"
                     label="Português"
-                    src={`http://26.128.44.247:8080/film/${title || ''}/ptbr/subtitle`}
+                    src={`http://localhost:8080/film/${title || ''}/ptbr/subtitle`}
                 />
                 <track
                     srcLang="en"
                     kind="subtitles"
                     label="Inglês"
-                    src={`http://26.128.44.247:8080/film/${title || ''}/en/subtitle`}
+                    src={`http://localhost:8080/film/${title || ''}/en/subtitle`}
                 />
             </video>
         </div>
