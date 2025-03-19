@@ -9,8 +9,9 @@ import { useStore } from '../../../app/store/store';
 const SearchPage: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
     const { commonStore: { language } } = useStore();
-    const { filmStore: { list, filteredFilms, searchTerm, setSearchTerm, setFilteredFilms } } = useStore();
+    const { filmStore: { listFiltredFilms, filteredFilms, searchTerm, setSearchTerm, setFilteredFilms } } = useStore();
 
     const handleFilmClick = (film: Film) => {
         navigate(`/film/${film.id}`);
@@ -21,15 +22,33 @@ const SearchPage: React.FC = () => {
         setSearchTerm(search);
     };
 
+    const handleSearch = async () => {
+        setCurrentPage(1);
+        setFilteredFilms(null);
+        setLoading(true);
+        await listFiltredFilms(1, 10, searchTerm);
+        setLoading(false);
+    };
+
     const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            if (searchTerm !== '') {
-                setLoading(true);
-                await list(1, null, searchTerm, true);
-                setLoading(false);
-            } else {
-                setFilteredFilms(null);
-            }
+            await handleSearch();
+        }
+    };
+
+    const loadNextPage = async () => {
+        if (loading || !filteredFilms || currentPage >= filteredFilms.totalPages) return;
+        setLoading(true);
+        const nextPage = currentPage + 1;
+        setCurrentPage(nextPage);
+        await listFiltredFilms(nextPage, 10, searchTerm);
+        setLoading(false);
+    };
+
+    const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const bottom = e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.clientHeight;
+        if (bottom) {
+            loadNextPage();
         }
     };
 
@@ -39,7 +58,7 @@ const SearchPage: React.FC = () => {
     }, [setSearchTerm, setFilteredFilms]);
 
     return (
-        <Segment className="home-page" id="home">
+        <Segment className="home-page" id="home" style={{ overflowY: 'auto' }} onScroll={handleScroll}>
             <Input
                 size="large"
                 value={searchTerm || ''}
@@ -48,16 +67,16 @@ const SearchPage: React.FC = () => {
                 onKeyPress={handleKeyPress}
                 onChange={handleSearchChange}
                 placeholder={`${findTranslation('Search', language)}...`}
-                icon={<Icon name='search' link onClick={() => { list(1, null, searchTerm); }} />}
+                icon={<Icon name='search' link onClick={handleSearch} />}
             />
 
             <div>
-                {loading ? (
+                {loading && currentPage === 1 ? (
                     <Loader className='loader-search-films' active size='huge' inline='centered' />
                 ) : (
-                    filteredFilms && filteredFilms.length > 0 ? (
+                    filteredFilms && filteredFilms.totalElements > 0 ? (
                         <div className='search-page-segment'>
-                            {filteredFilms.map((film: Film, index: number) => (
+                            {filteredFilms.data.map((film: Film, index: number) => (
                                 <div className='search-card-film-container' key={index}>
                                     <Segment
                                         key={index}
@@ -67,7 +86,7 @@ const SearchPage: React.FC = () => {
                                         <Image
                                             className="film-image"
                                             src={`data:image/jpeg;base64,${film.image}`}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s ease', zIndex: 1, }}
+                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s ease', zIndex: 1 }}
                                         />
 
                                         <div className="film-hover-container">
@@ -97,6 +116,10 @@ const SearchPage: React.FC = () => {
                     )
                 )}
             </div>
+
+            {loading && currentPage > 1 && (
+                <Loader style={{marginTop: '3vh', marginBottom:"3vh"}} active size='huge' inline='centered' />
+            )}
         </Segment>
     );
 };

@@ -11,7 +11,6 @@ export default class FilmStore implements IBaseStore<Film> {
     searchTerm: any;
     film: Film | any;
     userFilmList: Film[] = [];
-    filteredFilms: Film[] = [];
     categories: Category[] = [];
     continueWathingList: Film[] = [];
     autoCarrousselfilms: Film[] = [];
@@ -19,6 +18,7 @@ export default class FilmStore implements IBaseStore<Film> {
     userListChanging: { [filmId: number]: boolean } = {};
     allFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
     entityList: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
+    filteredFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
 
     constructor() {
         makeAutoObservable(this);
@@ -42,20 +42,28 @@ export default class FilmStore implements IBaseStore<Film> {
         }
     };
 
-    list = async (page?: any, pageSize?: any, search?: any, searchPage?: boolean, dontNeedLoad?: boolean, searchTable?: boolean | null) => {
+    list = async (page?: any, pageSize?: any, search?: any, dontNeedLoad?: boolean, searchTable?: boolean | null) => {
         if (dontNeedLoad) this.setLoading(false);
 
-        if (!this.entityList || this.entityList.data.length === 0 || searchPage || searchTable) {
-            if (searchPage) {
-                const response = await service.film.list(1, 20, search);
-                runInAction(() => { this.filteredFilms = response.data; });
-            } else {
-                const response = await service.film.list(page, pageSize, search);
-                runInAction(() => {
-                    this.entityList = response;
-                });
-            }
+        if (!this.entityList || this.entityList.data.length === 0 || searchTable) {
+            const response = await service.film.list(page, pageSize, search);
+            runInAction(() => {
+                this.entityList = response;
+            });
         }
+    };
+
+    listFiltredFilms = async (page?: any, pageSize?: any, search?: any) => {
+        const response = await service.film.list(page, pageSize, search);
+        runInAction(() => {
+            if (page === 1 || !this.filteredFilms) {
+                this.filteredFilms = response;
+            } else {
+                this.filteredFilms.data = [...this.filteredFilms.data, ...response.data];
+                this.filteredFilms.totalPages = response.totalPages;
+                this.filteredFilms.totalElements = response.totalElements;
+            }
+        });
     };
 
     listContinueWathingFilms = async (force?: boolean) => {
@@ -83,7 +91,7 @@ export default class FilmStore implements IBaseStore<Film> {
     deleteEntity = async (id: any) => {
         await service.film.delete(id);
         await runInAction(async () => {
-            await this.list(1, 10, undefined, undefined, undefined, true);
+            await this.list(1, 10, undefined, undefined, true);
             await this.listGroupedFilms(true);
         });
     }

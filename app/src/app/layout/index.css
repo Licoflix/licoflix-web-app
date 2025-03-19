@@ -1066,6 +1066,7 @@ i.link.icon,
     display: flex;
     flex-wrap: wrap;
     margin-top: 12vh;
+    margin-bottom: 12vh;
     align-items: center;
     justify-content: center;
 }
