@@ -12,12 +12,12 @@ const ManageFilmPage: React.FC = () => {
 
     const columns = [
         findTranslation('Title', language),
-        findTranslation('Description', language),
         findTranslation('Oscars', language),
         findTranslation('BaftaAwards', language),
         findTranslation('GoldenGlobes', language),
         findTranslation('imdb', language),
         findTranslation('Year', language),
+        findTranslation('Directors', language),
     ];
 
 
@@ -26,17 +26,17 @@ const ManageFilmPage: React.FC = () => {
             case columns[0]:
                 return entity.title;
             case columns[1]:
-                return entity.description;
-            case columns[2]:
                 return entity.oscars === 0 ? "" : entity.oscars;
-            case columns[3]:
+            case columns[2]:
                 return entity.baftaAwards === 0 ? "" : entity.baftaAwards;
-            case columns[4]:
+            case columns[3]:
                 return entity.goldenGlobes === 0 ? "" : entity.goldenGlobes;
-            case columns[5]:
+            case columns[4]:
                 return entity.imdb;
-            case columns[6]:
+            case columns[5]:
                 return entity.year;
+            case columns[6]:
+                return entity.directors;
             default:
                 return null;
         }

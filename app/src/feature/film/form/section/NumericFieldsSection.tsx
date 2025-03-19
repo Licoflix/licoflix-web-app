@@ -5,12 +5,13 @@ import { findTranslation } from '../../../../app/common/language/translations';
 interface Props {
     values: any;
     language: any;
+    saving: boolean;
     handleChange: any;
     formatDuration: (duration: string) => string;
     setFieldValue: (field: string, value: any) => void;
 }
 
-const NumericFieldsSection: React.FC<Props> = ({ values, language, handleChange, setFieldValue, formatDuration }) => {
+const NumericFieldsSection: React.FC<Props> = ({ values, language, handleChange, saving, setFieldValue, formatDuration }) => {
     return (
         <section className="year-duration-section">
             <Grid columns={2} stackable>
@@ -19,6 +20,7 @@ const NumericFieldsSection: React.FC<Props> = ({ values, language, handleChange,
                         <Form.Input
                             name="year"
                             type="number"
+                            disabled={saving}
                             onChange={handleChange}
                             className="create-input"
                             value={values.year || ''}
@@ -36,6 +38,7 @@ const NumericFieldsSection: React.FC<Props> = ({ values, language, handleChange,
                     <Grid.Column>
                         <Form.Input
                             name="duration"
+                            disabled={saving}
                             className="create-input"
                             value={values.duration || ''}
                             label={findTranslation("duration", language)}

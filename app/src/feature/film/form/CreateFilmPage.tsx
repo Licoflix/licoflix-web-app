@@ -6,19 +6,18 @@ import { findTranslation } from '../../../app/common/language/translations';
 import { FilmRequest } from '../../../app/model/Film';
 import { useStore } from '../../../app/store/store';
 import ActionButtonsSection from './section/ActionButtonsSection';
+import AwardsFieldsSection from './section/AwardsFieldsSection';
 import FileUploadSection from './section/FileUploadSection';
+import NumericFieldsSection from './section/NumericFieldsSection';
 import RatingAndCategorySection from './section/RatingAndCategorySection';
+import SubsUploadSection from './section/SubsUploadSection';
 import TeamFilmSection from './section/TeamFilmSection';
 import TitleDescriptionSection from './section/TitleDescriptionSection';
-import NumericFieldsSection from './section/NumericFieldsSection';
-import SubsUploadSection from './section/SubsUploadSection';
-import AwardsFieldsSection from './section/AwardsFieldsSection';
 
 const CreateFilmPage: React.FC = () => {
     const {
-        commonStore: { language },
-        filmFormStore: { onSubmit, formatDuration, getCategoryOptions, getLanguageOptions, setFormValues, setSelectedFilm, initialFormValues, ageOptions, formValues, validationSchema, selectedFilm },
-    } = useStore();
+        commonStore: { language }, filmFormStore: { onSubmit, formatDuration, getCategoryOptions, getLanguageOptions, setFormValues, setSelectedFilm,
+            initialFormValues, ageOptions, formValues, validationSchema, selectedFilm, saving }, } = useStore();
 
     const handleSubmit = (request: FilmRequest, resetForm: () => void) => {
         onSubmit(request, language)
@@ -42,9 +41,10 @@ const CreateFilmPage: React.FC = () => {
                     {({ values, handleChange, handleSubmit, setFieldValue, isValid }) => {
                         return (
                             <Form className="ui form error" onSubmit={handleSubmit} autoComplete="off">
-                                <TitleDescriptionSection editFlow={selectedFilm != null} values={values} handleChange={handleChange} language={language} />
+                                <TitleDescriptionSection saving={saving} editFlow={selectedFilm != null} values={values} handleChange={handleChange} language={language} />
                                 <NumericFieldsSection
                                     values={values}
+                                    saving={saving}
                                     language={language}
                                     handleChange={handleChange}
                                     setFieldValue={setFieldValue}
@@ -52,23 +52,25 @@ const CreateFilmPage: React.FC = () => {
                                 />
                                 <AwardsFieldsSection
                                     values={values}
+                                    saving={saving}
                                     language={language}
                                     handleChange={handleChange}
                                     setFieldValue={setFieldValue}
                                     formatDuration={formatDuration}
                                 />
-                                <TeamFilmSection values={values} handleChange={handleChange} language={language} />
+                                <TeamFilmSection saving={saving} values={values} handleChange={handleChange} language={language} />
                                 <RatingAndCategorySection
                                     values={values}
+                                    saving={saving}
                                     language={language}
                                     ageOptions={ageOptions}
                                     setFieldValue={setFieldValue}
                                     categoryOptions={getCategoryOptions()}
                                     languageOptions={getLanguageOptions()}
                                 />
-                                <FileUploadSection values={values} setFieldValue={setFieldValue} language={language} />
-                                <SubsUploadSection values={values} setFieldValue={setFieldValue} language={language} />
-                                <ActionButtonsSection isValid={isValid} language={language} />
+                                <FileUploadSection saving={saving} values={values} setFieldValue={setFieldValue} language={language} />
+                                <SubsUploadSection saving={saving} values={values} setFieldValue={setFieldValue} language={language} />
+                                <ActionButtonsSection saving={saving} isValid={isValid} language={language} />
                             </Form>
                         );
                     }}

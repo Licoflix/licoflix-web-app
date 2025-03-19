@@ -5,17 +5,19 @@ import { findTranslation } from '../../../../app/common/language/translations';
 
 interface FileUploadSectionProps {
     language: any;
+    saving: boolean;
     values: any | null;
     setFieldValue: (field: string, value: any) => void;
 }
 
-const FileUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldValue, language }) => {
+const FileUploadSection: React.FC<FileUploadSectionProps> = ({ setFieldValue, values, language, saving }) => {
     return (
         <Grid columns={3} stackable>
             <Grid.Row>
                 <GridColumn>
                     <UploadComponent
                         fieldName="image"
+                        saving={saving}
                         language={language}
                         accept=".jpg,.jpeg,.png"
                         value={values.image || ''}
@@ -27,6 +29,7 @@ const FileUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldV
                 </GridColumn>
                 <GridColumn>
                     <UploadComponent
+                        saving={saving}
                         language={language}
                         fieldName="background"
                         accept=".jpg,.jpeg,.png"
@@ -41,6 +44,7 @@ const FileUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldV
                     <UploadComponent
                         label="Video"
                         accept=".mp4"
+                        saving={saving}
                         fieldName="film"
                         language={language}
                         value={values.film || ''}

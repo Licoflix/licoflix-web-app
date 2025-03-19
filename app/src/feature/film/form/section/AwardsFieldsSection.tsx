@@ -5,12 +5,13 @@ import { findTranslation } from '../../../../app/common/language/translations';
 interface Props {
     values: any;
     language: any;
+    saving: boolean;
     handleChange: any;
     formatDuration: (duration: string) => string;
     setFieldValue: (field: string, value: any) => void;
 }
 
-const AwardsFieldsSection: React.FC<Props> = ({ values, language, handleChange }) => {
+const AwardsFieldsSection: React.FC<Props> = ({ values, language, handleChange, saving }) => {
     const handleNumericInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value.replace(/[^0-9]/g, '');
         e.target.value = value;
@@ -30,6 +31,7 @@ const AwardsFieldsSection: React.FC<Props> = ({ values, language, handleChange }
                     <Grid.Column>
                         <Form.Input
                             type="number"
+                            disabled={saving}
                             name="baftaAwards"
                             className="create-input"
                             value={values.baftaAwards}
@@ -43,6 +45,7 @@ const AwardsFieldsSection: React.FC<Props> = ({ values, language, handleChange }
                         <Form.Input
                             type="number"
                             name="oscars"
+                            disabled={saving}
                             value={values.oscars}
                             className="create-input"
                             onChange={handleNumericInput}
@@ -54,6 +57,7 @@ const AwardsFieldsSection: React.FC<Props> = ({ values, language, handleChange }
                     <Grid.Column>
                         <Form.Input
                             type="number"
+                            disabled={saving}
                             name="goldenGlobes"
                             className="create-input"
                             value={values.goldenGlobes}
@@ -67,6 +71,7 @@ const AwardsFieldsSection: React.FC<Props> = ({ values, language, handleChange }
                         <Form.Input
                             name="imdb"
                             type="number"
+                            disabled={saving}
                             value={values.imdb}
                             className="create-input"
                             onChange={handleImdbInput}

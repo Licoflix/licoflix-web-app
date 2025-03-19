@@ -14,7 +14,6 @@ const ManageUserPage: React.FC = () => {
         findTranslation('Nickname', language),
         findTranslation('Email', language),
         findTranslation('Admin', language),
-        findTranslation('Deleted', language),
     ];
 
 
@@ -28,8 +27,6 @@ const ManageUserPage: React.FC = () => {
                 return entity.email;
             case columns[3]:
                 return entity.admin;
-            case columns[4]:
-                return entity.deleted;
             default:
                 return null;
         }

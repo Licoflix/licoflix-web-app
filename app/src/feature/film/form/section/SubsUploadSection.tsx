@@ -5,17 +5,19 @@ import { findTranslation } from '../../../../app/common/language/translations';
 
 interface FileUploadSectionProps {
     language: any;
+    saving: boolean;
     values: any | null;
     setFieldValue: (field: string, value: any) => void;
 }
 
-const SubsUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldValue, language }) => {
+const SubsUploadSection: React.FC<FileUploadSectionProps> = ({ setFieldValue, values, language, saving }) => {
     return (
         <Grid columns={2} stackable>
             <Grid.Row>
                 <GridColumn>
                     <UploadComponent
                         accept=".vtt"
+                        saving={saving}
                         language={language}
                         fieldName="subtitle"
                         validTypes={['text/vtt']}
@@ -28,6 +30,7 @@ const SubsUploadSection: React.FC<FileUploadSectionProps> = ({ values, setFieldV
                 <GridColumn>
                     <UploadComponent
                         accept=".vtt"
+                        saving={saving}
                         language={language}
                         fieldName="subtitleEn"
                         validTypes={['text/vtt']}

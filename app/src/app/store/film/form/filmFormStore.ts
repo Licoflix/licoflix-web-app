@@ -15,7 +15,7 @@ export default class FilmFormStore {
 
     saving: boolean = false;
     selectedFilm: Film | null = null;
-    activeItem: string = 'manageUsers';
+    activeItem: string = 'createFilms';
 
     initialFormValues: FilmRequest = {
         imdb: 0,
@@ -267,7 +267,7 @@ export default class FilmFormStore {
     private async submitFilm(formData: FormData, title: string, language: any): Promise<void> {
         await service.film.create(formData)
             .finally(async () => {
-                await store.filmStore.list(1, 10, undefined, undefined, true);
+                await store.filmStore.list(1, 10, undefined, true);
                 await store.filmStore.listGroupedFilms(true);
                 toast.success(`${title + findTranslation("createFilmSuccess", language)}`)
                 this.saving = false;

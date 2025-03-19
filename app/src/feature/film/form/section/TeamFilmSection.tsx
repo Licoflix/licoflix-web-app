@@ -4,11 +4,12 @@ import { findTranslation } from '../../../../app/common/language/translations';
 
 interface Props {
     language: any;
+    saving: boolean;
     values: any | null;
     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const TeamFilmSection: React.FC<Props> = ({ values, language, handleChange }) => {
+const TeamFilmSection: React.FC<Props> = ({ values, language, saving, handleChange }) => {
     return (
         <section className="team-film-section">
             <Grid columns={3} stackable>
@@ -16,6 +17,7 @@ const TeamFilmSection: React.FC<Props> = ({ values, language, handleChange }) =>
                     <Grid.Column>
                         <Form.Input
                             name="cast"
+                            disabled={saving}
                             onChange={handleChange}
                             className='create-input'
                             value={values.cast || ''}
@@ -27,6 +29,7 @@ const TeamFilmSection: React.FC<Props> = ({ values, language, handleChange }) =>
                     <Grid.Column>
                         <Form.Input
                             name="producers"
+                            disabled={saving}
                             onChange={handleChange}
                             className='create-input'
                             value={values.producers || ''}
@@ -38,6 +41,7 @@ const TeamFilmSection: React.FC<Props> = ({ values, language, handleChange }) =>
                     <Grid.Column>
                         <Form.Input
                             name="directors"
+                            disabled={saving}
                             onChange={handleChange}
                             className='create-input'
                             value={values.directors || ''}

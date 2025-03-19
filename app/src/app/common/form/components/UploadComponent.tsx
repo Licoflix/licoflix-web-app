@@ -1,3 +1,4 @@
+import { observer } from 'mobx-react-lite';
 import React from 'react';
 import { Button, Form, Icon, Input } from 'semantic-ui-react';
 import { findTranslation } from '../../language/translations';
@@ -6,6 +7,7 @@ interface UploadComponentProps {
     language: any;
     label: string;
     accept: string;
+    saving: boolean;
     fieldName: string;
     value: File | null;
     validTypes?: string[];
@@ -17,6 +19,7 @@ const UploadComponent: React.FC<UploadComponentProps> = ({
     label,
     value,
     accept,
+    saving,
     language,
     fieldName,
     validTypes,
@@ -35,10 +38,11 @@ const UploadComponent: React.FC<UploadComponentProps> = ({
     };
 
     return (
-        <Form.Field>
+        <Form.Field disabled={saving}>
             <label>{label}</label>
             <Button
                 type="button"
+                disabled={saving}
                 className='upload-buttom'
                 style={{ width: '100%' }}
                 onClick={() => document.getElementById(`${fieldName}-upload`)?.click()}
@@ -59,6 +63,7 @@ const UploadComponent: React.FC<UploadComponentProps> = ({
             <Input
                 type="file"
                 accept={accept}
+                disabled={saving}
                 id={`${fieldName}-upload`}
                 style={{ display: 'none' }}
                 onChange={handleFileChange}
@@ -67,4 +72,4 @@ const UploadComponent: React.FC<UploadComponentProps> = ({
     );
 };
 
-export default UploadComponent;
+export default observer(UploadComponent);

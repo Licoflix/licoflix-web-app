@@ -342,7 +342,7 @@ html {
     z-index: 1 !important;
     width: 100% !important;
     height: 100% !important;
-    object-fit: cover !important;
+    object-fit: fill !important;
     position: absolute !important;
 }
 
@@ -814,8 +814,8 @@ img {
 .auto-image {
     z-index: 1 !important;
     width: 100% !important;
-    height: 100% !important;
     content: '' !important;
+    height: 100% !important;
     object-fit: cover !important;
     position: relative !important;
     background-size: cover !important;
@@ -1144,6 +1144,11 @@ input[type="number"] {
 .manage-column {
     margin: 0 !important;
     padding: 0 !important;
+}
+
+.disabled.field.create-input textarea {
+    opacity: .45 !important;
+    color: #ffffff79 !important;
 }
 
 .ui.pointing.secondary.manage-menu.menu .item {

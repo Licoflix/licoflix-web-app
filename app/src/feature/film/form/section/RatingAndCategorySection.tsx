@@ -5,6 +5,7 @@ import { CategoryOption } from '../../../../app/model/CategoryOption';
 
 interface Props {
     language: any;
+    saving: boolean;
     ageOptions: any[];
     values: any | null;
     languageOptions: CategoryOption[];
@@ -12,7 +13,7 @@ interface Props {
     setFieldValue: (field: string, value: any) => void;
 }
 
-const RatingAndCategorySection: React.FC<Props> = ({ setFieldValue, values, ageOptions, categoryOptions, languageOptions, language }) => {
+const RatingAndCategorySection: React.FC<Props> = ({ setFieldValue, values, ageOptions, categoryOptions, languageOptions, language, saving }) => {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [searchLanguage, setSearchLanguage] = useState<string>('');
 
@@ -61,11 +62,12 @@ const RatingAndCategorySection: React.FC<Props> = ({ setFieldValue, values, ageO
             <Grid columns={3} stackable>
                 <Grid.Row>
                     <Grid.Column>
-                        <Form.Field>
+                        <Form.Field disabled={saving}>
                             <label>{findTranslation("rating", language)}</label>
                             <Dropdown
                                 fluid
                                 selection
+                                disabled={saving}
                                 options={ageOptions}
                                 value={values.age || ''}
                                 className='create-input'
@@ -76,7 +78,7 @@ const RatingAndCategorySection: React.FC<Props> = ({ setFieldValue, values, ageO
                     </Grid.Column>
 
                     <Grid.Column>
-                        <Form.Field>
+                        <Form.Field disabled={saving}>
                             <label>{findTranslation("category", language)}</label>
                             <Dropdown
                                 fluid
@@ -84,6 +86,7 @@ const RatingAndCategorySection: React.FC<Props> = ({ setFieldValue, values, ageO
                                 lazyLoad
                                 multiple
                                 selection
+                                disabled={saving}
                                 className='create-input'
                                 value={values.categories || ''}
                                 options={translatedCategoryOptions}
@@ -95,12 +98,13 @@ const RatingAndCategorySection: React.FC<Props> = ({ setFieldValue, values, ageO
                     </Grid.Column>
 
                     <Grid.Column>
-                        <Form.Field>
+                        <Form.Field disabled={saving}>
                             <label>{findTranslation("OriginalLanguage", language)}</label>
                             <Dropdown
                                 fluid
                                 search
                                 selection
+                                disabled={saving}
                                 className='create-input'
                                 value={values.language || ''}
                                 options={translatedLanguagesOptions}

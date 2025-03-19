@@ -11,9 +11,9 @@ const ManagePage: React.FC = () => {
     const { filmStore: { setSearchTerm }, commonStore: { language }, filmFormStore: { setSelectedFilm, setActiveItem, setFormValues, initialFormValues, activeItem } } = useStore();
 
     const menuItems = [
-        { key: 'manageUsers', label: findTranslation('manageUsers', language), component: <ManageUserPage /> },
-        { key: 'manageFilms', label: findTranslation('manageFilms', language), component: <ManageFilmPage /> },
         { key: 'createFilms', label: findTranslation('createFilms', language), component: <CreateFilmPage /> },
+        { key: 'manageFilms', label: findTranslation('manageFilms', language), component: <ManageFilmPage /> },
+        { key: 'manageUsers', label: findTranslation('manageUsers', language), component: <ManageUserPage /> },
     ];
 
     const activeComponent = menuItems.find((item) => item.key === activeItem)?.component;
