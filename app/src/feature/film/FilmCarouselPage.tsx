@@ -74,9 +74,9 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
 
     return (
         <Segment className="film-carousel-segment">
-            <Header className="film-category" content={findTranslation(category, language)} />
             {films && films.length > 0 ? (
                 <div className="film-carousel-container" style={{ position: 'relative', overflow: 'hidden' }}>
+                    <Header className="film-category" content={findTranslation(category, language)} />
                     <div
                         ref={carouselRef}
                         className="film-carousel"
