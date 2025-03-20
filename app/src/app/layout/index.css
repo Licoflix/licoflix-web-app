@@ -1416,7 +1416,7 @@ th {
     padding-bottom: 1vh !important;
 
     /* Tamanho e Layout */
-    max-width: 35vw !important;
+    max-width: 50vw !important;
     width: max-content !important;
     height: fit-content !important;
     display: inline-block !important;
