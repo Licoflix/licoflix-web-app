@@ -17,6 +17,7 @@ export default class FilmStore implements IBaseStore<Film> {
     userListChanging: { [filmId: number]: boolean } = {};
     allFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
     entityList: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
+    newFilmsList: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
     filteredFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
 
     constructor() {
@@ -48,6 +49,13 @@ export default class FilmStore implements IBaseStore<Film> {
                 this.entityList = response;
             });
         }
+    };
+
+    listNewFilms = async () => {
+        const response = await service.film.list(1, 15);
+        runInAction(() => {
+            this.newFilmsList = response;
+        });
     };
 
     listFiltredFilms = async (page?: any, pageSize?: any, search?: any) => {

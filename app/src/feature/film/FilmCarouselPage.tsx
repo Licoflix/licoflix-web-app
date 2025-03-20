@@ -51,6 +51,23 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
         }
     };
 
+    const smoothScrollBy = (element: HTMLElement, distance: number, duration: number) => {
+        const start = element.scrollLeft;
+        const startTime = performance.now();
+
+        const animateScroll = (currentTime: number) => {
+            const elapsed = currentTime - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            element.scrollLeft = start + distance * progress;
+            if (progress < 1) {
+                requestAnimationFrame(animateScroll);
+            }
+        };
+
+        requestAnimationFrame(animateScroll);
+    };
+
+
     useEffect(() => {
         checkArrowsVisibility();
     }, [films]);
@@ -124,7 +141,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 e.stopPropagation();
                                 e.preventDefault();
                                 if (carouselRef.current) {
-                                    carouselRef.current.scrollBy({ left: -600, behavior: 'smooth' });
+                                    smoothScrollBy(carouselRef.current, -800, 800);
                                 }
                             }}
                         >
@@ -138,7 +155,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 e.stopPropagation();
                                 e.preventDefault();
                                 if (carouselRef.current) {
-                                    carouselRef.current.scrollBy({ left: 600, behavior: 'smooth' });
+                                    smoothScrollBy(carouselRef.current, 800, 800);
                                 }
                             }}
                         >
