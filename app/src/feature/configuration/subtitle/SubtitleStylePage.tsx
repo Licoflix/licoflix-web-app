@@ -1,9 +1,9 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { HexColorPicker } from 'react-colorful';
 import { Header, Segment } from "semantic-ui-react";
 import { findTranslation } from "../../../app/common/language/translations";
 import { useStore } from "../../../app/store/store";
+import { HexColorPicker } from "react-colorful";
 
 const SubtitleStylePage: React.FC = () => {
     const { playerStore, commonStore: { language } } = useStore();
@@ -25,7 +25,7 @@ const SubtitleStylePage: React.FC = () => {
                             <label>{findTranslation("backgroundSubtitle", language)}</label>
                             <HexColorPicker
                                 color={playerStore.subtitleBackground}
-                                onChange={(novaCor) => {
+                                onChange={(novaCor: string) => {
                                     playerStore.setSubtitleBackground(novaCor);
                                 }}
                             />
@@ -34,7 +34,7 @@ const SubtitleStylePage: React.FC = () => {
                             <label>{findTranslation("color", language)}</label>
                             <HexColorPicker
                                 color={playerStore.subtitleColor}
-                                onChange={(novaCor) => {
+                                onChange={(novaCor: string) => {
                                     playerStore.setSubtitleColor(novaCor);
                                 }}
                             />

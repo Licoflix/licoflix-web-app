@@ -40,7 +40,6 @@ const FilmAutoCarouselPage: React.FC<FilmAutoCarouselPageProps> = ({ films }) =>
     }, [films]);
 
     return (
-        !filmStore.filteringByCategory &&
         <Segment className="film-auto-carousel">
             <div className="carousel-container" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                 {films?.map((film, index) => (
