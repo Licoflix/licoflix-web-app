@@ -4,9 +4,13 @@ import React from "react";
 
 export default class PlayerStore {
     // Configurações de legendas (valores padrão)
+    subtitleOpacity: string = "0";
     subtitleSize: string = "3rem";
-    subtitleOpacity: string = "100%";
-    subtitleColor: string = "yellow";
+    subtitleColor: string = "#FFEE00";
+    subtitleFontOpacity: string = "100%";
+    subtitleBackground: string = "#000000";
+    subtitleColorRGBA: string = "rgba(255, 238, 0, 1)";
+    subtitleBackgroundRGBA: string = "rgba(0, 0, 0, 0)";
 
     // Instância do Plyr e outros controles
     plyrInstance: Plyr | null = null;
@@ -65,9 +69,26 @@ export default class PlayerStore {
     // --------------------------------
     setSubtitleColor(color: string) {
         this.subtitleColor = color;
+        localStorage.setItem("subtitleColor", color);
+    }
+
+    setSubtitleColorRGBA(color: string) {
+        this.subtitleColorRGBA = color;
         document.documentElement.style.setProperty("--subtitle-color", color);
 
-        localStorage.setItem("subtitleColor", color);
+        localStorage.setItem("subtitleColorRGBA", color);
+    }
+
+    setSubtitleBackground(color: string) {
+        this.subtitleBackground = color;
+        localStorage.setItem("subtitleBackground", color);
+    }
+
+    setSubtitleBackgroundRGBA(color: string) {
+        this.subtitleBackgroundRGBA = color;
+        document.documentElement.style.setProperty("--subtitle-background", color);
+
+        localStorage.setItem("subtitleBackgroundRGBA", color);
     }
 
     setSubtitleSize(size: string) {
@@ -77,11 +98,32 @@ export default class PlayerStore {
         localStorage.setItem("subtitleSize", size);
     }
 
+    setSubtitleFontOpacity(opacity: string) {
+        this.subtitleFontOpacity = opacity;
+        localStorage.setItem("subtitleFontOpacity", opacity);
+    }
+
     setSubtitleOpacity(opacity: string) {
         this.subtitleOpacity = opacity;
-        document.documentElement.style.setProperty("--subtitle-opacity", opacity);
-
         localStorage.setItem("subtitleOpacity", opacity);
+    }
+
+    hexToRgba(hex: string, alpha: number, isBackground: boolean): string {
+        hex = hex.replace(/^#/, '');
+        if (hex.length === 3) {
+            hex = hex.split('').map(x => x + x).join('');
+        }
+        const r = parseInt(hex.substring(0, 2), 16);
+        const g = parseInt(hex.substring(2, 4), 16);
+        const b = parseInt(hex.substring(4, 6), 16);
+
+        const color = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+
+        if (isBackground)
+            this.setSubtitleBackgroundRGBA(color);
+        else
+            this.setSubtitleColorRGBA(color)
+        return color;
     }
 
     // --------------------------------
@@ -90,8 +132,12 @@ export default class PlayerStore {
     resetSubtitleSettings() {
         // Volta aos valores padrão (ajuste conforme quiser)
         this.setSubtitleSize("3rem");
-        this.setSubtitleColor("yellow");
-        this.setSubtitleOpacity("100%");
+        this.setSubtitleOpacity("0");
+        this.setSubtitleColor("#FFEE00");
+        this.setSubtitleFontOpacity("100%");
+        this.setSubtitleBackground("#000000");
+        this.setSubtitleColorRGBA("rgba(255, 230, 0, 1)");
+        this.setSubtitleBackgroundRGBA("rgba(0, 0, 0, 0)");
     }
 
     // --------------------------------
@@ -101,10 +147,18 @@ export default class PlayerStore {
         const size = localStorage.getItem("subtitleSize");
         const color = localStorage.getItem("subtitleColor");
         const opacity = localStorage.getItem("subtitleOpacity");
+        const background = localStorage.getItem("subtitleBackground");
+        const subtitleColorRGBA = localStorage.getItem("subtitleColorRGBA");
+        const backgroundRGBA = localStorage.getItem("subtitleBackgroundRGBA");
+        const subtitleFontOpacity = localStorage.getItem("subtitleFontOpacity");
 
         if (size) this.setSubtitleSize(size);
         if (color) this.setSubtitleColor(color);
         if (opacity) this.setSubtitleOpacity(opacity);
+        if (background) this.setSubtitleBackground(background);
+        if (backgroundRGBA) this.setSubtitleBackgroundRGBA(backgroundRGBA);
+        if (subtitleColorRGBA) this.setSubtitleColorRGBA(subtitleColorRGBA);
+        if (subtitleFontOpacity) this.setSubtitleFontOpacity(subtitleFontOpacity);
     }
 
     /**

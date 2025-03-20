@@ -20,6 +20,7 @@ const translations: TranslationSections = {
             myList: 'Minha Lista',
             settings: "Configurações",
             addFilm: 'Adicionar Filme',
+            settingsSubtitle: "Legendas",
         },
         en: {
             home: 'Home',
@@ -31,6 +32,7 @@ const translations: TranslationSections = {
             addFilm: 'Add Film',
             settings: 'Settings',
             register: 'Register',
+            settingsSubtitle: "Subtitle",
         }
     },
     category: {
@@ -343,26 +345,41 @@ const translations: TranslationSections = {
     },
     text: {
         ptbr: {
+            color: 'Cor',
+            size: 'Tamanho',
             winner: 'vencedor',
             newAccount: 'Nova Conta',
+            backgroundSubtitle: 'Fundo',
             0: 'Apto para todas as idades',
+            fontStyle: 'Estilo da Legenda',
+            subtitleEx: "Exemplo de Legenda",
             haveAccount: 'Já tem uma conta? ',
+            fontOpacity: "Opacidade da Fonte",
             noData: 'Nenhum registro encontrado',
             recordsFound: 'Registros encontrados: ',
+            backgroundOpacity: 'Opacidade do Fundo',
             dontHaveAccount: 'Ainda não tem uma conta? ',
             sureQuestion: 'Tem certeza de que deseja prosseguir?',
             14: 'Pode incluir violência, drogas ou linguagem vulgar',
             12: 'Pode conter violência moderada e linguagem inadequada',
             16: 'Pode conter violência intensa, drogas ou sexo explícito',
             10: 'Pode conter cenas leves de violência ou linguagem imprópria',
+            fontStyleDesc: 'Altere a maneira como as legendas aparecem ao assistir',
             18: 'Conteúdo restrito a maiores de 18 anos, com sexo explícito ou violência extrema',
         },
         en: {
+            size: 'Size',
+            color: 'Color',
             winner: 'winner',
+            fontStyle: 'Font Style',
             newAccount: 'New Account',
             0: 'Suitable for all ages',
             noData: 'No data available',
+            fontOpacity: "Font Opacity",
+            subtitleEx: "Subtitle Example",
             recordsFound: 'Records found: ',
+            backgroundSubtitle: "Background",
+            backgroundOpacity: 'Background Opacity',
             haveAccount: "Alredy have an account? ",
             dontHaveAccount: "Don't have an account? ",
             sureQuestion: 'Are you sure you want to proceed?',
@@ -370,6 +387,7 @@ const translations: TranslationSections = {
             10: 'May contain mild violence or inappropriate language',
             16: 'May contain intense violence, drugs, or explicit sex',
             12: 'May contain moderate violence and inappropriate language',
+            fontStyleDesc: 'Change the way subtitles appear when watching',
             18: 'Restricted content for 18 and over, with explicit sex or extreme violence'
         }
     }

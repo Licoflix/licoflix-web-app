@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { Container, Icon, Menu, Popup, Segment } from "semantic-ui-react";
+import { Container, Icon, Image, Menu, Popup, Segment } from "semantic-ui-react";
 import { findTranslation } from '../../common/language/translations';
 import { useStore } from '../../store/store';
 
@@ -9,7 +9,7 @@ const NavBar = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const [activeItem, setActiveItem] = useState<string>(location.pathname.substring(location.pathname.lastIndexOf('/') + 1));
-    const { commonStore: { language, scrollTop, setLoading }, userStore,
+    const { commonStore: { language, scrollTop, setLoading, changeLanguage }, userStore,
         filmStore: { list, listGroupedFilms, getWatchingFilmsList, categories, entityList } } = useStore();
 
     const handleItemClick = async (name: string) => {
@@ -99,9 +99,9 @@ const NavBar = () => {
                                     }
                                     content={
                                         <Menu vertical size="mini" className='navbar'>
-                                            {/* <Menu.Item className='navbar' onClick={() => changeLanguage(language === 'ptbr' ? 'en' : 'ptbr')}><Image className='language-popup-icon' size='mini' src={language === 'ptbr' ? '../../../image/br-flag.png' : '../../../image/us-flag.png'} /> {findTranslation('Language', language)}</Menu.Item> */}
                                             <Menu.Item className='navbar' as={NavLink} to={`/profile`} onClick={() => setActiveItem('')}><Icon name='user circle' /> {findTranslation('profile', language)}</Menu.Item>
-                                            <Menu.Item className='navbar' as={NavLink} to={'/subtitle-style'} ><Icon name='cog' /> {findTranslation('settings', language)}</Menu.Item>
+                                            <Menu.Item className='navbar' as={NavLink} to={'/subtitle-style'} ><Icon name='cog' /> {findTranslation('settingsSubtitle', language)}</Menu.Item>
+                                            <Menu.Item className='navbar' onClick={() => changeLanguage(language === 'ptbr' ? 'en' : 'ptbr')}><Image className='language-popup-icon' size='mini' src={language === 'ptbr' ? '../../../image/br-flag.png' : '../../../image/us-flag.png'} /> {findTranslation('Language', language)}</Menu.Item>
                                             <Menu.Item className='navbar' onClick={() => userStore.logout()}><Icon name='sign-out' /> {findTranslation('signout', language)}</Menu.Item>
                                         </Menu>
                                     }

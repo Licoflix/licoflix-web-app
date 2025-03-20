@@ -127,11 +127,13 @@ html {
 }
 
 .language-popup-icon {
+    border-radius: 100px;
     margin: 0 !important;
     padding: 0 !important;
     width: 1.3rem !important;
-    height: 1.2rem !important;
+    height: 1.3rem !important;
     margin-right: 0.5vw !important;
+    margin-left: 0.5vw !important;
 }
 
 .ui.menu .item {
@@ -1257,7 +1259,7 @@ th {
 --------------------------------------------------------------*/
 
 .ui.center.aligned.header.subtitle-title {
-    margin-top: 15vh !important;
+    margin-top: 10vh !important;
     font-size: 2.5rem !important;
     background-color: transparent !important;
 }
@@ -1285,12 +1287,20 @@ th {
     background-color: transparent !important;
 }
 
+.color-picker {
+    gap: 4rem !important;
+    display: flex !important;
+    align-items: start !important;
+    flex-direction: row !important;
+}
+
 .preview-container {
     margin: 0;
     border: 0;
-    width: 70%;
+    width: 100%;
     display: flex;
     min-height: 40vh;
+    margin-top: auto;
     position: relative;
     align-items: flex-end;
     background-size: cover;
@@ -1317,13 +1327,13 @@ th {
 }
 
 .form-container {
-    width: 70vw;
     color: white;
+    min-width: 50vw;
     background-color: transparent !important;
 }
 
 .form-grid {
-    gap: 2rem;
+    gap: 0rem;
     display: grid;
     margin-bottom: 5vh;
     justify-items: center;
@@ -1339,29 +1349,19 @@ th {
 }
 
 .form-row-container {
-    gap: 0.5rem;
+    gap: 0rem;
     display: flex;
     justify-content: space-between;
 }
 
-.form-row.color-picker {
-    margin: 0 !important;
-    width: 5vw !important;
-    padding: 0 !important;
-}
-
 .form-row {
     display: flex;
-    flex-direction: column;
     align-items: center;
-}
-
-.color-picker {
-    width: 30vw;
+    flex-direction: column;
 }
 
 .sliders {
-    gap: 05rem;
+    gap: 0.5rem;
     display: flex;
     flex-direction: column;
 }
@@ -1371,9 +1371,17 @@ th {
 }
 
 .form-row label {
-    font-size: 1.3rem;
     font-weight: bold;
+    font-size: 1.3rem;
     margin-bottom: 0.5rem;
+}
+
+.react-colorful {
+    margin-top: 1.5vh !important;
+}
+
+.form-control-range {
+    margin-top: 0.5vh !important;
 }
 
 /*--------------------------------------------------------------
@@ -1385,13 +1393,48 @@ th {
     height: 100% !important;
 }
 
-.plyr__captions,
+.plyr__captions {
+    padding: 0 !important;
+    margin: auto !important;
+    max-width: 100% !important;
+    text-align: center !important;
+    height: fit-content !important;
+}
+
+/* Container da legenda */
+.plyr__captions .plyr__caption {
+    /* Margens e Padding */
+    margin: auto !important;
+    padding: 0 1vw !important;
+    padding-top: 1vh !important;
+    padding-bottom: 1vh !important;
+
+    /* Tamanho e Layout */
+    max-width: 35vw !important;
+    width: max-content !important;
+    height: fit-content !important;
+    display: inline-block !important;
+    text-align: center !important;
+
+    /* Quebra de Linha */
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+
+    /* Fundo */
+    background: var(--subtitle-background, rgba(0, 0, 0, 0)) !important;
+}
+
+/* Estilo do texto da legenda */
 .plyr__caption {
+    /* Tipografia */
     line-height: 1.2 !important;
     font-weight: bold !important;
-    color: var(--subtitle-color, yellow) !important;
     font-size: var(--subtitle-size, 3rem) !important;
-    background: var(--subtitle-background, none) !important;
+    color: var(--subtitle-color, yellow) !important;
+    background-color: transparent !important;
+
+    /* Efeito de Sombra */
     text-shadow:
         0px 0px 3px rgba(0, 0, 0, 0.8),
         1px 1px 0 rgba(0, 0, 0, 0.8),
@@ -1401,6 +1444,13 @@ th {
         0px 0px 8px rgba(0, 0, 0, 0.8) !important;
 }
 
+.plyr__caption:empty,
+.plyr__captions:empty {
+    width: 0 !important;
+    padding: 0 !important;
+    max-width: 0 !important;
+    background: none !important;
+}
 
 .plyr__video-wrapper {
     pointer-events: none !important;
