@@ -1417,11 +1417,11 @@ th {
     padding-bottom: 1vh !important;
 
     /* Tamanho e Layout */
-    max-width: 50vw !important;
+    max-width: 52% !important;
     width: max-content !important;
+    text-align: center !important;
     height: fit-content !important;
     display: inline-block !important;
-    text-align: center !important;
 
     /* Quebra de Linha */
     white-space: normal !important;
