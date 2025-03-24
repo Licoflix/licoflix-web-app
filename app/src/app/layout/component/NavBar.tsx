@@ -18,7 +18,7 @@ const NavBar = () => {
         setActiveItem(name);
         scrollTop(name);
 
-        if (name == 'home') {
+        if (name == 'films') {
             await Promise.all([
                 listGroupedFilms(),
                 getWatchingFilmsList()
@@ -31,15 +31,15 @@ const NavBar = () => {
     const handleIconClick = () => {
         setLoading(true)
 
-        navigate('/home')
-        setActiveItem('home');
+        navigate('/films')
+        setActiveItem('films');
         scrollTop(activeItem);
 
         setLoading(false)
     };
 
     const menuItems = [
-        { key: 'home', label: findTranslation('home', language) },
+        { key: 'films', label: findTranslation('films', language) },
         ...(userStore.entity?.admin ? [{ key: 'manage', label: findTranslation('manage', language) }] : []),
         { key: 'search', label: findTranslation('search', language) },
     ];

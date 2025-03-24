@@ -13,6 +13,7 @@ const translations: TranslationSections = {
         ptbr: {
             home: 'Inicio',
             login: 'Entrar',
+            films: 'Filmes',
             profile: "Perfil",
             manage: 'Gerenciar',
             myArea: 'Minha Area',
@@ -24,6 +25,7 @@ const translations: TranslationSections = {
         },
         en: {
             home: 'Home',
+            films: 'Films',
             login: 'Login',
             manage: 'Manage',
             myList: 'My List',

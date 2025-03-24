@@ -15,7 +15,7 @@ import SubtitleStylePage from "../../feature/configuration/subtitle/SubtitleStyl
 const sideBarRoutes: RouteObject[] = [
     { path: '/', element: <HomePage /> },
     { path: '/my-area', element: <></> },
-    { path: '/home', element: <HomePage /> },
+    { path: '/films', element: <HomePage /> },
     { path: '/manage', element: <ManagePage /> },
     { path: '/search', element: <SearchPage /> },
     { path: '/profile', element: <ProfilePage /> },
@@ -36,7 +36,7 @@ export const routes: RouteObject[] = [
         path: '/',
         element: <App />,
         children: [
-            { path: '', element: <Navigate to="/home" replace /> },
+            { path: '', element: <Navigate to="/films" replace /> },
             ...sideBarRoutes,
             ...otherRoutes,
         ],
