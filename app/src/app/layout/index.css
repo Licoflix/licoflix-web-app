@@ -1309,8 +1309,8 @@ th {
     margin-top: auto;
     position: relative;
     align-items: flex-end;
-    background-size: cover;
     justify-content: center;
+    background-size: cover !important;
     background: url('/image/subtitle-background.png') no-repeat center center;
 }
 
