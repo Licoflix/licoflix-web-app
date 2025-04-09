@@ -44,10 +44,11 @@ const FilmAutoCarouselPage: React.FC<FilmAutoCarouselPageProps> = ({ films }) =>
             <div className="carousel-container" style={{ transform: `translateX(-${currentIndex * 100}%)` }}>
                 {films?.map((film, index) => (
                     <div key={index} className="carousel-item">
-                        <Image
+                        <div
                             className="auto-image"
-                            alt={`Imagem de ${film.title}`}
-                            src={`data:image/jpeg;base64,${film.background}`}
+                            style={{
+                                backgroundImage: `url(data:image/jpeg;base64,${film.background})`
+                            }}
                         />
                         <div className="overlay-content">
                             <p className='overlay-title'>
