@@ -1526,6 +1526,7 @@ th {
 --------------------------------------------------------------*/
 
 .register-button {
+    width: 15vw !important;
     color: white !important;
     font-size: 1.2rem !important;
     font-weight: bolder !important;
