@@ -916,7 +916,7 @@ img {
         font-size: 1rem !important;
     }
 
-    .film-component-description-container{
+    .film-component-description-container {
         margin-bottom: 10vh !important;
     }
 
@@ -945,6 +945,28 @@ img {
 
     .ui.header.film-component-category {
         font-size: 1rem !important;
+    }
+
+    .film-component-info-container {
+        width: 95% !important;
+    }
+
+    .film-details-title {
+        font-size: 1.2rem !important;
+    }
+    
+    .film-details-info-title {
+        font-size: 1.2rem !important;
+    }
+    
+    .film-details-info-desc {
+        font-size: 1rem !important;
+    }
+    
+    .film-age-desc {
+        width: 1.9vh !important;
+        height: 1.9vh !important;
+        margin-right: 1vw !important;
     }
 }
 
