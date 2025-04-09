@@ -35,6 +35,7 @@ export default class UserStore implements IBaseStore<UserResponse> {
             router.navigate("/films");
         } catch {
             store.commonStore.setLoading(false);
+            router.navigate("/login");
         } finally {
             store.commonStore.setLoading(true);
             await store.commonStore.initApp();
@@ -49,21 +50,26 @@ export default class UserStore implements IBaseStore<UserResponse> {
     }
 
     register = async (creds: UserFormValues, overwriteToken: boolean) => {
-        store.commonStore.setLoading(true);
-        if (overwriteToken)
-            store.commonStore.setToken(null);
-        const entity = await service.auth.register(creds);
+        try {
+            store.commonStore.setLoading(true);
+            if (overwriteToken)
+                store.commonStore.setToken(null);
+            const entity = await service.auth.register(creds);
 
-        runInAction(() => {
-            this.entity = entity.data;
-            this.list(1, null);
-        });
+            runInAction(() => {
+                this.entity = entity.data;
+                this.list(1, null);
+            });
 
-        if (overwriteToken)
-            store.commonStore.setToken(entity.data.token);
-        if (overwriteToken)
-            router.navigate("/films");
-        store.commonStore.setLoading(false);
+            if (overwriteToken)
+                store.commonStore.setToken(entity.data.token);
+            if (overwriteToken)
+                router.navigate("/films");
+            store.commonStore.setLoading(false);
+        } catch {
+            store.commonStore.setLoading(false);
+            router.navigate("/register");
+        }
     }
 
     edit = async (creds: UserFormValues) => {
@@ -89,10 +95,16 @@ export default class UserStore implements IBaseStore<UserResponse> {
 
     get = async () => {
         if (this.entity === null) {
-            const response = await service.user.get()
-            runInAction(() => {
-                this.entity = response.data;
-            });
+            try {
+                const response = await service.user.get()
+                runInAction(() => {
+                    this.entity = response.data;
+                });
+            }
+            catch {
+                store.commonStore.setLoading(false);
+                router.navigate("/login");
+            }
         }
     };
 
