@@ -77,7 +77,7 @@ const NavBar = () => {
                             />
                         ))}
                     </div>
-                    <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <div>
                         {userStore.entity && (
                             <Menu.Item className="language-nav-icon">
                                 <Popup
@@ -87,22 +87,16 @@ const NavBar = () => {
                                     trigger={
                                         <img
                                             alt="Icon"
-                                            style={{
-                                                width: '3.4rem',
-                                                height: '3.4rem',
-                                                objectFit: 'cover',
-                                                borderRadius: '50%',
-                                                cursor: 'pointer',
-                                            }}
+                                            className="user-avatar-img"
                                             src={userStore.entity.avatar ? `data:image/jpeg;base64,${userStore.entity.avatar}` : "../../../image/user.png"}
                                         />
                                     }
                                     content={
                                         <Menu vertical size="mini" className='navbar'>
-                                            <Menu.Item className='navbar' as={NavLink} to={`/profile`} onClick={() => setActiveItem('')}><Icon name='user circle' /> {findTranslation('profile', language)}</Menu.Item>
-                                            <Menu.Item className='navbar' as={NavLink} to={'/subtitle-style'} ><Icon name='cog' /> {findTranslation('settingsSubtitle', language)}</Menu.Item>
-                                            <Menu.Item className='navbar' onClick={() => changeLanguage(language === 'ptbr' ? 'en' : 'ptbr')}><Image className='language-popup-icon' size='mini' src={language === 'ptbr' ? '../../../image/br-flag.png' : '../../../image/us-flag.png'} /> {findTranslation('Language', language)}</Menu.Item>
-                                            <Menu.Item className='navbar' onClick={() => userStore.logout()}><Icon name='sign-out' /> {findTranslation('signout', language)}</Menu.Item>
+                                            <Menu.Item className='navbar' as={NavLink} to={`/profile`} onClick={() => setActiveItem('')}><Icon name='user circle' /><div className='popup-item'>{findTranslation('profile', language)}</div></Menu.Item>
+                                            <Menu.Item className='navbar' as={NavLink} to={'/subtitle-style'} ><Icon name='cog' /><div className='popup-item'>{findTranslation('settingsSubtitle', language)}</div></Menu.Item>
+                                            <Menu.Item className='navbar navbar-language-item' onClick={() => changeLanguage(language === 'ptbr' ? 'en' : 'ptbr')}><Image className='language-popup-icon' size='mini' src={language === 'ptbr' ? '../../../image/br-flag.png' : '../../../image/us-flag.png'} /><div className='popup-item'>{findTranslation('Language', language)}</div></Menu.Item>
+                                            <Menu.Item className='navbar' onClick={() => userStore.logout()}><Icon name='sign-out' /><div className='popup-item'>{findTranslation('signout', language)}</div></Menu.Item>
                                         </Menu>
                                     }
                                 />

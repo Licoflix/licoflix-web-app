@@ -62,7 +62,7 @@ export default class UserStore implements IBaseStore<UserResponse> {
         if (overwriteToken)
             store.commonStore.setToken(entity.data.token);
         if (overwriteToken)
-            router.navigate("/home");
+            router.navigate("/films");
         store.commonStore.setLoading(false);
     }
 

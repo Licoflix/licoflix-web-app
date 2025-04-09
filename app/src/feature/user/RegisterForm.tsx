@@ -4,20 +4,13 @@ import { Form, useNavigate } from "react-router-dom";
 import { Button, Container, FormField, Header, Input } from "semantic-ui-react";
 import * as Yup from "yup";
 import { findTranslation } from "../../app/common/language/translations";
-import { useStore } from "../../app/store/store";
 import { UserFormValues } from "../../app/model/UserResponse";
-import { useEffect } from "react";
+import { useStore } from "../../app/store/store";
 
 export default observer(function RegisterForm() {
     const navigate = useNavigate();
-    const { userStore: { register, entity } } = useStore();
+    const { userStore: { register } } = useStore();
     const { commonStore: { language } } = useStore();
-
-    useEffect(() => {
-        if (!entity || !entity.admin) {
-            navigate("/login");
-        }
-    }, [entity, navigate]);
 
     return (
         <>

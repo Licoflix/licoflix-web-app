@@ -2,10 +2,18 @@ body,
 html {
     margin: 0;
     padding: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     background: linear-gradient(to bottom, black 0%, #160025 55%, #2a0047 100%) !important;
     font-family: "book", "Handset Sans UI", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji" !important;
+}
+
+@media (max-width: 600px) {
+
+    body,
+    html {
+        background: linear-gradient(to bottom, black 0%, #160025 15%, #220034 50%, #2a0047 75%, #330055 100%) !important;
+    }
 }
 
 .ui.grey.button {
@@ -108,6 +116,15 @@ html {
     transition: transform 0.3s ease;
 }
 
+.user-avatar-img {
+    width: 3.4rem !important;
+    height: 3.4rem !important;
+    cursor: pointer !important;
+    object-fit: cover !important;
+    border-radius: 50% !important;
+    transition: transform 0.2s ease-in-out !important;
+}
+
 .search-nav {
     margin: 0px !important;
 }
@@ -132,8 +149,8 @@ html {
     padding: 0 !important;
     width: 1.3rem !important;
     height: 1.3rem !important;
-    margin-right: 0.5vw !important;
     margin-left: 0.5vw !important;
+    margin-right: 0.5vw !important;
 }
 
 .ui.menu .item {
@@ -150,6 +167,64 @@ html {
 
 .ui.container {
     padding: 0 !important;
+}
+
+
+@media (max-width: 600px) {
+    .ui.inverted.segment.navbar {
+        height: auto !important;
+    }
+
+    .ui.inverted.segment.navbar .menu {
+        gap: 1rem !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-wrap: wrap !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+    }
+
+    .nav-icon {
+        margin: 0 !important;
+        margin-left: 8vw !important;
+        font-size: 1.2rem !important;
+    }
+
+    .menu-items-container {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-around !important;
+    }
+
+    .language-nav-icon {
+        margin: 0 !important;
+        font-size: 1rem !important;
+    }
+
+    .ui.menu .item {
+        padding: 1rem !important;
+        font-size: 1rem !important;
+    }
+
+    .user-avatar-img {
+        width: 2rem !important;
+        height: 2rem !important;
+    }
+
+    .ui.secondary.pointing.menu .item {
+        font-size: 1rem !important;
+    }
+
+    .popup-item {
+        font-size: 1rem !important;
+    }
+
+    .language-popup-icon {
+        width: 1.4em !important;
+        height: 1.4em !important;
+        margin-left: 0.5em !important;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -249,26 +324,27 @@ html {
 .carousel-arrow-right {
     top: 50%;
     padding: 0;
-    width: 100px;
-    height: 96%;
+    width: 5rem;
+    height: 5rem;
     z-index: 1000;
     display: flex;
     cursor: pointer;
     position: absolute;
     align-items: center;
     pointer-events: none;
+    border-radius: 1000px;
     justify-content: center;
     transform: translateY(-50%);
 }
 
 .carousel-arrow-left {
     left: 0px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .carousel-arrow-right {
     right: 0px;
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 0.2) 80%, rgba(0, 0, 0, 0) 100%);
+    background: rgba(0, 0, 0, 0.6);
 }
 
 .carousel-arrow-left.show,
@@ -317,9 +393,9 @@ html {
 .film-category,
 .film-category:first-child {
     margin-bottom: 0 !important;
+    margin-left: 1em !important;
+    padding-left: 1em !important;
     font-size: 1.5rem !important;
-    margin-left: 30px !important;
-    padding-left: 10px !important;
 }
 
 .film-card {
@@ -494,6 +570,29 @@ html {
 .film-hover-container:hover .film-hover-age,
 .film-hover-container:hover .film-hover-desc {
     opacity: 1;
+}
+
+@media (max-width: 600px) {
+    .film-card {
+        width: 32vw !important;
+        height: 25vh !important;
+        margin: 3vw !important;
+    }
+
+    .film-carousel {
+        height: auto !important;
+    }
+
+    .film-category,
+    .film-category:first-child {
+        padding-left: 0px !important;
+    }
+
+    .carousel-arrow-left,
+    .carousel-arrow-right {
+        width: 3rem !important;
+        height: 3rem !important;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -806,6 +905,48 @@ img {
     background-color: rgba(122, 122, 122, 0.205);
 }
 
+@media (max-width: 600px) {
+    .film-component-buttons {
+        width: 90vw !important;
+    }
+
+    .film-component-button {
+        width: 40vw !important;
+        font-size: 1rem !important;
+    }
+
+    .film-component-description-container {
+        margin-top: 5vh !important;
+    }
+
+    .ui.header.film-component-header {
+        font-size: 2.8rem !important;
+    }
+
+    .film-component-description-text {
+        font-size: 1.2rem !important;
+    }
+
+    .film-imdb,
+    .film-year,
+    .film-duration {
+        font-size: 1rem !important;
+    }
+
+    .film-age {
+        width: 3.8vw !important;
+        height: 1.8vh !important;
+    }
+
+    .film-component-description-container {
+        width: 90vw !important;
+    }
+
+    .ui.header.film-component-category {
+        font-size: 1rem !important;
+    }
+}
+
 /*--------------------------------------------------------------
 # Film Auto Carousel Component
 --------------------------------------------------------------*/
@@ -945,6 +1086,33 @@ img {
     gap: 10px;
     display: flex;
     margin-top: 2vh;
+}
+
+@media (max-width: 600px) {
+    .film-overlay-button {
+        width: 40vw !important;
+    }
+
+    .film-auto-carousel {
+        max-height: 70vh !important;
+    }
+
+    .overlay-title {
+        font-size: 3rem !important;
+    }
+
+    .overlay-category {
+        font-size: 1.3rem !important;
+    }
+
+    .overlay-inline-text {
+        font-size: 0.9rem !important;
+    }
+
+    .film-age-overlay {
+        width: 18px !important;
+        height: 18px !important;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -1257,7 +1425,7 @@ th {
     padding: 12px !important;
     color: white !important;
     font-size: 1.1rem !important;
-    background-color: #1c0032 !important;
+    background-color: #260042 !important;
 }
 
 /*--------------------------------------------------------------
@@ -1631,6 +1799,24 @@ th {
     margin-left: 0.3vw;
     font-weight: bolder;
     text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .authForm {
+        width: 90vw !important;
+    }
+
+    .register-button {
+        width: 65vw !important;
+        margin-bottom: 2vh !important;
+    }
+
+    .authBody {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
 }
 
 /*--------------------------------------------------------------
