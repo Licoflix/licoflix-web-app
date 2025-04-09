@@ -10,7 +10,7 @@ const NavBar = () => {
     const navigate = useNavigate();
     const [activeItem, setActiveItem] = useState<string>(location.pathname.substring(location.pathname.lastIndexOf('/') + 1));
     const { commonStore: { language, scrollTop, setLoading, changeLanguage }, userStore,
-        filmStore: { list, listGroupedFilms, getWatchingFilmsList, categories, entityList } } = useStore();
+        filmStore: { list, listGroupedFilms, categories, entityList } } = useStore();
 
     const handleItemClick = async (name: string) => {
         setLoading(true)
@@ -21,7 +21,6 @@ const NavBar = () => {
         if (name == 'films') {
             await Promise.all([
                 listGroupedFilms(),
-                getWatchingFilmsList()
             ]);
         }
 

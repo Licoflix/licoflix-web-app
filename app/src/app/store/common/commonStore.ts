@@ -28,11 +28,11 @@ export default class CommonStore {
         if (this.token) {
             await Promise.all([
                 store.filmStore.listNewFilms(),
-                store.filmStore.getFilmCategories(),
                 store.filmStore.listUserFilmList(),
                 store.filmStore.listGroupedFilms(),
-                store.filmStore.listContinueWathingFilms(),
-                store.filmStore.listAutoCarrousselFilms(1, 5)
+                store.filmStore.getFilmCategories(),
+                store.playerStore.loadContinueWatchingList(),
+                store.filmStore.listAutoCarrousselFilms(1, 5),
             ]);
         }
     };

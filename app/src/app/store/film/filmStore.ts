@@ -11,11 +11,10 @@ export default class FilmStore implements IBaseStore<Film> {
     film: Film | any;
     userFilmList: Film[] = [];
     categories: Category[] = [];
-    continueWathingList: Film[] = [];
+    continueWatchingList: Film[] = [];
     autoCarrousselfilms: Film[] = [];
     groupedFilms: FilmCategoryGroup[] | null = null;
     userListChanging: { [filmId: number]: boolean } = {};
-    allFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
     entityList: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
     newFilmsList: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
     filteredFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
@@ -69,17 +68,6 @@ export default class FilmStore implements IBaseStore<Film> {
                 this.filteredFilms.totalElements = response.totalElements;
             }
         });
-    };
-
-    listContinueWathingFilms = async (force?: boolean) => {
-        if (this.allFilms.totalElements === 0 || force) {
-            const response = await service.film.list();
-            runInAction(() => {
-                this.allFilms = response;
-            });
-            await this.getWatchingFilmsList(force);
-        } else
-            return
     };
 
     getFilm = async (long: string): Promise<void> => {
@@ -163,14 +151,6 @@ export default class FilmStore implements IBaseStore<Film> {
                 this.userFilmList = response.data;
             });
 
-        }
-    }
-
-    getWatchingFilmsList = (force?: boolean) => {
-        if (this.allFilms.totalElements > 0 || force) {
-            this.continueWathingList = this.allFilms.data.filter((film) => {
-                return localStorage.getItem("film-duration-" + film.title);
-            });
         }
     }
 }

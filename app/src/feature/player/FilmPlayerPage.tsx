@@ -1,6 +1,6 @@
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStore } from '../../app/store/store';
 
@@ -10,46 +10,59 @@ const FilmPlayerPage: React.FC = () => {
     const { title } = useParams<{ title: string }>();
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
-    useEffect(() => {
-        if (videoRef.current) {
-            playerRef.current = new Plyr(videoRef.current, {
-                muted: false,
-                tooltips: { controls: true, seek: true },
-                keyboard: { focused: true, global: true },
-                captions: { active: true, language: 'pt' },
-                settings: ['captions', 'quality', 'speed', 'pip', 'airplay', 'playback-rate'],
-                controls: ['play-large', 'play', 'current-time', 'progress', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
-            });
-
-            const savedTime = playerStore.loadProgress(title);
-            if (savedTime > 0 && videoRef.current) {
-                videoRef.current.currentTime = savedTime;
-            }
-
-            const handleTimeUpdate = () => {
-                if (videoRef.current) {
-                    playerStore.saveProgress(videoRef.current.currentTime, videoRef.current.duration, title);
-                }
-            };
-
-            videoRef.current.addEventListener('timeupdate', handleTimeUpdate);
-
-            const handleKey = (e: KeyboardEvent) => {
-                playerStore.handleKey(e);
-            };
-            window.addEventListener('keydown', handleKey);
-
-            return () => {
-                if (videoRef.current) {
-                    videoRef.current.removeEventListener('timeupdate', handleTimeUpdate);
-                }
-                if (playerRef.current) {
-                    playerRef.current.destroy();
-                }
-                window.removeEventListener('keydown', handleKey);
-            };
+    const saveProgress = useCallback(async () => {
+        if (videoRef.current && title) {
+            await playerStore.saveProgress(
+                videoRef.current.currentTime,
+                videoRef.current.duration,
+                title
+            );
         }
-    }, [playerStore, title]);
+    }, [title, playerStore]);
+
+    useEffect(() => {
+        if (!videoRef.current || !title) return;
+
+        // Inicializa o player
+        playerRef.current = new Plyr(videoRef.current, {
+            muted: false,
+            tooltips: { controls: true, seek: true },
+            keyboard: { focused: true, global: true },
+            captions: { active: true, language: 'pt' },
+            settings: ['captions', 'quality', 'speed', 'pip', 'airplay', 'playback-rate'],
+            controls: ['play-large', 'play', 'current-time', 'progress', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
+        });
+
+        // Carrega o progresso salvo
+        const savedTime = playerStore.loadProgress(title);
+        if (savedTime > 0) {
+            videoRef.current.currentTime = savedTime;
+        }
+
+        // Configura os event listeners
+        const handlePause = () => saveProgress();
+        const handleSeeked = () => saveProgress();
+        const handleKeyUp = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                saveProgress();
+            }
+        };
+
+        // Adiciona os listeners
+        videoRef.current.addEventListener('pause', handlePause);
+        videoRef.current.addEventListener('seeked', handleSeeked);
+        window.addEventListener('keyup', handleKeyUp);
+
+        // Função de cleanup
+        return () => {
+            videoRef.current?.removeEventListener('pause', handlePause);
+            videoRef.current?.removeEventListener('seeked', handleSeeked);
+            window.removeEventListener('keyup', handleKeyUp);
+
+            playerRef.current?.destroy();
+            saveProgress();
+        };
+    }, [title, playerStore, saveProgress]);
 
     return (
         <div style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}>

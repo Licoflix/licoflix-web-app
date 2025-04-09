@@ -103,7 +103,11 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                             size="big"
                                             color="purple"
                                             className="film-component-button-restart"
-                                            onClick={() => { resetFilmProgress(film.title); handleWathNowClick(film) }}
+                                            onClick={async () => {
+                                                await resetFilmProgress(film.title);
+                                                await new Promise(resolve => setTimeout(resolve, 100)); 
+                                                handleWathNowClick(film);
+                                            }}
                                         >
                                             <Icon className="undo-icon" name="undo alternate" />
                                         </Button>

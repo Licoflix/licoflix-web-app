@@ -7,14 +7,15 @@ import { Film, FilmCategoryGroup } from '../model/Film';
 import { UserFormValues, UserResponse } from '../model/UserResponse';
 import { store } from '../store/store';
 import ErrorHandler from './error-handler';
+import { FilmWatchingList } from '../model/FilmWatchingList';
 
 const filmModule = '/film';
 const authModule = '/auth';
 const userModule = '/auth/user';
 const userFilmListModule = '/film/user/list';
 
+const BASE_URL_FILM = 'http://192.168.0.4:8080';
 const BASE_URL_AUTH_USER = 'http://192.168.0.4:8081';
-const BASE_URL_FILM_CATEGORY = 'http://192.168.0.4:8080';
 
 const response = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -55,16 +56,16 @@ const requests = {
 };
 
 const film = {
-    xls: (type: string) => requests.xls(filmModule, type, BASE_URL_FILM_CATEGORY),
-    get: (id: string) => requests.get<DataResponse<Film>>(`${filmModule}/${id}`, BASE_URL_FILM_CATEGORY),
-    delete: (id: any) => requests.delete<DataResponse<Film>>(filmModule + `/${id}`, BASE_URL_FILM_CATEGORY),
-    create: (formData: FormData) => requests.post<DataResponse<Film>>(`${filmModule}`, formData, BASE_URL_FILM_CATEGORY),
-    listGrouped: () => requests.get<DataListResponse<FilmCategoryGroup>>(`${filmModule}/grouped`, BASE_URL_FILM_CATEGORY),
-    list: (page?: number, pageSize?: number, search?: string, category?: string) => requests.get<DataListResponse<Film>>(`${filmModule}?page=${page ?? 1}&pageSize=${pageSize ?? 2147483647}&search=${search ?? ''}&category=${category ?? ''}`, BASE_URL_FILM_CATEGORY),
+    xls: (type: string) => requests.xls(filmModule, type, BASE_URL_FILM),
+    get: (id: string) => requests.get<DataResponse<Film>>(`${filmModule}/${id}`, BASE_URL_FILM),
+    delete: (id: any) => requests.delete<DataResponse<Film>>(filmModule + `/${id}`, BASE_URL_FILM),
+    create: (formData: FormData) => requests.post<DataResponse<Film>>(`${filmModule}`, formData, BASE_URL_FILM),
+    listGrouped: () => requests.get<DataListResponse<FilmCategoryGroup>>(`${filmModule}/grouped`, BASE_URL_FILM),
+    list: (page?: number, pageSize?: number, search?: string, category?: string) => requests.get<DataListResponse<Film>>(`${filmModule}?page=${page ?? 1}&pageSize=${pageSize ?? 2147483647}&search=${search ?? ''}&category=${category ?? ''}`, BASE_URL_FILM),
 };
 
 const category = {
-    list: () => requests.get<DataListResponse<Category>>(`${filmModule}/category`, BASE_URL_FILM_CATEGORY),
+    list: () => requests.get<DataListResponse<Category>>(`${filmModule}/category`, BASE_URL_FILM),
 };
 
 const auth = {
@@ -80,11 +81,17 @@ const user = {
 };
 
 const filmList = {
-    add: (id: any) => requests.post<void>(userFilmListModule + `/${id}`, {}, BASE_URL_FILM_CATEGORY),
-    remove: (id: any) => requests.delete<void>(userFilmListModule + `/${id}`, BASE_URL_FILM_CATEGORY),
-    list: () => requests.get<DataListResponse<Film>>(`${userFilmListModule}`, BASE_URL_FILM_CATEGORY),
+    add: (id: any) => requests.post<void>(userFilmListModule + `/${id}`, {}, BASE_URL_FILM),
+    remove: (id: any) => requests.delete<void>(userFilmListModule + `/${id}`, BASE_URL_FILM),
+    list: () => requests.get<DataListResponse<Film>>(`${userFilmListModule}`, BASE_URL_FILM),
 }
 
-const service = { film, filmList, category, auth, user }
+const continueWatching = {
+    add: (title: string, currentTime: string, duration: string) => requests.post<void>(`${filmModule}/continue-watching?title=${encodeURIComponent(title)}&current=${currentTime}&duration=${duration}`, {}, BASE_URL_FILM),
+    remove: (title: string) => requests.delete<void>(`${filmModule}/continue-watching?title=${encodeURIComponent(title)}`, BASE_URL_FILM),
+    list: () => requests.get<DataListResponse<FilmWatchingList>>(`${filmModule}/continue-watching`, BASE_URL_FILM)
+};
+
+const service = { film, filmList, continueWatching, category, auth, user }
 
 export default service;
