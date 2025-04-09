@@ -331,9 +331,9 @@ const translations: TranslationSections = {
         ptbr: {
             signout: 'Sair',
             close: "Fechar",
+            addList: "Lista",
             language: 'Idioma',
             watchNow: "Assistir",
-            addList: "Adicionar a Lista",
             removeList: "Remover da Lista",
         },
         en: {
