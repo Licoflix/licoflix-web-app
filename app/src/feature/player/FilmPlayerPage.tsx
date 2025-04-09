@@ -54,8 +54,10 @@ const FilmPlayerPage: React.FC = () => {
     return (
         <div style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}>
             <video
+                playsInline
                 ref={videoRef}
                 crossOrigin="anonymous"
+                webkit-playsinline="true"
                 className="plyr-react plyr"
                 style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}
             >
