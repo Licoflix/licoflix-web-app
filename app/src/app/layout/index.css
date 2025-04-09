@@ -814,6 +814,7 @@ img {
     margin-top: auto !important;
     font-size: 1.4rem !important;
     position: relative !important;
+    margin-bottom: 10vh !important;
     flex-direction: column !important;
     align-items: flex-start !important;
     justify-content: flex-end !important;
@@ -874,7 +875,7 @@ img {
     gap: 10px;
     display: flex;
     margin-top: 1vh;
-    padding-bottom: 10vh;
+    margin-bottom: 10vh !important;
 }
 
 .ui.page.modal.dimmer.transition.visible.active {
@@ -915,8 +916,8 @@ img {
         font-size: 1rem !important;
     }
 
-    .film-component-description-container {
-        margin-top: 5vh !important;
+    .film-component-description-container{
+        margin-bottom: 10vh !important;
     }
 
     .ui.header.film-component-header {
