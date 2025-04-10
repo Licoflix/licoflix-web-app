@@ -20,27 +20,6 @@ const SubtitleStylePage: React.FC = () => {
 
             <Segment className="form-container">
                 <div className="form-grid">
-                    <div className="form-row color-picker">
-                        <div>
-                            <label>{findTranslation("backgroundSubtitle", language)}</label>
-                            <HexColorPicker
-                                color={playerStore.subtitleBackground}
-                                onChange={(novaCor: string) => {
-                                    playerStore.setSubtitleBackground(novaCor);
-                                }}
-                            />
-                        </div>
-                        <div>
-                            <label>{findTranslation("color", language)}</label>
-                            <HexColorPicker
-                                color={playerStore.subtitleColor}
-                                onChange={(novaCor: string) => {
-                                    playerStore.setSubtitleColor(novaCor);
-                                }}
-                            />
-                        </div>
-                    </div>
-
                     <div className="form-row sliders">
                         <div className="slider-item">
                             <label>{findTranslation("size", language)}</label>
@@ -81,6 +60,26 @@ const SubtitleStylePage: React.FC = () => {
                                 className="form-control-range"
                                 value={parseInt(playerStore.subtitleFontOpacity)}
                                 onChange={(e) => playerStore.setSubtitleFontOpacity(`${e.target.value}%`)}
+                            />
+                        </div>
+                    </div>
+                    <div className="form-row color-picker">
+                        <div>
+                            <label>{findTranslation("backgroundSubtitle", language)}</label>
+                            <HexColorPicker
+                                color={playerStore.subtitleBackground}
+                                onChange={(novaCor: string) => {
+                                    playerStore.setSubtitleBackground(novaCor);
+                                }}
+                            />
+                        </div>
+                        <div>
+                            <label>{findTranslation("color", language)}</label>
+                            <HexColorPicker
+                                color={playerStore.subtitleColor}
+                                onChange={(novaCor: string) => {
+                                    playerStore.setSubtitleColor(novaCor);
+                                }}
                             />
                         </div>
                     </div>

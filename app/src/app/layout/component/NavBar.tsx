@@ -8,15 +8,15 @@ import { useStore } from '../../store/store';
 const NavBar = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    const [popupOpen, setPopupOpen] = useState(false);
     const [activeItem, setActiveItem] = useState<string>(location.pathname.substring(location.pathname.lastIndexOf('/') + 1));
-    const { commonStore: { language, scrollTop, setLoading, changeLanguage }, userStore,
-        filmStore: { list, listGroupedFilms, categories, entityList } } = useStore();
+    const { commonStore: { language, scrollTop, setLoading, changeLanguage }, userStore, filmStore: { list, listGroupedFilms, categories, entityList } } = useStore();
 
     const handleItemClick = async (name: string) => {
-        setLoading(true)
+        setLoading(true);
 
-        setActiveItem(name);
         scrollTop(name);
+        setActiveItem(name);
 
         if (name == 'films') {
             await Promise.all([
@@ -37,9 +37,13 @@ const NavBar = () => {
         setLoading(false)
     };
 
+    const handlePopupItemClick = () => {
+        setActiveItem('');
+        setPopupOpen(false);
+    };
+
     const menuItems = [
         { key: 'films', label: findTranslation('films', language) },
-        ...(userStore.entity?.admin ? [{ key: 'manage', label: findTranslation('manage', language) }] : []),
         { key: 'search', label: findTranslation('search', language) },
     ];
 
@@ -81,8 +85,11 @@ const NavBar = () => {
                             <Menu.Item className="language-nav-icon">
                                 <Popup
                                     on="click"
+                                    open={popupOpen}
                                     className='navbar'
                                     position="bottom left"
+                                    onOpen={() => setPopupOpen(true)}
+                                    onClose={() => setPopupOpen(false)}
                                     trigger={
                                         <img
                                             alt="Icon"
@@ -92,10 +99,16 @@ const NavBar = () => {
                                     }
                                     content={
                                         <Menu vertical size="mini" className='navbar'>
-                                            <Menu.Item className='navbar' as={NavLink} to={`/profile`} onClick={() => setActiveItem('')}><Icon name='user circle' /><div className='popup-item'>{findTranslation('profile', language)}</div></Menu.Item>
-                                            <Menu.Item className='navbar' as={NavLink} to={'/subtitle-style'} ><Icon name='cog' /><div className='popup-item'>{findTranslation('settingsSubtitle', language)}</div></Menu.Item>
+                                            <Menu.Item className='navbar' as={NavLink} to={`/profile`} onClick={() => handlePopupItemClick()}><Icon name='user circle' /><div className='popup-item'>{findTranslation('profile', language)}</div></Menu.Item>
+                                            <Menu.Item className='navbar' as={NavLink} to={'/subtitle-style'} onClick={() => handlePopupItemClick()} ><Icon name='font' /><div className='popup-item'>{findTranslation('settingsSubtitle', language)}</div></Menu.Item>
+                                            {userStore.entity?.admin && (
+                                                <Menu.Item className='navbar' as={NavLink} to="/manage" onClick={() => { handlePopupItemClick() }}>
+                                                    <Icon name='film' />
+                                                    <div className='popup-item'>{findTranslation('manage', language)}</div>
+                                                </Menu.Item>
+                                            )}
                                             <Menu.Item className='navbar navbar-language-item' onClick={() => changeLanguage(language === 'ptbr' ? 'en' : 'ptbr')}><Image className='language-popup-icon' size='mini' src={language === 'ptbr' ? '../../../image/br-flag.png' : '../../../image/us-flag.png'} /><div className='popup-item'>{findTranslation('Language', language)}</div></Menu.Item>
-                                            <Menu.Item className='navbar' onClick={() => userStore.logout()}><Icon name='sign-out' /><div className='popup-item'>{findTranslation('signout', language)}</div></Menu.Item>
+                                            <Menu.Item className='navbar' onClick={() => { userStore.logout(), handlePopupItemClick() }}><Icon name='sign-out' /><div className='popup-item'>{findTranslation('signout', language)}</div></Menu.Item>
                                         </Menu>
                                     }
                                 />
