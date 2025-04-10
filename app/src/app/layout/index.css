@@ -1133,6 +1133,12 @@ img {
 }
 
 @media (max-width: 600px) {
+
+    .film-overlay-button,
+    .add-list-button-overlay {
+        font-size: 1rem !important;
+    }
+
     .film-overlay-button {
         width: 40vw !important;
     }
