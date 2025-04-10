@@ -573,6 +573,20 @@ html {
 }
 
 @media (max-width: 600px) {
+
+    .film-card:hover .film-hover-image,
+    .film-card:hover .film-hover-container,
+    .film-card:hover .film-image {
+        display: none !important;
+        transform: none !important;
+        opacity: initial !important;
+    }
+
+    .film-hover-image,
+    .film-hover-container {
+        display: none !important;
+    }
+
     .film-card {
         width: 32vw !important;
         height: 25vh !important;
