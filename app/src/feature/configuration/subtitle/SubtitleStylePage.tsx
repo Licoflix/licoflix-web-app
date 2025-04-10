@@ -48,20 +48,6 @@ const SubtitleStylePage: React.FC = () => {
                                 onChange={(e) => playerStore.setSubtitleOpacity(`${e.target.value}%`)}
                             />
                         </div>
-
-                        <div className="slider-item">
-                            <label>{findTranslation("fontOpacity", language)}</label>
-                            <input
-                                min="0"
-                                step="1"
-                                max="100"
-                                type="range"
-                                style={{ width: '100%' }}
-                                className="form-control-range"
-                                value={parseInt(playerStore.subtitleFontOpacity)}
-                                onChange={(e) => playerStore.setSubtitleFontOpacity(`${e.target.value}%`)}
-                            />
-                        </div>
                     </div>
                     <div className="form-row color-picker">
                         <div>

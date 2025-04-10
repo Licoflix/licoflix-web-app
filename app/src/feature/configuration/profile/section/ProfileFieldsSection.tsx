@@ -20,7 +20,7 @@ const ProfileFieldsSection: React.FC = () => {
 
     return (
         entity && (
-            <div>
+            <div style={{width: '100%'}}>
                 <ProfileField
                     value={profileStore.nickname}
                     onChange={profileStore.setNickname}

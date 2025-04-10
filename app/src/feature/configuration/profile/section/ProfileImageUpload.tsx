@@ -35,15 +35,7 @@ const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({ avatar, onImage
 
     return (
         <div
-            style={{
-                width: "12vw",
-                height: "12vw",
-                margin: "0 auto",
-                cursor: "pointer",
-                overflow: "hidden",
-                borderRadius: "50%",
-                position: "relative",
-            }}
+            className="profile-upload-container"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
             onClick={() => fileInputRef.current?.click()}
@@ -51,28 +43,15 @@ const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({ avatar, onImage
             <Image
                 circular
                 centered
-                style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    transition: "filter 0.3s ease",
-                    filter: hovered ? "brightness(0.6)" : "none",
-                }}
                 src={preview}
+                className={`profile-image ${hovered ? 'image-hovered' : ''}`}
             />
 
             {hovered && (
                 <Icon
                     size="huge"
                     name="upload"
-                    style={{
-                        top: "50%",
-                        left: "50%",
-                        opacity: 0.9,
-                        color: "white",
-                        position: "absolute",
-                        transform: "translate(-50%, -50%)",
-                    }}
+                    className="upload-icon"
                 />
             )}
 
@@ -80,7 +59,7 @@ const ProfileImageUpload: React.FC<ProfileImageUploadProps> = ({ avatar, onImage
                 type="file"
                 accept="image/*"
                 ref={fileInputRef}
-                style={{ display: "none" }}
+                className="file-input"
                 onChange={handleFileChange}
             />
         </div>

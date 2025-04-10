@@ -30,7 +30,7 @@ const ProfilePage: React.FC = () => {
                         />
                     </Grid.Column>
                 </Grid.Row>
-                <Grid.Row>
+                <Grid.Row className="profile-filds-section">
                     <Grid.Column width={8}>
                         <ProfileFieldsSection />
                     </Grid.Column>
