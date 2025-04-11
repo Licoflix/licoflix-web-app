@@ -83,10 +83,10 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                         onScroll={checkArrowsVisibility}
                         style={{
                             cursor: 'grab',
-                            overflow: 'hidden',
                             display: 'flex',
+                            overflow: 'hidden',
                             alignItems: 'center',
-                            position: 'relative'
+                            position: 'relative',
                         }}
                     >
                         {films.map((film: Film, index: number) => (
@@ -100,11 +100,11 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                     className="film-image"
                                     src={`data:image/jpeg;base64,${film.image}`}
                                     style={{
+                                        zIndex: 1,
                                         width: '100%',
                                         height: '100%',
                                         objectFit: 'cover',
                                         transition: 'opacity 0.3s ease',
-                                        zIndex: 1,
                                     }}
                                 />
                                 <div className="film-hover-container">

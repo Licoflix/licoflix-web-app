@@ -120,7 +120,7 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                                 : handleAddFilmClick(film)
                                         }
                                     >
-                                        <Icon className={filmStore.userFilmList.length > 0 && someIncluded(film) ? 'remove' : 'add circle'} />
+                                        <Icon className={filmStore.userFilmList.length > 0 && someIncluded(film) ? 'remove circle' : 'add circle'} />
                                         {filmStore.userFilmList.length > 0 && someIncluded(film) ? findTranslation('removeList', language) : findTranslation('addList', language)}
                                     </Button>
                                 </div>

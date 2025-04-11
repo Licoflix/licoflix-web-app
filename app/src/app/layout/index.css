@@ -566,6 +566,28 @@ html {
     transition: opacity 0.5s ease-in-out;
 }
 
+.film-card,
+.film-image,
+.film-hover-age,
+.film-hover-desc,
+.film-hover-title,
+.film-hover-image,
+.film-hover-container,
+.film-hover-content {
+    transition: all 0.3s ease 0s;
+}
+
+.film-card:hover,
+.film-card:hover .film-image,
+.film-card:hover .film-hover-age,
+.film-card:hover .film-hover-desc,
+.film-card:hover .film-hover-title,
+.film-card:hover .film-hover-image,
+.film-card:hover .film-hover-container,
+.film-card:hover .film-hover-content {
+    transition-delay: 1s !important;
+}
+
 .film-hover-container:hover .film-hover-title,
 .film-hover-container:hover .film-hover-age,
 .film-hover-container:hover .film-hover-desc {
