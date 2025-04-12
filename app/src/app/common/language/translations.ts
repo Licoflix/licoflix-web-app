@@ -181,6 +181,7 @@ const translations: TranslationSections = {
         ptbr: {
             year: 'Ano',
             imdb: 'IMDb',
+            film: 'Filme',
             cast: 'Elenco',
             email: "Email",
             user: 'Usuário',
@@ -238,11 +239,12 @@ const translations: TranslationSections = {
         },
         en: {
             cast: 'Cast',
+            film: 'Film',
             year: 'Year',
             imdb: 'IMDb',
-            user: 'Usuário',
             title: 'Title',
             email: 'Email',
+            user: 'Usuário',
             cancel: 'Cancel',
             poster: 'Poster',
             rating: 'Rating',
