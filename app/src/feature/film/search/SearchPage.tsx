@@ -61,9 +61,8 @@ const SearchPage: React.FC = () => {
         <Segment className="home-page" id="home" style={{ overflowY: 'auto' }} onScroll={handleScroll}>
             <Input
                 size="large"
-                value={searchTerm || ''}
                 className='search-input'
-                style={{ width: '25vw' }}
+                value={searchTerm || ''}
                 onKeyPress={handleKeyPress}
                 onChange={handleSearchChange}
                 placeholder={`${findTranslation('Search', language)}...`}

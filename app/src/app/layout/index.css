@@ -1363,6 +1363,17 @@ input[type="number"] {
     -moz-appearance: textfield !important;
 }
 
+@media (max-width: 600px) {
+    .search-input {
+        width: 70vw !important;
+    }
+
+    i.link.icon,
+    .search-input>input {
+        font-size: 1rem !important;
+    }
+}
+
 /*--------------------------------------------------------------
 # Manage Page Component
 --------------------------------------------------------------*/
