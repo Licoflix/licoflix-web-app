@@ -10,7 +10,7 @@ const NavBar = () => {
     const navigate = useNavigate();
     const [popupOpen, setPopupOpen] = useState(false);
     const [activeItem, setActiveItem] = useState<string>(location.pathname.substring(location.pathname.lastIndexOf('/') + 1));
-    const { commonStore: { language, scrollTop, setLoading, changeLanguage }, userStore, filmStore: { list, listGroupedFilms, categories, entityList } } = useStore();
+    const { commonStore: { language, scrollTop, setLoading, changeLanguage }, userStore, filmStore: { list, entityList } } = useStore();
 
     const handleItemClick = async (name: string) => {
         setLoading(true);
@@ -18,13 +18,7 @@ const NavBar = () => {
         scrollTop(name);
         setActiveItem(name);
 
-        if (name == 'films') {
-            await Promise.all([
-                listGroupedFilms(),
-            ]);
-        }
-
-        setLoading(false)
+        setLoading(false);
     };
 
     const handleIconClick = () => {
@@ -58,7 +52,7 @@ const NavBar = () => {
         };
 
         loadData();
-    }, [categories.length, location.pathname, entityList.data.length]);
+    }, [entityList.totalElements, userStore.entityList.totalElements]);
 
     return (
         <Segment inverted className='navbar'>
