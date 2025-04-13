@@ -14,8 +14,8 @@ const authModule = '/auth';
 const userModule = '/auth/user';
 const userFilmListModule = '/film/user/list';
 
-const BASE_URL_FILM = 'http://192.168.0.4:8080';
-const BASE_URL_AUTH_USER = 'http://192.168.0.4:8081';
+const BASE_URL_FILM = 'http://localhost:8080';
+const BASE_URL_AUTH_USER = 'http://localhost:8081';
 
 const response = <T>(response: AxiosResponse<T>) => response.data;
 

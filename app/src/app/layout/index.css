@@ -1722,11 +1722,6 @@ th {
     height: fit-content !important;
     display: inline-block !important;
 
-    /* Quebra de Linha */
-    white-space: normal !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-
     /* Fundo */
     background: var(--subtitle-background, rgba(0, 0, 0, 0)) !important;
 }

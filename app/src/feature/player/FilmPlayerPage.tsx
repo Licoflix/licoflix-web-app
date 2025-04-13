@@ -67,6 +67,7 @@ const FilmPlayerPage: React.FC = () => {
     return (
         <div style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}>
             <video
+                autoPlay
                 playsInline
                 ref={videoRef}
                 crossOrigin="anonymous"
@@ -76,20 +77,20 @@ const FilmPlayerPage: React.FC = () => {
             >
                 <source
                     type="video/mp4"
-                    src={encodeURI(`http://192.168.0.4:8080/film/${title || ''}/video`)}
+                    src={encodeURI(`http://localhost:8080/film/${title || ''}/video`)}
                 />
                 <track
                     default
                     srcLang="pt"
                     kind="subtitles"
                     label="Português"
-                    src={`http://192.168.0.4:8080/film/${title || ''}/ptbr/subtitle`}
+                    src={`http://localhost:8080/film/${title || ''}/ptbr/subtitle`}
                 />
                 <track
                     srcLang="en"
                     kind="subtitles"
                     label="Inglês"
-                    src={`http://192.168.0.4:8080/film/${title || ''}/en/subtitle`}
+                    src={`http://localhost:8080/film/${title || ''}/en/subtitle`}
                 />
             </video>
         </div>
