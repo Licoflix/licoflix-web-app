@@ -139,7 +139,6 @@ export default class FilmFormStore {
 
     handleEditClick = (entity: any) => {
         this.setSelectedFilm(entity);
-        console.log(this.selectedFilm != null)
 
         const videoBlob = entity.film ? this.base64ToFile(entity.film, 'film.mp4', 'video') : null;
         const imageBlob = entity.image ? this.base64ToFile(entity.image, 'image.jpg', 'image') : null;
@@ -261,18 +260,18 @@ export default class FilmFormStore {
     onSubmit = async (request: FilmRequest, language: any) => {
         this.saving = true;
         const formData = this.createFormData(request);
-        await this.submitFilm(formData, request.title, language);
-    }
 
-    private async submitFilm(formData: FormData, title: string, language: any): Promise<void> {
-        await service.film.create(formData)
-            .finally(async () => {
-                await store.filmStore.list(1, 10, undefined, true);
-                await store.filmStore.listGroupedFilms(true);
-                toast.success(`${title + findTranslation("createFilmSuccess", language)}`)
-                this.saving = false;
-            });
-    }
+        try {
+            await service.film.create(formData);
+        } finally {
+            await store.filmStore.listNewFilms();
+            await store.filmStore.listGroupedFilms(true);
+            await store.filmStore.list(1, 10, undefined, true);
+            await store.filmStore.listAutoCarrousselFilms(1, 5, true);
+            toast.success(`${request.title} ${findTranslation("operationSuccess", language)}`);
+            this.saving = false;
+        }
+    };
 
     private createFormData(request: FilmRequest): FormData {
         const formData = new FormData();

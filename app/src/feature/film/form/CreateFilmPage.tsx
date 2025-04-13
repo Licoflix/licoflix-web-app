@@ -16,15 +16,14 @@ import TitleDescriptionSection from './section/TitleDescriptionSection';
 
 const CreateFilmPage: React.FC = () => {
     const {
-        commonStore: { language }, filmFormStore: { onSubmit, formatDuration, getCategoryOptions, getLanguageOptions, setFormValues, setSelectedFilm,
-            initialFormValues, ageOptions, formValues, validationSchema, selectedFilm, saving }, } = useStore();
+        commonStore: { language }, filmFormStore: { onSubmit, formatDuration, getCategoryOptions, getLanguageOptions, setActiveItem, setSelectedFilm, ageOptions, formValues, validationSchema, selectedFilm, saving }, } = useStore();
 
     const handleSubmit = (request: FilmRequest, resetForm: () => void) => {
         onSubmit(request, language)
             .finally(() => {
                 resetForm();
                 setSelectedFilm(null);
-                setFormValues(initialFormValues);
+                setActiveItem("manageFilms");
             });
     };
 
