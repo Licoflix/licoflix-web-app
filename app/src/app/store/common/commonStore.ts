@@ -29,8 +29,7 @@ export default class CommonStore {
             await Promise.all([
                 store.filmStore.listNewFilms(),
                 store.filmStore.listUserFilmList(),
-                store.filmStore.listGroupedFilms(),
-                store.filmStore.getFilmCategories(),
+                store.filmStore.listGroupedFilms(1, true),
                 store.playerStore.loadContinueWatchingList(),
                 store.filmStore.listAutoCarrousselFilms(1, 5),
             ]);

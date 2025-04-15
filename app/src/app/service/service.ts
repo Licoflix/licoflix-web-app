@@ -60,7 +60,7 @@ const film = {
     get: (id: string) => requests.get<DataResponse<Film>>(`${filmModule}/${id}`, BASE_URL_FILM),
     delete: (id: any) => requests.delete<DataResponse<Film>>(filmModule + `/${id}`, BASE_URL_FILM),
     create: (formData: FormData) => requests.post<DataResponse<Film>>(`${filmModule}`, formData, BASE_URL_FILM),
-    listGrouped: () => requests.get<DataListResponse<FilmCategoryGroup>>(`${filmModule}/grouped`, BASE_URL_FILM),
+    listGrouped: (page: number, pageSize: number, category?: string) => requests.get<DataListResponse<FilmCategoryGroup>>(`${filmModule}/grouped?page=${page}&pageSize=${pageSize}&category=${category || ''}`, BASE_URL_FILM),
     list: (page?: number, pageSize?: number, search?: string, category?: string) => requests.get<DataListResponse<Film>>(`${filmModule}?page=${page ?? 1}&pageSize=${pageSize ?? 2147483647}&search=${search ?? ''}&category=${category ?? ''}`, BASE_URL_FILM),
 };
 

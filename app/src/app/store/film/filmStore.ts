@@ -23,7 +23,7 @@ export default class FilmStore implements IBaseStore<Film> {
         makeAutoObservable(this);
     }
 
-    getFilmCategories = async (): Promise<void> => {
+    getFilmCategories = async () => {
         if (this.categories.length === 0) {
             const response = await service.category.list();
             runInAction(() => {
@@ -32,12 +32,50 @@ export default class FilmStore implements IBaseStore<Film> {
         }
     };
 
-    listGroupedFilms = async (force?: boolean) => {
+    listGroupedFilms = async (page: number = 1, force?: boolean) => {
         if (this.groupedFilms === null || force) {
-            const response = await service.film.listGrouped();
+            await this.getFilmCategories();
+            const newGroupedFilms: FilmCategoryGroup[] = [];
+            for (const category of this.categories) {
+                const response = await service.film.listGrouped(page, 10, category.name);
+                if (response.data) {
+                    newGroupedFilms.push({
+                        category: category.name,
+                        films: response.data.map(item => item.films).flat()
+                    });
+                }
+            }
             runInAction(() => {
-                this.groupedFilms = response.data;
+                this.groupedFilms = page === 1 ? newGroupedFilms : [...(this.groupedFilms || []), ...newGroupedFilms];
             });
+        }
+    };
+
+    loadMoreFilmsByCategory = async (category: string) => {
+        if (!this.groupedFilms) return;
+
+        const categoryGroup = this.groupedFilms.find(group => group.category === category);
+        if (!categoryGroup) return;
+
+        const currentPage = Math.ceil(categoryGroup.films.length / 10);
+        const nextPage = currentPage + 1;
+
+        if (nextPage > currentPage) {
+            const response = await service.film.listGrouped(nextPage, 10, category);
+            if (response.data && response.totalElements > 0) {
+                runInAction(() => {
+                    const newCategoryGroup = response.data.find(group => group.category === category);
+
+                    if (newCategoryGroup) {
+                        this.groupedFilms = this.groupedFilms?.map(group => {
+                            if (group.category === category) {
+                                return { ...group, films: [...group.films, ...newCategoryGroup.films] };
+                            }
+                            return group;
+                        }) || [];
+                    }
+                });
+            }
         }
     };
 
@@ -85,7 +123,7 @@ export default class FilmStore implements IBaseStore<Film> {
         await service.film.delete(id);
         await runInAction(async () => {
             await this.list(1, 10, undefined, true);
-            await this.listGroupedFilms(true);
+            await this.listGroupedFilms(1, true);
         });
     }
 

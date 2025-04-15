@@ -15,7 +15,7 @@ interface FilmCarouselPageProps {
 const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, continueWatching }) => {
     const navigate = useNavigate();
     const carouselRef = useRef<HTMLDivElement>(null);
-    const { commonStore: { language }, playerStore: { loadProgress, getFilmDuration, isWatching } } = useStore();
+    const { commonStore: { language }, playerStore: { loadProgress, getFilmDuration, isWatching }, filmStore: { loadMoreFilmsByCategory } } = useStore();
 
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
@@ -156,6 +156,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 e.preventDefault();
                                 if (carouselRef.current) {
                                     smoothScrollBy(carouselRef.current, 400, 400);
+                                    loadMoreFilmsByCategory(category);
                                 }
                             }}
                         >
