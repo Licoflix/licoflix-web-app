@@ -1,16 +1,16 @@
+import { throttle } from 'lodash';
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
 import React, { useCallback, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStore } from '../../app/store/store';
-
 const FilmPlayerPage: React.FC = () => {
     const { playerStore } = useStore();
     const playerRef = useRef<Plyr | null>(null);
     const { title } = useParams<{ title: string }>();
     const videoRef = useRef<HTMLVideoElement | null>(null);
 
-    const saveProgress = useCallback(async () => {
+    const saveProgressImmediately = useCallback(async () => {
         if (videoRef.current && title) {
             await playerStore.saveProgress(
                 videoRef.current.currentTime,
@@ -19,6 +19,13 @@ const FilmPlayerPage: React.FC = () => {
             );
         }
     }, [title, playerStore]);
+
+    const saveProgressThrottled = useCallback(
+        throttle(async () => {
+            await saveProgressImmediately();
+        }, 1500, { leading: true, trailing: false }),
+        [saveProgressImmediately]
+    );
 
     useEffect(() => {
         if (!videoRef.current || !title) return;
@@ -40,11 +47,11 @@ const FilmPlayerPage: React.FC = () => {
         }
 
         // Configura os event listeners
-        const handlePause = () => saveProgress();
-        const handleSeeked = () => saveProgress();
+        const handlePause = () => saveProgressThrottled();
+        const handleSeeked = () => saveProgressThrottled();
         const handleKeyUp = (e: KeyboardEvent) => {
             if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                saveProgress();
+                saveProgressThrottled();
             }
         };
 
@@ -60,9 +67,9 @@ const FilmPlayerPage: React.FC = () => {
             window.removeEventListener('keyup', handleKeyUp);
 
             playerRef.current?.destroy();
-            saveProgress();
+            saveProgressImmediately();
         };
-    }, [title, playerStore, saveProgress]);
+    }, [title, playerStore, saveProgressImmediately]);
 
     return (
         <div style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}>
