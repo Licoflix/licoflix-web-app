@@ -32,8 +32,8 @@ export default class FilmStore implements IBaseStore<Film> {
         }
     };
 
-    listGroupedFilms = async (page: number = 1, force?: boolean) => {
-        if (this.groupedFilms === null || force) {
+    listGroupedFilms = async (page: number, force?: boolean) => {
+        if ((this.groupedFilms === null || force) && page) {
             await this.getFilmCategories();
             const newGroupedFilms: FilmCategoryGroup[] = [];
             for (const category of this.categories) {
@@ -123,7 +123,6 @@ export default class FilmStore implements IBaseStore<Film> {
         await service.film.delete(id);
         await runInAction(async () => {
             await this.list(1, 10, undefined, true);
-            await this.listGroupedFilms(1, true);
         });
     }
 
