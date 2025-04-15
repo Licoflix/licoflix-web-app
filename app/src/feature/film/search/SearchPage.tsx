@@ -28,7 +28,7 @@ const SearchPage: React.FC = () => {
         setCurrentPage(1);
         setFilteredFilms(null);
         setLoading(true);
-        await listFiltredFilms(1, 10, searchTerm, orderBy);
+        await listFiltredFilms(1, 10, searchTerm, orderBy, orderDirection);
         setLoading(false);
     };
 
@@ -43,7 +43,7 @@ const SearchPage: React.FC = () => {
         setLoading(true);
         const nextPage = currentPage + 1;
         setCurrentPage(nextPage);
-        await listFiltredFilms(nextPage, 10, searchTerm, orderBy);
+        await listFiltredFilms(nextPage, 10, searchTerm, orderBy, orderDirection);
         setLoading(false);
     };
 
