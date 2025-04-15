@@ -1,7 +1,7 @@
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
-import { Icon, Image, Input, Loader, Segment } from "semantic-ui-react";
+import { Dropdown, Icon, Image, Input, Loader, Segment } from "semantic-ui-react";
 import { findTranslation } from '../../../app/common/language/translations';
 import { Film } from '../../../app/model/Film';
 import { useStore } from '../../../app/store/store';
@@ -9,8 +9,10 @@ import { useStore } from '../../../app/store/store';
 const SearchPage: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
     const { commonStore: { language } } = useStore();
+    const [currentPage, setCurrentPage] = useState(1);
+    const [orderBy, setOrderBy] = useState<string>("id");
+    const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("asc");
     const { filmStore: { listFiltredFilms, filteredFilms, searchTerm, setSearchTerm, setFilteredFilms } } = useStore();
 
     const handleFilmClick = (film: Film) => {
@@ -26,7 +28,7 @@ const SearchPage: React.FC = () => {
         setCurrentPage(1);
         setFilteredFilms(null);
         setLoading(true);
-        await listFiltredFilms(1, 10, searchTerm);
+        await listFiltredFilms(1, 10, searchTerm, orderBy);
         setLoading(false);
     };
 
@@ -41,7 +43,7 @@ const SearchPage: React.FC = () => {
         setLoading(true);
         const nextPage = currentPage + 1;
         setCurrentPage(nextPage);
-        await listFiltredFilms(nextPage, 10, searchTerm);
+        await listFiltredFilms(nextPage, 10, searchTerm, orderBy);
         setLoading(false);
     };
 
@@ -52,22 +54,66 @@ const SearchPage: React.FC = () => {
         }
     };
 
+    const handleOrderByChange = async (value: string) => {
+        setLoading(true);
+        setOrderBy(value);
+        setCurrentPage(1);
+        setFilteredFilms(null);
+        await listFiltredFilms(1, 10, searchTerm, value, orderDirection);
+        setLoading(false);
+    };
+
+    const toggleOrderDirection = async () => {
+        const newDirection = orderDirection === "asc" ? "desc" : "asc";
+        setOrderDirection(newDirection);
+
+        setCurrentPage(1);
+        await listFiltredFilms(1, 10, searchTerm, orderBy, newDirection);
+    };
+
     useEffect(() => {
         setSearchTerm(null);
         setFilteredFilms(null);
     }, [setSearchTerm, setFilteredFilms]);
 
+    const orderOptions = [
+        { key: 'year', text: findTranslation('Year', language), value: 'year' },
+        { key: 'imdb', text: findTranslation('IMDb', language), value: 'imdb' }
+    ];
+
     return (
         <Segment className="home-page" id="home" style={{ overflowY: 'auto' }} onScroll={handleScroll}>
-            <Input
-                size="large"
-                className='search-input'
-                value={searchTerm || ''}
-                onKeyPress={handleKeyPress}
-                onChange={handleSearchChange}
-                placeholder={`${findTranslation('Search', language)}...`}
-                icon={<Icon name='search' link onClick={handleSearch} />}
-            />
+            <div className='search-header'>
+                <Input
+                    size="large"
+                    className='search-input'
+                    value={searchTerm || ''}
+                    onKeyPress={handleKeyPress}
+                    onChange={handleSearchChange}
+                    placeholder={`${findTranslation('Search', language)}...`}
+                    icon={<Icon name='search' link onClick={handleSearch} />}
+                    style={{ flex: 1, marginRight: '10px' }}
+                />
+
+                <div className='order-by-container'>
+                    <Dropdown
+                        compact
+                        selection
+                        icon={null}
+                        value={orderBy}
+                        options={orderOptions}
+                        className='order-by-dropdown'
+                        placeholder={findTranslation('OrderBy', language)}
+                        onChange={(_e, data) => handleOrderByChange(data.value as string)}
+                    />
+                    <Icon
+                        link
+                        className='order-icon'
+                        onClick={toggleOrderDirection}
+                        name={orderDirection === "asc" ? "sort amount up" : "sort amount down"}
+                    />
+                </div>
+            </div>
 
             <div>
                 {loading && currentPage === 1 ? (
@@ -117,7 +163,7 @@ const SearchPage: React.FC = () => {
             </div>
 
             {loading && currentPage > 1 && (
-                <Loader style={{marginTop: '3vh', marginBottom:"3vh"}} active size='huge' inline='centered' />
+                <Loader style={{ marginTop: '3vh', marginBottom: "3vh" }} active size='huge' inline='centered' />
             )}
         </Segment>
     );
