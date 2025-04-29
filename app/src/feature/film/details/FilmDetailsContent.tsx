@@ -105,7 +105,7 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                             className="film-component-button-restart"
                                             onClick={async () => {
                                                 await resetFilmProgress(film.title);
-                                                await new Promise(resolve => setTimeout(resolve, 100)); 
+                                                await new Promise(resolve => setTimeout(resolve, 100));
                                                 handleWathNowClick(film);
                                             }}
                                         >
@@ -120,12 +120,12 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                                 : handleAddFilmClick(film)
                                         }
                                     >
-                                        <Icon className={filmStore.userFilmList.length > 0 && someIncluded(film) ? 'remove circle' : 'add circle'} />
+                                        <Icon className={filmStore.userFilmList.length > 0 && someIncluded(film) ? 'remove' : 'add circle'} />
                                         {filmStore.userFilmList.length > 0 && someIncluded(film) ? findTranslation('removeList', language) : findTranslation('addList', language)}
                                     </Button>
                                 </div>
                             </Segment>
-                            <p className='film-details-title'>Details</p>
+                            <p className='film-details-title'>{findTranslation("details", language)}</p>
                             <div className='film-details-divider' />
                             <Segment className="film-component-info-container">
                                 <p className='film-details-info-title'>{findTranslation('ratingInfo', language)}</p>
