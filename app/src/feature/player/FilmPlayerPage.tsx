@@ -1,14 +1,16 @@
 import { throttle } from 'lodash';
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useStore } from '../../app/store/store';
+
 const FilmPlayerPage: React.FC = () => {
     const { playerStore } = useStore();
     const playerRef = useRef<Plyr | null>(null);
     const { title } = useParams<{ title: string }>();
     const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [showHiddenItems, setShowHiddenItems] = useState(false);
 
     const saveProgressImmediately = useCallback(async () => {
         if (videoRef.current && title) {
@@ -40,6 +42,11 @@ const FilmPlayerPage: React.FC = () => {
             controls: ['play-large', 'play', 'current-time', 'progress', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
         });
 
+        // Controle de visibilidade do botão
+        const updateButtonVisibility = () => {
+            setShowHiddenItems(playerRef.current?.paused || false);
+        };
+
         // Carrega o progresso salvo
         const savedTime = playerStore.loadProgress(title);
         if (savedTime > 0) {
@@ -47,8 +54,8 @@ const FilmPlayerPage: React.FC = () => {
         }
 
         // Configura os event listeners
-        const handlePause = () => saveProgressThrottled();
         const handleSeeked = () => saveProgressThrottled();
+        const handlePause = () => { saveProgressThrottled(); updateButtonVisibility() };
         const handleKeyUp = (e: KeyboardEvent) => {
             if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
                 saveProgressThrottled();
@@ -56,15 +63,17 @@ const FilmPlayerPage: React.FC = () => {
         };
 
         // Adiciona os listeners
+        window.addEventListener('keyup', handleKeyUp);
         videoRef.current.addEventListener('pause', handlePause);
         videoRef.current.addEventListener('seeked', handleSeeked);
-        window.addEventListener('keyup', handleKeyUp);
+        videoRef.current.addEventListener('play', updateButtonVisibility);
 
         // Função de cleanup
         return () => {
+            window.removeEventListener('keyup', handleKeyUp);
             videoRef.current?.removeEventListener('pause', handlePause);
             videoRef.current?.removeEventListener('seeked', handleSeeked);
-            window.removeEventListener('keyup', handleKeyUp);
+            videoRef.current?.addEventListener('play', updateButtonVisibility);
 
             playerRef.current?.destroy();
             saveProgressImmediately();
@@ -73,6 +82,9 @@ const FilmPlayerPage: React.FC = () => {
 
     return (
         <div style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}>
+            <div style={{ opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease' }} className='film-player-title'>{title}</div>
+            <button style={{ opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease' }} className="close-button" onClick={() => history.back()}>&times;</button>
+
             <video
                 autoPlay
                 playsInline
