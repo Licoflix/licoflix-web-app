@@ -116,7 +116,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                         <div className="film-hover-title">{film.title}</div>
                                         <div className="film-hover-age">
                                             <Image className="film-age-hover" src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`} />
-                                            <p className="film-hover-imdb">IMDb {film.imdb}</p>
+                                            <p className="film-hover-imdb">IMDb {String(film.imdb).includes('.') ? film.imdb : `${film.imdb}.0`}</p>
                                             <p className="film-hover-duration">{film.duration}</p>
                                             <p className="film-hover-year">{film.year}</p>
                                         </div>

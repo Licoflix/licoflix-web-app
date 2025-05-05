@@ -62,7 +62,7 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                 <p className="film-component-description-text">{film.description}</p>
                                 <Header className="film-component-header-info">
                                     <p className="film-imdb">
-                                        IMDb {film.imdb}
+                                        IMDb {String(film.imdb).includes('.') ? film.imdb : `${film.imdb}.0`}
                                     </p>
                                     <p className="film-duration">{film.duration}</p>
                                     <Image
