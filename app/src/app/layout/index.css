@@ -1792,6 +1792,7 @@ th {
     padding-bottom: 1vh !important;
 
     /* Tamanho e Layout */
+    max-width: 90% !important;
     width: max-content !important;
     text-align: center !important;
     height: fit-content !important;
