@@ -7,6 +7,7 @@ import { store } from "../store";
 
 export default class PlayerStore {
     // Configurações de legendas (valores padrão)
+    subtitleBold: string = "0";
     subtitleOpacity: string = "0";
     subtitleSize: string = "3rem";
     subtitleColor: string = "#FFEE00";
@@ -125,6 +126,13 @@ export default class PlayerStore {
         localStorage.setItem("subtitleOpacity", opacity);
     }
 
+    setSubtitleBold(bold: string){
+        this.subtitleBold = bold;
+        document.documentElement.style.setProperty("--subtitle-bold", bold);
+
+        localStorage.setItem("subtitleBold", bold);
+    }
+
     hexToRgba(hex: string, alpha: number, isBackground: boolean): string {
         hex = hex.replace(/^#/, '');
         if (hex.length === 3) {
@@ -148,6 +156,7 @@ export default class PlayerStore {
     // --------------------------------
     resetSubtitleSettings() {
         // Volta aos valores padrão (ajuste conforme quiser)
+        this.setSubtitleBold("0");
         this.setSubtitleSize("3rem");
         this.setSubtitleOpacity("0");
         this.setSubtitleColor("#FFEE00");
@@ -161,6 +170,7 @@ export default class PlayerStore {
     // Carrega do localStorage
     // --------------------------------
     private loadSubtitleSettings() {
+        const bold = localStorage.getItem("subtitleBold");
         const size = localStorage.getItem("subtitleSize");
         const color = localStorage.getItem("subtitleColor");
         const opacity = localStorage.getItem("subtitleOpacity");
@@ -169,6 +179,7 @@ export default class PlayerStore {
         const backgroundRGBA = localStorage.getItem("subtitleBackgroundRGBA");
         const subtitleFontOpacity = localStorage.getItem("subtitleFontOpacity");
 
+        if(bold) this.setSubtitleBold(bold);
         if (size) this.setSubtitleSize(size);
         if (color) this.setSubtitleColor(color);
         if (opacity) this.setSubtitleOpacity(opacity);

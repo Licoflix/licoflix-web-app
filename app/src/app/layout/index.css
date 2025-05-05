@@ -1604,7 +1604,6 @@ th {
 .preview-text {
     padding: 1rem;
     line-height: 1.2;
-    font-weight: bold;
     margin-bottom: 3vh;
     position: absolute;
     text-align: center;
@@ -1656,12 +1655,12 @@ th {
 .sliders {
     gap: 0.5rem;
     display: flex;
+    margin: auto;
     flex-direction: column;
 }
 
 .slider-item {
     width: 20vw;
-    margin-top: 3.7vh;
 }
 
 .form-row label {
@@ -1806,10 +1805,10 @@ th {
 .plyr__caption {
     /* Tipografia */
     line-height: 1.2 !important;
-    font-weight: bold !important;
+    background-color: transparent !important;
+    font-weight: var(--subtitle-bold, 0) !important;
     font-size: var(--subtitle-size, 3rem) !important;
     color: var(--subtitle-color, yellow) !important;
-    background-color: transparent !important;
 
     /* Efeito de Sombra */
     text-shadow:

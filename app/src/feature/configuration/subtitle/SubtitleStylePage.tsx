@@ -48,6 +48,20 @@ const SubtitleStylePage: React.FC = () => {
                                 onChange={(e) => playerStore.setSubtitleOpacity(`${e.target.value}%`)}
                             />
                         </div>
+
+                        <div className="slider-item">
+                            <label>{findTranslation("backgroundBold", language)}</label>
+                            <input
+                                min="300"
+                                max="800"
+                                step="100"
+                                type="range"
+                                style={{ width: '100%' }}
+                                className="form-control-range"
+                                value={parseInt(playerStore.subtitleBold)}
+                                onChange={(e) => playerStore.setSubtitleBold(`${e.target.value}`)}
+                            />
+                        </div>
                     </div>
                     <div className="form-row color-picker">
                         <div>
@@ -79,6 +93,7 @@ const SubtitleStylePage: React.FC = () => {
                         color: computedColor,
                         background: computedBackground,
                         fontSize: playerStore.subtitleSize,
+                        fontWeight: playerStore.subtitleBold,
                     }}
                 >
                     {findTranslation("subtitleEx", language)}
