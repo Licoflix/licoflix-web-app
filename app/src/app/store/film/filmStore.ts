@@ -1,10 +1,10 @@
 import JSZip from 'jszip';
-import { makeAutoObservable, runInAction } from "mobx";
-import { Category } from "../../model/Category";
-import { DataListResponse } from "../../model/DataListResponse";
-import { Film, FilmCategoryGroup } from "../../model/Film";
+import {makeAutoObservable, runInAction} from "mobx";
+import {Category} from "../../model/Category";
+import {DataListResponse} from "../../model/DataListResponse";
+import {Film, FilmCategoryGroup} from "../../model/Film";
 import service from "../../service/service";
-import { IBaseStore } from "../IBaseStore";
+import {IBaseStore} from "../IBaseStore";
 
 export default class FilmStore implements IBaseStore<Film> {
     searchTerm: any;
@@ -15,9 +15,8 @@ export default class FilmStore implements IBaseStore<Film> {
     autoCarrousselfilms: Film[] = [];
     groupedFilms: FilmCategoryGroup[] | null = null;
     userListChanging: { [filmId: number]: boolean } = {};
-    entityList: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
-    newFilmsList: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
-    filteredFilms: DataListResponse<Film> = { data: [], totalElements: 0, totalPages: 0, };
+    entityList: DataListResponse<Film> = {data: [], totalElements: 0, totalPages: 0,};
+    filteredFilms: DataListResponse<Film> = {data: [], totalElements: 0, totalPages: 0,};
 
     constructor() {
         makeAutoObservable(this);
@@ -35,16 +34,16 @@ export default class FilmStore implements IBaseStore<Film> {
     listGroupedFilms = async (page: number, force?: boolean) => {
         if ((this.groupedFilms === null || force) && page) {
             await this.getFilmCategories();
-            const newGroupedFilms: FilmCategoryGroup[] = [];
-            for (const category of this.categories) {
+            const categoryPromises = this.categories.map(async (category) => {
                 const response = await service.film.listGrouped(page, 10, category.name);
-                if (response.data) {
-                    newGroupedFilms.push({
-                        category: category.name,
-                        films: response.data.map(item => item.films).flat()
-                    });
-                }
-            }
+                return response && response.data ? {
+                    category: category.name,
+                    films: response.data.map((item) => item.films).flat()
+                } : null;
+            });
+
+            const groupedFilmsResult = await Promise.all(categoryPromises);
+            const newGroupedFilms = groupedFilmsResult.filter((group) => group !== null) as FilmCategoryGroup[];
             runInAction(() => {
                 this.groupedFilms = page === 1 ? newGroupedFilms : [...(this.groupedFilms || []), ...newGroupedFilms];
             });
@@ -69,7 +68,7 @@ export default class FilmStore implements IBaseStore<Film> {
                     if (newCategoryGroup) {
                         this.groupedFilms = this.groupedFilms?.map(group => {
                             if (group.category === category) {
-                                return { ...group, films: [...group.films, ...newCategoryGroup.films] };
+                                return {...group, films: [...group.films, ...newCategoryGroup.films]};
                             }
                             return group;
                         }) || [];
@@ -86,13 +85,6 @@ export default class FilmStore implements IBaseStore<Film> {
                 this.entityList = response;
             });
         }
-    };
-
-    listNewFilms = async () => {
-        const response = await service.film.list(1, 15);
-        runInAction(() => {
-            this.newFilmsList = response;
-        });
     };
 
     listFiltredFilms = async (page?: any, pageSize?: any, search?: any, orderBy?: any, direction?: any) => {

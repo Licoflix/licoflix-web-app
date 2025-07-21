@@ -1,7 +1,7 @@
-import { makeAutoObservable, reaction } from "mobx";
-import { Link } from "react-router-dom";
-import { ErrorResponse } from "../../model/ErrorResponse";
-import { store } from "../store";
+import {makeAutoObservable, reaction} from "mobx";
+import {Link} from "react-router-dom";
+import {ErrorResponse} from "../../model/ErrorResponse";
+import {store} from "../store";
 
 export default class CommonStore {
     loading = false;
@@ -27,7 +27,6 @@ export default class CommonStore {
     initApp = async () => {
         if (this.token) {
             await Promise.all([
-                store.filmStore.listNewFilms(),
                 store.filmStore.listUserFilmList(),
                 store.filmStore.listGroupedFilms(1, true),
                 store.playerStore.loadContinueWatchingList(),
@@ -40,7 +39,7 @@ export default class CommonStore {
         if (key) {
             const container = document.querySelector(`#${key}`);
             if (container) {
-                container.scrollTo({ top: 0, behavior: 'smooth' });
+                container.scrollTo({top: 0, behavior: 'smooth'});
             }
         }
     }
@@ -70,7 +69,7 @@ export default class CommonStore {
     scrollToSection = (sectionId: string) => {
         const section = document.getElementById(sectionId);
         if (section) {
-            section.scrollIntoView({ behavior: 'smooth' });
+            section.scrollIntoView({behavior: 'smooth'});
         }
     };
 
