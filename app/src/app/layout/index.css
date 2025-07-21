@@ -1219,7 +1219,7 @@ img {
 }
 
 .create-film-segment {
-    width: 100% !important;
+    min-width: 45vw !important;
     height: 80vh !important;
     margin: auto !important;
     padding: 30px !important;
@@ -1232,13 +1232,28 @@ img {
     background: transparent !important;
 }
 
+.steps-container {
+    display: flex;
+    flex-direction: row;
+    will-change: transform;
+    transition: transform 1.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.step {
+    width: 100%;
+    flex: 0 0 100%;
+    position: relative;
+    box-sizing: border-box;
+    transition: opacity 0.5s ease-in-out;
+}
+
 .create-film-title {
     color: white;
     padding-top: 2vh;
     font-size: 2.7rem;
     text-align: center;
     font-weight: bolder;
-    padding-bottom: 2vh;
+    padding-bottom: 6vh;
 }
 
 .create-film-buttons {

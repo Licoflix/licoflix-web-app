@@ -329,8 +329,10 @@ const translations: TranslationSections = {
             asyncSave: 'You will be notified as soon as the process completes',
         }
     },
-    buttom: {
+    button: {
         ptbr: {
+            back: 'Voltar',
+            next: 'Próximo',
             signout: 'Sair',
             close: "Fechar",
             addList: "Lista",
@@ -339,6 +341,8 @@ const translations: TranslationSections = {
             watchNow: "Assistir",
         },
         en: {
+            next: 'Next',
+            back: 'Back',
             close: "Close",
             addList: "List",
             watchNow: "Watch",
