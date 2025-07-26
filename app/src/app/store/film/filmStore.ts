@@ -79,7 +79,7 @@ export default class FilmStore implements IBaseStore<Film> {
     };
 
     list = async (page?: any, pageSize?: any, search?: any, searchTable?: boolean | null) => {
-        if (!this.entityList || this.entityList.data.length === 0 || searchTable) {
+        if (!this.entityList || searchTable) {
             const response = await service.film.list(page, pageSize, search);
             runInAction(() => {
                 this.entityList = response;
@@ -89,11 +89,14 @@ export default class FilmStore implements IBaseStore<Film> {
 
     listFiltredFilms = async (page?: any, pageSize?: any, search?: any, orderBy?: any, direction?: any) => {
         const response = await service.film.list(page, pageSize, search, orderBy, direction);
+        await new Promise(resolve => setTimeout(resolve, 1500));
         runInAction(() => {
-            if (page === 1 || !this.filteredFilms) {
+            if (page === 1) {
                 this.filteredFilms = response;
             } else {
-                this.filteredFilms.data = [...this.filteredFilms.data, ...response.data];
+                const existingIds = new Set(this.filteredFilms.data.map(film => film.id));
+                const newFilms = response.data.filter(film => !existingIds.has(film.id));
+                this.filteredFilms.data = [...this.filteredFilms.data, ...newFilms];
                 this.filteredFilms.totalPages = response.totalPages;
                 this.filteredFilms.totalElements = response.totalElements;
             }

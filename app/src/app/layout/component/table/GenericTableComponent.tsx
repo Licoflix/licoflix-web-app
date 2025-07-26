@@ -73,9 +73,9 @@ const GenericTableComponent = <T extends BaseEntity>({
                 </>
             )}
             <TableComponent
-                list={currentStore?.list}
                 columns={columns}
                 renderCell={renderCell}
+                list={currentStore?.list}
                 handleEditClick={handleEditClick}
                 deleteEntity={currentStore?.deleteEntity}
                 entityList={currentStore?.entityList || null}

@@ -43,7 +43,7 @@ const ManageFilmPage: React.FC = () => {
     };
 
     useEffect(() => {
-        filmStore.list(1, 10, undefined, true);
+        filmStore.list(1, 10, undefined, true).then();
     }, []);
 
     return (

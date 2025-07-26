@@ -1,19 +1,19 @@
-import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { Dropdown, Icon, Image, Input, Loader, Segment } from "semantic-ui-react";
-import { findTranslation } from '../../../app/common/language/translations';
-import { Film } from '../../../app/model/Film';
-import { useStore } from '../../../app/store/store';
+import {observer} from 'mobx-react-lite';
+import {useEffect, useState} from "react";
+import {useNavigate} from 'react-router-dom';
+import {Dropdown, Icon, Image, Input, Loader, Segment} from "semantic-ui-react";
+import {findTranslation} from '../../../app/common/language/translations';
+import {Film} from '../../../app/model/Film';
+import {useStore} from '../../../app/store/store';
 
 const SearchPage: React.FC = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
-    const { commonStore: { language } } = useStore();
+    const {commonStore: {language}} = useStore();
     const [currentPage, setCurrentPage] = useState(1);
     const [orderBy, setOrderBy] = useState<string>("id");
-    const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("asc");
-    const { filmStore: { listFiltredFilms, filteredFilms, searchTerm, setSearchTerm, setFilteredFilms } } = useStore();
+    const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("desc");
+    const {filmStore: {listFiltredFilms, filteredFilms, searchTerm, setSearchTerm, setFilteredFilms}} = useStore();
 
     const handleFilmClick = (film: Film) => {
         navigate(`/film/${film.id}`);
@@ -39,18 +39,20 @@ const SearchPage: React.FC = () => {
     };
 
     const loadNextPage = async () => {
-        if (loading || !filteredFilms || currentPage >= filteredFilms.totalPages) return;
         setLoading(true);
         const nextPage = currentPage + 1;
         setCurrentPage(nextPage);
+
         await listFiltredFilms(nextPage, 10, searchTerm, orderBy, orderDirection);
         setLoading(false);
     };
 
-    const handleScroll = (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
-        const bottom = e.currentTarget.scrollHeight === e.currentTarget.scrollTop + e.currentTarget.clientHeight;
+    const handleScroll = async (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
+        const {scrollTop, scrollHeight, clientHeight} = e.currentTarget;
+        const bottom = scrollTop + clientHeight >= scrollHeight;
+
         if (bottom) {
-            loadNextPage();
+            await loadNextPage();
         }
     };
 
@@ -77,12 +79,12 @@ const SearchPage: React.FC = () => {
     }, [setSearchTerm, setFilteredFilms]);
 
     const orderOptions = [
-        { key: 'year', text: findTranslation('Year', language), value: 'year' },
-        { key: 'imdb', text: findTranslation('IMDb', language), value: 'imdb' }
+        {key: 'year', text: findTranslation('Year', language), value: 'year'},
+        {key: 'imdb', text: findTranslation('IMDb', language), value: 'imdb'}
     ];
 
     return (
-        <Segment className="home-page" id="home" style={{ overflowY: 'auto' }} onScroll={handleScroll}>
+        <Segment className="home-page" id="home" style={{overflowY: 'auto'}} onScroll={handleScroll}>
             <div className='search-header'>
                 <Input
                     size="large"
@@ -91,8 +93,8 @@ const SearchPage: React.FC = () => {
                     onKeyPress={handleKeyPress}
                     onChange={handleSearchChange}
                     placeholder={`${findTranslation('Search', language)}...`}
-                    icon={<Icon name='search' link onClick={handleSearch} />}
-                    style={{ flex: 1, marginRight: '10px' }}
+                    icon={<Icon name='search' link onClick={handleSearch}/>}
+                    style={{flex: 1, marginRight: '10px'}}
                 />
 
                 <div className='order-by-container'>
@@ -117,7 +119,7 @@ const SearchPage: React.FC = () => {
 
             <div>
                 {loading && currentPage === 1 ? (
-                    <Loader className='loader-search-films' active size='huge' inline='centered' />
+                    <Loader className='loader-search-films' active size='huge' inline='centered'/>
                 ) : (
                     filteredFilms && filteredFilms.totalElements > 0 ? (
                         <div className='search-page-segment'>
@@ -131,7 +133,7 @@ const SearchPage: React.FC = () => {
                                         <Image
                                             className="film-image"
                                             src={`data:image/jpeg;base64,${film.image}`}
-                                            style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s ease', zIndex: 1 }}
+                                            style={{width: '100%', height: '100%', objectFit: 'cover', transition: 'opacity 0.3s ease', zIndex: 1}}
                                         />
 
                                         <div className="film-hover-container">
@@ -142,7 +144,7 @@ const SearchPage: React.FC = () => {
                                                 />
                                                 <div className="film-hover-title">{film.title}</div>
                                                 <div className="film-hover-age">
-                                                    <Image className='film-age-hover' src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`} />
+                                                    <Image className='film-age-hover' src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`}/>
                                                     <p className="film-hover-imdb">IMDb {film.imdb}</p>
                                                     <p className="film-hover-duration">{film.duration}</p>
                                                     <p className="film-hover-year">{film.year}</p>
@@ -163,7 +165,13 @@ const SearchPage: React.FC = () => {
             </div>
 
             {loading && currentPage > 1 && (
-                <Loader style={{ marginTop: '3vh', marginBottom: "3vh" }} active size='huge' inline='centered' />
+                <div className="dots-loader-container">
+                    <div className="dots-loader">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
             )}
         </Segment>
     );

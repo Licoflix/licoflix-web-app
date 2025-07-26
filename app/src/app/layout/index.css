@@ -36,8 +36,8 @@ html {
 # NavBar Component
 --------------------------------------------------------------*/
 
-.ui.menu .ui.dropdown .menu>.item:hover,
-.ui.menu .ui.dropdown .menu>.item {
+.ui.menu .ui.dropdown .menu > .item:hover,
+.ui.menu .ui.dropdown .menu > .item {
     color: white !important;
 }
 
@@ -69,11 +69,11 @@ html {
     background-color: #260042 !important;
 }
 
-.ui.mini.vertical.navbar.menu>.item.navbar:hover {
+.ui.mini.vertical.navbar.menu > .item.navbar:hover {
     background-color: rgba(44, 0, 75, 0.856) !important;
 }
 
-.ui.mini.vertical.navbar.menu>.item.navbar {
+.ui.mini.vertical.navbar.menu > .item.navbar {
     display: flex !important;
     color: white !important;
     font-size: 1.2rem !important;
@@ -103,7 +103,7 @@ html {
     padding-top: 1vh !important;
     box-shadow: none !important;
     border: transparent !important;
-    background: linear-gradient(to bottom, #040007 0%, #04000791 70%, rgba(0, 0, 0, 0)100%) !important;
+    background: linear-gradient(to bottom, #040007 0%, #04000791 70%, rgba(0, 0, 0, 0) 100%) !important;
 }
 
 .nav-icon {
@@ -133,7 +133,7 @@ html {
     background: transparent !important;
 }
 
-.ui.menu .item>i.icon {
+.ui.menu .item > i.icon {
     margin-right: 0.5vw !important;
 }
 
@@ -486,7 +486,7 @@ html {
     display: inline-block;
 }
 
-.film-hover-content>div {
+.film-hover-content > div {
     z-index: 2;
     margin-left: 1vw;
     position: absolute;
@@ -1206,13 +1206,13 @@ img {
     opacity: unset !important;
 }
 
-.ui.form .field>label {
+.ui.form .field > label {
     color: white !important;
     font-size: 1.2rem !important;
     padding-bottom: 1vh !important;
 }
 
-.ui.grid>.column:not(.row) {
+.ui.grid > .column:not(.row) {
     width: auto !important;
     margin-left: 0 !important;
     margin-right: 0 !important;
@@ -1282,7 +1282,7 @@ img {
 }
 
 .visible.menu.transition,
-.ui.selection.dropdown .menu>.item {
+.ui.selection.dropdown .menu > .item {
     border: 0px !important;
     color: white !important;
     font-weight: 900 !important;
@@ -1305,9 +1305,45 @@ img {
     margin-top: 30vh !important;
 }
 
+.dots-loader-container {
+    gap: 8px;
+    display: flex;
+    margin-top: 0;
+    align-items: center;
+    padding-bottom: 10rem;
+    justify-content: center;
+}
+
+.dots-loader {
+    gap: 4px;
+    display: flex;
+}
+
+.dots-loader span {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: #666;
+    animation: dots-bounce 1.4s infinite ease-in-out both;
+}
+
+.dots-loader span:nth-child(1) { animation-delay: -0.32s; }
+.dots-loader span:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes dots-bounce {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
 i.link.icon,
 .order-by-dropdown,
-.search-input>input {
+.search-input > input {
     border: none !important;
     color: white !important;
     font-size: 1.5rem !important;
@@ -1420,7 +1456,7 @@ input[type="number"] {
 
     i.link.icon,
     .order-by-dropdown,
-    .search-input>input {
+    .search-input > input {
         font-size: 1rem !important;
     }
 }
@@ -1429,7 +1465,7 @@ input[type="number"] {
 # Manage Page Component
 --------------------------------------------------------------*/
 
-.ui.vertical.menu>.active.item:first-child,
+.ui.vertical.menu > .active.item:first-child,
 .ui.fluid.vertical.left.fixed menu {
     color: white !important;
 }
@@ -1444,7 +1480,7 @@ input[type="number"] {
     min-height: 80vh !important;
 }
 
-.ui.grid>[class*="twelve wide"].column {
+.ui.grid > [class*="twelve wide"].column {
     margin: auto !important;
     overflow-x: auto !important;
     width: max-content !important;
@@ -1624,13 +1660,12 @@ th {
     text-align: center;
     white-space: pre-wrap;
     transition: all 0.5s ease;
-    text-shadow:
-        0px 0px 3px rgba(0, 0, 0, 0.8),
-        1px 1px 0 rgba(0, 0, 0, 0.8),
-        -1px -1px 0 rgba(0, 0, 0, 0.8),
-        1px -1px 0 rgba(0, 0, 0, 0.8),
-        -1px 1px 0 rgba(0, 0, 0, 0.8),
-        0px 0px 8px rgba(0, 0, 0, 0.8);
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8),
+    1px 1px 0 rgba(0, 0, 0, 0.8),
+    -1px -1px 0 rgba(0, 0, 0, 0.8),
+    1px -1px 0 rgba(0, 0, 0, 0.8),
+    -1px 1px 0 rgba(0, 0, 0, 0.8),
+    0px 0px 8px rgba(0, 0, 0, 0.8);
 }
 
 .form-container {
@@ -1708,7 +1743,7 @@ th {
         flex-direction: row !important;
     }
 
-    .color-picker>div {
+    .color-picker > div {
         flex: 1 !important;
         min-width: 0 !important;
     }
@@ -1827,13 +1862,12 @@ th {
     color: var(--subtitle-color, yellow) !important;
 
     /* Efeito de Sombra */
-    text-shadow:
-        0px 0px 3px rgba(0, 0, 0, 0.8),
-        1px 1px 0 rgba(0, 0, 0, 0.8),
-        -1px -1px 0 rgba(0, 0, 0, 0.8),
-        1px -1px 0 rgba(0, 0, 0, 0.8),
-        -1px 1px 0 rgba(0, 0, 0, 0.8),
-        0px 0px 8px rgba(0, 0, 0, 0.8) !important;
+    text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.8),
+    1px 1px 0 rgba(0, 0, 0, 0.8),
+    -1px -1px 0 rgba(0, 0, 0, 0.8),
+    1px -1px 0 rgba(0, 0, 0, 0.8),
+    -1px 1px 0 rgba(0, 0, 0, 0.8),
+    0px 0px 8px rgba(0, 0, 0, 0.8) !important;
 }
 
 .plyr__caption:empty,
@@ -1921,31 +1955,31 @@ th {
     background: linear-gradient(to right, #1c0032 0%, #1f0036 70%, #260042 100%) !important;
 }
 
-.login-input>i.icon {
+.login-input > i.icon {
     right: 10px !important;
     height: 80% !important;
 }
 
 .login-input,
-.login-input>input,
-.login-input>i.icon,
-.login-input>::placeholder {
+.login-input > input,
+.login-input > i.icon,
+.login-input > ::placeholder {
     opacity: 1 !important;
     color: rgb(255, 255, 255) !important;
     background-color: transparent !important;
 }
 
-.login-input>::placeholder {
+.login-input > ::placeholder {
     font-size: 1.1rem !important;
 }
 
 .login-input,
-.login-input>input {
+.login-input > input {
     margin-bottom: 1vh !important;
     color: rgb(255, 255, 255) !important;
 }
 
-.login-input>input {
+.login-input > input {
     border-radius: 500px !important;
     border: 2px solid rgba(255, 255, 255, 0.548) !important;
 }
@@ -1996,8 +2030,7 @@ th {
     font-size: 1.2rem;
     text-align: center;
     font-weight: bolder;
-    color: rgba(255, 255, 255, 0.842);
-    ;
+    color: rgba(255, 255, 255, 0.842);;
 }
 
 .auth-register {
@@ -2040,15 +2073,15 @@ th {
 # Profile Page
 --------------------------------------------------------------*/
 
-.profile-input>i.icon {
+.profile-input > i.icon {
     right: 10px !important;
     height: 80% !important;
 }
 
 .profile-input,
-.profile-input>input,
-.profile-input>i.icon,
-.profile-input>::placeholder {
+.profile-input > input,
+.profile-input > i.icon,
+.profile-input > ::placeholder {
     opacity: 1 !important;
     font-weight: bolder !important;
     color: rgb(255, 255, 255) !important;
@@ -2056,18 +2089,18 @@ th {
 }
 
 .ui.disabled.input.profile-input,
-.ui.disabled.input.profile-input>input {
+.ui.disabled.input.profile-input > input {
     background-color: #41007011 !important;
     color: rgba(255, 255, 255, 0.719) !important;
 }
 
-.profile-input>::placeholder {
+.profile-input > ::placeholder {
     font-size: 1.3rem !important;
     font-weight: bolder !important;
 }
 
 .profile-input,
-.profile-input>input {
+.profile-input > input {
     width: 25vw !important;
     height: 5vh !important;
     display: block !important;
@@ -2096,7 +2129,7 @@ th {
 }
 
 .profile-nickname-input,
-.profile-nickname-input>input {
+.profile-nickname-input > input {
     padding: 0;
     height: 5vh;
     font-size: 1.8rem;
@@ -2158,9 +2191,9 @@ th {
         height: 35vw;
     }
 
-    .ui.input>input,
-    .ui.disabled.input>input,
-    .ui.input:not(.disabled) input[disabled] .profile-input> ::placeholder {
+    .ui.input > input,
+    .ui.disabled.input > input,
+    .ui.input:not(.disabled) input[disabled] .profile-input > ::placeholder {
         width: 100% !important;
     }
 
