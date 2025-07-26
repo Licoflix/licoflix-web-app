@@ -49,7 +49,7 @@ const SearchPage: React.FC = () => {
 
     const handleScroll = async (e: React.UIEvent<HTMLDivElement, UIEvent>) => {
         const {scrollTop, scrollHeight, clientHeight} = e.currentTarget;
-        const bottom = scrollTop + clientHeight >= scrollHeight;
+        const bottom = scrollTop + clientHeight >= scrollHeight - 100;
 
         if (bottom) {
             await loadNextPage();

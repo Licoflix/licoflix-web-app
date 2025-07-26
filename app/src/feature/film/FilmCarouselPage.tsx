@@ -44,7 +44,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
     const checkArrowsVisibility = () => {
         if (carouselRef.current) {
             const carousel = carouselRef.current;
-            const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth;
+            const maxScrollLeft = carousel.scrollWidth - carousel.clientWidth - 5;
 
             setShowLeftArrow(carousel.scrollLeft > 0);
             setShowRightArrow(carousel.scrollLeft < maxScrollLeft);

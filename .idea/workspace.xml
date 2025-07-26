@@ -7,8 +7,8 @@
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/app/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/store/player/playerStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/player/playerStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/player/FilmPlayerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/player/FilmPlayerPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,7 @@
       <workItem from="1750070055781" duration="21000" />
       <workItem from="1753114556038" duration="4698000" />
       <workItem from="1753488815118" duration="2000" />
-      <workItem from="1753489064014" duration="3544000" />
+      <workItem from="1753489064014" duration="6371000" />
     </task>
     <servers />
   </component>
