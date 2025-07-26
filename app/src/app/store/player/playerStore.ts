@@ -1,9 +1,7 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import Plyr from "plyr";
-import React from "react";
-import { FilmWatchingList } from "../../model/FilmWatchingList";
+import {makeAutoObservable, runInAction} from "mobx";
+import {FilmWatchingList} from "../../model/FilmWatchingList";
 import service from "../../service/service";
-import { store } from "../store";
+import {store} from "../store";
 
 export default class PlayerStore {
     // Configurações de legendas (valores padrão)
@@ -16,10 +14,7 @@ export default class PlayerStore {
     subtitleColorRGBA: string = "rgba(255, 238, 0, 1)";
     subtitleBackgroundRGBA: string = "rgba(0, 0, 0, 0)";
 
-    plyrInstance: Plyr | null = null;
     continueWatchingList: FilmWatchingList[] = [];
-    hideControlsTimeout: ReturnType<typeof setTimeout> | null = null;
-    playerRef: React.RefObject<HTMLVideoElement> = React.createRef<HTMLVideoElement>();
 
     constructor() {
         makeAutoObservable(this);
@@ -126,7 +121,7 @@ export default class PlayerStore {
         localStorage.setItem("subtitleOpacity", opacity);
     }
 
-    setSubtitleBold(bold: string){
+    setSubtitleBold(bold: string) {
         this.subtitleBold = bold;
         document.documentElement.style.setProperty("--subtitle-bold", bold);
 
@@ -152,21 +147,6 @@ export default class PlayerStore {
     }
 
     // --------------------------------
-    // Resetar tudo
-    // --------------------------------
-    resetSubtitleSettings() {
-        // Volta aos valores padrão (ajuste conforme quiser)
-        this.setSubtitleBold("0");
-        this.setSubtitleSize("3rem");
-        this.setSubtitleOpacity("0");
-        this.setSubtitleColor("#FFEE00");
-        this.setSubtitleFontOpacity("100%");
-        this.setSubtitleBackground("#000000");
-        this.setSubtitleColorRGBA("rgba(255, 230, 0, 1)");
-        this.setSubtitleBackgroundRGBA("rgba(0, 0, 0, 0)");
-    }
-
-    // --------------------------------
     // Carrega do localStorage
     // --------------------------------
     private loadSubtitleSettings() {
@@ -179,7 +159,7 @@ export default class PlayerStore {
         const backgroundRGBA = localStorage.getItem("subtitleBackgroundRGBA");
         const subtitleFontOpacity = localStorage.getItem("subtitleFontOpacity");
 
-        if(bold) this.setSubtitleBold(bold);
+        if (bold) this.setSubtitleBold(bold);
         if (size) this.setSubtitleSize(size);
         if (color) this.setSubtitleColor(color);
         if (opacity) this.setSubtitleOpacity(opacity);
@@ -187,107 +167,5 @@ export default class PlayerStore {
         if (backgroundRGBA) this.setSubtitleBackgroundRGBA(backgroundRGBA);
         if (subtitleColorRGBA) this.setSubtitleColorRGBA(subtitleColorRGBA);
         if (subtitleFontOpacity) this.setSubtitleFontOpacity(subtitleFontOpacity);
-    }
-
-    /**
-     * ---------------------------------------
-     *     Inicialização e controle do Plyr
-     * ---------------------------------------
-     */
-    initializePlayer(videoElement: HTMLVideoElement) {
-        if (!this.plyrInstance) {
-            this.plyrInstance = new Plyr(videoElement, {
-                muted: false,
-                tooltips: { controls: true, seek: true },
-                captions: { active: true, language: "pt" },
-                settings: ["captions", "quality", "speed", "pip", "airplay", "playback-rate"],
-                controls: [
-                    "play-large",
-                    "play",
-                    "progress",
-                    "current-time",
-                    "mute",
-                    "volume",
-                    "captions",
-                    "settings",
-                    "pip",
-                    "airplay",
-                    "fullscreen",
-                ],
-            });
-        }
-    }
-
-    handleKey(e: KeyboardEvent) {
-        if (!this.plyrInstance) return;
-
-        // Sempre que alguma tecla for pressionada, mostramos os controles
-        this.plyrInstance.toggleControls(true);
-
-        // Limpa timeout anterior e inicia um novo para ocultar
-        if (this.hideControlsTimeout) {
-            clearTimeout(this.hideControlsTimeout);
-        }
-        this.hideControlsTimeout = setTimeout(
-            () => this.plyrInstance?.toggleControls(false),
-            3000
-        );
-
-        switch (e.key) {
-            case "ArrowLeft":
-                this.plyrInstance.currentTime = Math.max(0, this.plyrInstance.currentTime - 10);
-                break;
-            case "ArrowRight":
-                this.plyrInstance.currentTime = Math.min(
-                    this.plyrInstance.duration,
-                    this.plyrInstance.currentTime + 10
-                );
-                break;
-            case "m":
-                this.plyrInstance.muted = !this.plyrInstance.muted;
-                break;
-            case "ArrowUp":
-                if (this.plyrInstance.volume < 1) {
-                    this.plyrInstance.volume += 0.1;
-                }
-                break;
-            case "ArrowDown":
-                if (this.plyrInstance.volume > 0) {
-                    this.plyrInstance.volume -= 0.1;
-                }
-                break;
-            case " ":
-                if (this.plyrInstance.paused) {
-                    this.plyrInstance.play();
-                } else {
-                    this.plyrInstance.pause();
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    destroyPlayer() {
-        if (this.plyrInstance) {
-            this.plyrInstance.destroy();
-            this.plyrInstance = null;
-        }
-        if (this.hideControlsTimeout) {
-            clearTimeout(this.hideControlsTimeout);
-        }
-    }
-
-    /**
-     * ---------------------------------------
-     *     Função utilitária
-     * ---------------------------------------
-     */
-    convertToTitleCase(input: string): string {
-        return input
-            .replace(/%20/g, " ")
-            .split(" ")
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-            .join(" ");
     }
 }

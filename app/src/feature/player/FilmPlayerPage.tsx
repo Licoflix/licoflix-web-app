@@ -1,16 +1,16 @@
-import { throttle } from 'lodash';
+import {throttle} from 'lodash';
 import Plyr from 'plyr';
 import 'plyr/dist/plyr.css';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useStore } from '../../app/store/store';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import {useStore} from '../../app/store/store';
 
 const FilmPlayerPage: React.FC = () => {
-    const { playerStore } = useStore();
+    const {playerStore} = useStore();
+    const {title} = useParams<{ title: string }>();
+    const [showHiddenItems, setShowHiddenItems] = useState(true); // Inicia como true para mostrar o botão de play
     const playerRef = useRef<Plyr | null>(null);
-    const { title } = useParams<{ title: string }>();
     const videoRef = useRef<HTMLVideoElement | null>(null);
-    const [showHiddenItems, setShowHiddenItems] = useState(false);
 
     const saveProgressImmediately = useCallback(async () => {
         if (videoRef.current && title) {
@@ -25,7 +25,7 @@ const FilmPlayerPage: React.FC = () => {
     const saveProgressThrottled = useCallback(
         throttle(async () => {
             await saveProgressImmediately();
-        }, 1500, { leading: true, trailing: false }),
+        }, 1500, {leading: true, trailing: false}),
         [saveProgressImmediately]
     );
 
@@ -35,9 +35,9 @@ const FilmPlayerPage: React.FC = () => {
         // Inicializa o player
         playerRef.current = new Plyr(videoRef.current, {
             muted: false,
-            tooltips: { controls: true, seek: true },
-            keyboard: { focused: true, global: true },
-            captions: { active: true, language: 'pt' },
+            tooltips: {controls: true, seek: true},
+            keyboard: {focused: true, global: true},
+            captions: {active: true, language: 'pt'},
             settings: ['captions', 'quality', 'speed', 'pip', 'airplay', 'playback-rate'],
             controls: ['play-large', 'play', 'current-time', 'progress', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
         });
@@ -55,10 +55,14 @@ const FilmPlayerPage: React.FC = () => {
 
         // Configura os event listeners
         const handleSeeked = () => saveProgressThrottled();
-        const handlePause = () => { saveProgressThrottled(); updateButtonVisibility() };
+        const handlePause = () => {
+            saveProgressThrottled().then();
+            updateButtonVisibility()
+        };
+
         const handleKeyUp = (e: KeyboardEvent) => {
             if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
-                saveProgressThrottled();
+                saveProgressThrottled().then();
             }
         };
 
@@ -76,23 +80,22 @@ const FilmPlayerPage: React.FC = () => {
             videoRef.current?.addEventListener('play', updateButtonVisibility);
 
             playerRef.current?.destroy();
-            saveProgressImmediately();
+            saveProgressImmediately().then();
         };
     }, [title, playerStore, saveProgressImmediately]);
 
     return (
-        <div style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}>
-            <div style={{ opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease' }} className='film-player-title'>{title}</div>
-            <button style={{ opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease' }} className="close-button" onClick={() => history.back()}>&times;</button>
+        <div style={{height: '100vh', margin: 0, padding: 0, backgroundColor: 'black'}}>
+            <div style={{opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease'}} className='film-player-title'>{title}</div>
+            <button style={{opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease'}} className="close-button" onClick={() => history.back()}>&times;</button>
 
             <video
-                autoPlay
                 playsInline
                 ref={videoRef}
                 crossOrigin="anonymous"
                 webkit-playsinline="true"
                 className="plyr-react plyr"
-                style={{ height: '100vh', margin: 0, padding: 0, backgroundColor: 'black' }}
+                style={{height: '100vh', margin: 0, padding: 0, backgroundColor: 'black'}}
             >
                 <source
                     type="video/mp4"

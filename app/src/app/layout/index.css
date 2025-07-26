@@ -401,7 +401,7 @@ html {
 .film-card {
     border: 0 !important;
     width: 12vw !important;
-    height: 34vh !important;
+    height: 36vh !important;
     margin: 0 30px !important;
     flex: 0 0 auto !important;
     position: relative !important;
@@ -628,6 +628,29 @@ html {
     .carousel-arrow-right {
         width: 3rem !important;
         height: 3rem !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .film-card {
+        width: 18vw !important;
+        height: 33vh !important;
+        margin: 3vw !important;
+    }
+
+    .film-carousel {
+        height: auto !important;
+    }
+
+    .film-category,
+    .film-category:first-child {
+        margin-left: 2rem !important;
+    }
+
+    .carousel-arrow-left,
+    .carousel-arrow-right {
+        width: 4rem !important;
+        height: 4rem !important;
     }
 }
 
