@@ -38,6 +38,7 @@ const CreateFilmPage: React.FC = () => {
     const handleSubmit = (request: FilmRequest, resetForm: () => void) => {
         onSubmit(request, language).finally(() => {
             resetForm();
+            setCurrentStep(0);
             setSelectedFilm(null);
             setActiveItem('manageFilms');
         });
@@ -65,7 +66,7 @@ const CreateFilmPage: React.FC = () => {
                 >
                     {({values, handleChange, handleSubmit, setFieldValue, isValid}) => {
                         return (
-                            <Form className="ui form error" onSubmit={handleSubmit} autoComplete="off">
+                            <Form className="ui form error" autoComplete="off">
                                 <div className={`steps-container ${direction}`}
                                      style={{transform: `translateX(${-currentStep * 100}%)`}}>
                                     <div className="step">
@@ -148,7 +149,7 @@ const CreateFilmPage: React.FC = () => {
                                     setCurrentStep={(step) =>
                                         step > currentStep ? handleNext() : handleBack()
                                     }
-                                    onSubmit={handleSubmit}
+                                    onSubmit={() => handleSubmit()}
                                 />
                             </Form>
                         );
@@ -158,5 +159,4 @@ const CreateFilmPage: React.FC = () => {
         </Segment>
     );
 };
-
 export default observer(CreateFilmPage);

@@ -41,8 +41,8 @@ const ActionButtonsSection: React.FC<ActionButtonsProps> = ({isValid, language, 
                     type="submit"
                     color="purple"
                     loading={saving}
-                    disabled={saving || !isValid}
                     onClick={onSubmit}
+                    disabled={saving || !isValid}
                 >
                     {findTranslation('saveFilm', language)}
                 </Button>

@@ -5,6 +5,8 @@ import {DataListResponse} from "../../model/DataListResponse";
 import {Film, FilmCategoryGroup} from "../../model/Film";
 import service from "../../service/service";
 import {IBaseStore} from "../IBaseStore";
+import {findTranslation} from "../../common/language/translations.ts";
+import {store} from "../store.tsx";
 
 export default class FilmStore implements IBaseStore<Film> {
     searchTerm: any;
@@ -44,6 +46,9 @@ export default class FilmStore implements IBaseStore<Film> {
 
             const groupedFilmsResult = await Promise.all(categoryPromises);
             const newGroupedFilms = groupedFilmsResult.filter((group) => group !== null) as FilmCategoryGroup[];
+            newGroupedFilms.sort((a, b) => findTranslation(a.category, store.commonStore.language)
+                .localeCompare(findTranslation(b.category, store.commonStore.language)));
+
             runInAction(() => {
                 this.groupedFilms = page === 1 ? newGroupedFilms : [...(this.groupedFilms || []), ...newGroupedFilms];
             });

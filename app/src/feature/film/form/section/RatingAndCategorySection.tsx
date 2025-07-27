@@ -69,8 +69,8 @@ const RatingAndCategorySection: React.FC<Props> = ({ setFieldValue, values, ageO
                                 selection
                                 disabled={saving}
                                 options={ageOptions}
-                                value={values.age || ''}
                                 className='create-input'
+                                value={values.age ?? ''}
                                 onChange={(_, { value }) => setFieldValue('age', value)}
                                 placeholder={findTranslation("ratingPlaceholder", language)}
                             />

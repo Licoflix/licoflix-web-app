@@ -98,6 +98,7 @@ export default class FilmFormStore {
         { key: 'noir', text: 'Noir', value: 'Noir' },
         { key: 'experimental', text: 'Experimental', value: 'Experimental' },
         { key: 'cult', text: 'Cult', value: 'Cult' },
+        { key: 'japaneseAnimation', text: 'japaneseAnimation', value: 'JapaneseAnimation' },
     ];
 
     getLanguageOptions = (): { key: string, text: string, value: string }[] => {
@@ -281,8 +282,8 @@ export default class FilmFormStore {
         formData.append('directors', request.directors);
         formData.append('producers', request.producers);
         formData.append('description', request.description);
-        formData.append('age', request.age ? request.age.toString() : '');
-        formData.append('year', request.year ? request.year.toString() : '');
+        formData.append('age', request.age ? request.age.toString() : '0');
+        formData.append('year', request.year ? request.year.toString() : '0');
         formData.append('imdb', request.imdb ? request.imdb.toString() : '0');
         formData.append('oscars', request.oscars ? request.oscars.toString() : '0');
         formData.append('baftaAwards', request.baftaAwards ? request.baftaAwards.toString() : '0');

@@ -61,6 +61,7 @@ const translations: TranslationSections = {
             documentary: 'Documentário',
             scienceFiction: 'Ficção Científica',
             foundFootage: 'Filmagem Encontrada',
+            japaneseAnimation: 'Animação Japonesa',
         },
         en: {
             war: 'War',
@@ -85,6 +86,7 @@ const translations: TranslationSections = {
             scienceFiction: 'Sci-Fi',
             documentary: 'Documentary',
             foundFootage: 'Found Footage',
+            japaneseAnimation: 'Japanese Animation',
         }
     },
     audit: {
