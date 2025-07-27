@@ -42,6 +42,47 @@ const FilmPlayerPage: React.FC = () => {
             controls: ['play-large', 'play', 'current-time', 'progress', 'mute', 'volume', 'settings', 'pip', 'airplay', 'fullscreen'],
         });
 
+        const player = playerRef.current;
+
+        // Aguarda a inicialização completa do player
+        player.on('ready', () => {
+            const plyrContainer = player.elements.container;
+
+            if (plyrContainer) {
+                // Cria elementos para fullscreen usando as mesmas classes do CSS
+                const titleEl = document.createElement('div');
+                titleEl.textContent = title;
+                titleEl.className = 'film-player-title';
+                titleEl.style.opacity = showHiddenItems ? '1' : '0';
+                titleEl.style.transition = 'opacity 0.3s ease';
+
+                const closeBtn = document.createElement('div');
+                closeBtn.innerHTML = '&times;';
+                closeBtn.className = 'close-button';
+                closeBtn.style.opacity = showHiddenItems ? '1' : '0';
+                closeBtn.style.transition = 'opacity 0.3s ease';
+                closeBtn.onclick = () => history.back();
+
+                // Adiciona ao container do Plyr
+                plyrContainer.appendChild(titleEl);
+                plyrContainer.appendChild(closeBtn);
+
+                // Função para atualizar visibilidade
+                const updateVisibility = () => {
+                    const isPaused = player.paused;
+                    const opacity = isPaused ? '1' : '0';
+                    titleEl.style.opacity = opacity;
+                    closeBtn.style.opacity = opacity;
+                    setShowHiddenItems(isPaused);
+                };
+
+                // Event listeners do player
+                player.on('pause', updateVisibility);
+                player.on('play', updateVisibility);
+                player.on('seeked', saveProgressThrottled);
+            }
+        });
+
         // Controle de visibilidade do botão
         const updateButtonVisibility = () => {
             setShowHiddenItems(playerRef.current?.paused || false);
@@ -77,7 +118,7 @@ const FilmPlayerPage: React.FC = () => {
             window.removeEventListener('keyup', handleKeyUp);
             videoRef.current?.removeEventListener('pause', handlePause);
             videoRef.current?.removeEventListener('seeked', handleSeeked);
-            videoRef.current?.addEventListener('play', updateButtonVisibility);
+            videoRef.current?.removeEventListener('play', updateButtonVisibility);
 
             playerRef.current?.destroy();
             saveProgressImmediately().then();
@@ -86,9 +127,6 @@ const FilmPlayerPage: React.FC = () => {
 
     return (
         <div style={{height: '100vh', margin: 0, padding: 0, backgroundColor: 'black'}}>
-            <div style={{opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease'}} className='film-player-title'>{title}</div>
-            <button style={{opacity: showHiddenItems ? 1 : 0, transition: 'opacity 0.3s ease'}} className="close-button" onClick={() => history.back()}>&times;</button>
-
             <video
                 playsInline
                 ref={videoRef}

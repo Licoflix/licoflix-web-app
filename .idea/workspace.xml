@@ -7,6 +7,7 @@
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/app/layout/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/player/FilmPlayerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/player/FilmPlayerPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +82,7 @@
       <workItem from="1753488815118" duration="2000" />
       <workItem from="1753489064014" duration="7158000" />
       <workItem from="1753540165713" duration="3054000" />
-      <workItem from="1753629182713" duration="1414000" />
+      <workItem from="1753629182713" duration="4236000" />
     </task>
     <servers />
   </component>
