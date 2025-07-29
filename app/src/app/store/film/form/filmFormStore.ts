@@ -33,11 +33,12 @@ export default class FilmFormStore {
         producers: '',
         categories: [],
         baftaAwards: 0,
-        goldenGlobes: 0,
         subtitle: null,
+        goldenGlobes: 0,
         description: '',
         subtitleEn: null,
         background: null,
+        originalTitle: '',
     };
 
 
@@ -62,6 +63,7 @@ export default class FilmFormStore {
         description: '',
         subtitleEn: null,
         background: null,
+        originalTitle: '',
     };
 
     ageOptions = [
@@ -165,6 +167,7 @@ export default class FilmFormStore {
             goldenGlobes: entity.goldenGlobes,
             description: entity.description,
             categories: entity.categories || [],
+            originalTitle: entity.originalTitle,
         });
         this.setActiveItem("createFilms");
     };
@@ -282,6 +285,7 @@ export default class FilmFormStore {
         formData.append('directors', request.directors);
         formData.append('producers', request.producers);
         formData.append('description', request.description);
+        formData.append('originalTitle', request.originalTitle);
         formData.append('age', request.age ? request.age.toString() : '0');
         formData.append('year', request.year ? request.year.toString() : '0');
         formData.append('imdb', request.imdb ? request.imdb.toString() : '0');

@@ -895,10 +895,29 @@ html {
 }
 
 .ui.header.film-component-header {
+    margin: 0 !important;
     border: none !important;
     color: white !important;
     font-size: 4rem !important;
-    margin-bottom: 2px !important;
+    margin-right: 1rem !important;
+    display: inline-block !important;
+}
+
+.ui.header.film-component-original-title {
+    margin: 0 !important;
+    border: none !important;
+    font-size: 1.5rem !important;
+    font-weight: normal !important;
+    display: inline-block !important;
+    vertical-align: bottom !important;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.film-titles-container {
+    margin: 0 !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: baseline !important;
 }
 
 .ui.header.film-component-header-info {
@@ -1099,8 +1118,8 @@ img {
 }
 
 .undo-icon {
-    margin: 0px !important;
-    padding: 0px !important;
+    margin: 0 !important;
+    padding: 0ó !important;
     opacity: unset !important;
 }
 

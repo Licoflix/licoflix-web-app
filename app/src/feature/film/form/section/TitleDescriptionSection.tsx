@@ -23,6 +23,15 @@ const TitleDescriptionSection: React.FC<Props> = ({ values, language, handleChan
                 label={findTranslation("title", language)}
                 placeholder={findTranslation("titlePlaceholder", language)}
             />
+            <Form.Input
+                disabled={saving}
+                name="originalTitle"
+                onChange={handleChange}
+                className='create-input'
+                value={values.originalTitle || ''}
+                label={findTranslation("originalTitle", language)}
+                placeholder={findTranslation("originalTitlePlaceholder", language)}
+            />
             <Form.TextArea
                 disabled={saving}
                 name="description"

@@ -19,6 +19,7 @@ export interface Film extends BaseEntity {
     baftaAwards: number;
     goldenGlobes: number;
     categories: string[];
+    originalTitle: string;
 }
 
 export interface FilmCategoryGroup {
@@ -41,6 +42,7 @@ export interface FilmRequest {
     description: string;
     categories: string[];
     subtitle: File | null;
+    originalTitle: string;
     subtitleEn: File | null;
     baftaAwards: number | 0;
     goldenGlobes: number | 0;
