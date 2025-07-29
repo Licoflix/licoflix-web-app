@@ -21,6 +21,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
     const [showRightArrow, setShowRightArrow] = useState(true);
 
     const handleFilmClick = (film: Film) => {
+
         navigate(`/film/${film.id}`);
     };
 

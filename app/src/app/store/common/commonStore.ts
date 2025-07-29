@@ -5,6 +5,7 @@ import {store} from "../store";
 
 export default class CommonStore {
     loading = false;
+    activeItem: string | null = null;
     language: 'ptbr' | 'en' = 'ptbr';
     error: ErrorResponse | null = null;
     token: string | null = localStorage.getItem('jwt');
@@ -61,20 +62,13 @@ export default class CommonStore {
     }
 
     setLoading = async (loading: boolean) => {
-        if (loading == false)
+        if (!loading)
             await new Promise(resolve => setTimeout(resolve, 100));
         this.loading = loading;
     }
 
-    scrollToSection = (sectionId: string) => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-            section.scrollIntoView({behavior: 'smooth'});
-        }
-    };
-
     generateBreadcrumb(pathnames: string[]) {
-        const breadcrumb = pathnames.map((name, index) => {
+        return pathnames.map((name, index) => {
             const path = `/${pathnames.slice(0, index + 1).join('/')}`;
             name = name.charAt(0).toUpperCase() + name.slice(1);
             return {
@@ -85,7 +79,9 @@ export default class CommonStore {
                 to: path
             };
         });
-
-        return breadcrumb;
     }
+
+    setActiveItem = (item: string | null) => {
+        this.activeItem = item;
+    };
 }
