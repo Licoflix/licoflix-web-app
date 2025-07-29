@@ -251,12 +251,192 @@ html {
 # Loading Component
 --------------------------------------------------------------*/
 
-.loading-component {
-    color: white !important;
-    margin: 0 auto !important;
-    padding: 0 auto !important;
-    font-family: "Roboto", sans-serif !important;
-    background: transparent !important;
+.modern-loading-overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    z-index: 9999;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s ease;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.95) 0%, rgba(22, 0, 37, 0.95) 55%, rgba(42, 0, 71, 0.95) 100%);
+}
+
+.modern-loading-container {
+    gap: 2.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.brand-loading {
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.brand-text {
+    width: 8ch;
+    height: 4vh;
+    color: #c4b5fd;
+    font-size: 4rem;
+    overflow: hidden;
+    font-weight: bold;
+    padding-top: 3rem;
+    text-align: center;
+    white-space: nowrap;
+    padding-bottom: 3rem;
+    text-shadow: 0 0 20px rgba(76, 29, 149, 0.8);
+    animation: backspaceEffect 3s ease-in-out forwards;
+}
+
+@keyframes backspaceEffect {
+    0% {
+        width: 8ch;
+    }
+    15% {
+        width: 8ch;
+    }
+    25% {
+        width: 7ch;
+    }
+    30% {
+        width: 6ch;
+    }
+    35% {
+        width: 5ch;
+    }
+    40% {
+        width: 4ch;
+    }
+    45% {
+        width: 3ch;
+    }
+    50% {
+        width: 2ch;
+    }
+    55% {
+        width: 1ch;
+    }
+    60% {
+        width: 0;
+    }
+    85% {
+        width: 0;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+.skull-icon {
+    height: 4vh;
+    font-size: 4rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    animation: skullPulseIntense 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 15px rgba(76, 29, 149, 0.6));
+}
+
+.loading-text {
+    color: #c4b5fd;
+    font-size: 1rem;
+    font-weight: 300;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 1px;
+    animation: fadeInOut 2s ease-in-out infinite;
+    text-shadow: 0 0 10px rgba(109, 40, 217, 0.4);
+}
+
+@keyframes skullPulseIntense {
+    0%, 15% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(76, 29, 149, 0.6));
+    }
+    60%, 85% {
+        transform: scale(1.2);
+        filter: drop-shadow(0 0 30px rgba(76, 29, 149, 1));
+    }
+    100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 15px rgba(76, 29, 149, 0.6));
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInOut {
+    0%, 100% {
+        opacity: 0.7;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+/* Tablets */
+@media (max-width: 1024px) {
+    .brand-text {
+        font-size: 2.5rem;
+    }
+
+    .skull-icon {
+        font-size: 2.5rem;
+    }
+
+    .modern-loading-container {
+        gap: 2rem;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 600px) {
+    .brand-text {
+        font-size: 2rem;
+    }
+
+    .skull-icon {
+        font-size: 2rem;
+    }
+
+    .loading-text {
+        font-size: 0.9rem;
+    }
+
+    .modern-loading-container {
+        gap: 1.5rem;
+    }
+
+    .brand-loading {
+        gap: 0.8rem;
+    }
+}
+
+/* Telas muito pequenas */
+@media (max-width: 400px) {
+    .brand-text {
+        font-size: 1.8rem;
+    }
+
+    .skull-icon {
+        font-size: 1.8rem;
+    }
+
+    .loading-text {
+        font-size: 0.8rem;
+    }
 }
 
 /*--------------------------------------------------------------
@@ -1350,8 +1530,13 @@ img {
     animation: dots-bounce 1.4s infinite ease-in-out both;
 }
 
-.dots-loader span:nth-child(1) { animation-delay: -0.32s; }
-.dots-loader span:nth-child(2) { animation-delay: -0.16s; }
+.dots-loader span:nth-child(1) {
+    animation-delay: -0.32s;
+}
+
+.dots-loader span:nth-child(2) {
+    animation-delay: -0.16s;
+}
 
 @keyframes dots-bounce {
     0%, 80%, 100% {

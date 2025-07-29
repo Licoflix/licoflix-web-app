@@ -1,14 +1,18 @@
-import { observer } from 'mobx-react-lite';
-import { Dimmer, Loader } from 'semantic-ui-react';
+import {observer} from 'mobx-react-lite';
 
 interface Props {
     content?: string;
 }
 
-export default observer(function LoadingComponent({ content }: Props) {
+export default observer(function LoadingComponent({content}: Props) {
     return (
-        <Dimmer active={true} className="loading-component">
-            <Loader size='huge' indeterminate content={content} />
-        </Dimmer>
+        <div className="modern-loading-overlay">
+            <div className="modern-loading-container">
+                <div className="brand-loading">
+                    <span className="brand-text">{content}</span>
+                    <span className="skull-icon">☠️</span>
+                </div>
+            </div>
+        </div>
     )
 })
