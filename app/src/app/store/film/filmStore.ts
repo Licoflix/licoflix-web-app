@@ -11,10 +11,10 @@ import {store} from "../store.tsx";
 export default class FilmStore implements IBaseStore<Film> {
     searchTerm: any;
     film: Film | any;
+    newFilms: Film[] = [];
     userFilmList: Film[] = [];
     categories: Category[] = [];
     continueWatchingList: Film[] = [];
-    autoCarrousselfilms: Film[] = [];
     groupedFilms: FilmCategoryGroup[] | null = null;
     userListChanging: { [filmId: number]: boolean } = {};
     entityList: DataListResponse<Film> = {data: [], totalElements: 0, totalPages: 0,};
@@ -171,11 +171,11 @@ export default class FilmStore implements IBaseStore<Film> {
         })
     }
 
-    listAutoCarrousselFilms = async (page: any, pageSize: any, searchTable?: boolean) => {
-        if (this.autoCarrousselfilms.length === 0 || searchTable) {
+    listNewFilms = async (page: any, pageSize: any, searchTable?: boolean) => {
+        if (this.newFilms.length === 0 || searchTable) {
             const response = await service.film.list(page, pageSize);
             runInAction(() => {
-                this.autoCarrousselfilms = response.data;
+                this.newFilms = response.data;
             });
         }
 
