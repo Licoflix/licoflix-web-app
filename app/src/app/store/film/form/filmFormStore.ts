@@ -221,6 +221,7 @@ export default class FilmFormStore {
             producers: Yup.string().required('Producers are required'),
             description: Yup.string().required('Description is required'),
             background: Yup.mixed().required('Background image is required'),
+            originalTitle: Yup.string().required('Original title is required'),
             categories: Yup.array().of(Yup.string()).min(1, 'At least one category is required'),
         });
     }
@@ -269,7 +270,7 @@ export default class FilmFormStore {
             await service.film.create(formData);
         } finally {
             await store.filmStore.list(1, 10, undefined, true);
-            await store.filmStore.listNewFilms(1, 5, true);
+            await store.filmStore.listNewFilms(1, 10, true);
             toast.success(`${request.title} ${findTranslation("operationSuccess", language)}`);
             this.saving = false;
         }

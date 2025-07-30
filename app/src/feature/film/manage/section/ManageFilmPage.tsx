@@ -18,7 +18,6 @@ const ManageFilmPage: React.FC = () => {
         findTranslation('GoldenGlobes', language),
         findTranslation('imdb', language),
         findTranslation('Year', language),
-        findTranslation('Directors', language),
     ];
 
 
@@ -38,8 +37,6 @@ const ManageFilmPage: React.FC = () => {
                 return entity.imdb;
             case columns[6]:
                 return entity.year;
-            case columns[7]:
-                return entity.directors;
             default:
                 return null;
         }

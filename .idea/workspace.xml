@@ -6,9 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/store/film/form/filmFormStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/film/form/filmFormStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/manage/section/ManageFilmPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/manage/section/ManageFilmPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +83,8 @@
       <workItem from="1753489064014" duration="7158000" />
       <workItem from="1753540165713" duration="3054000" />
       <workItem from="1753629182713" duration="7150000" />
-      <workItem from="1753795271451" duration="855000" />
+      <workItem from="1753795271451" duration="10249000" />
+      <workItem from="1753831445821" duration="1444000" />
     </task>
     <servers />
   </component>
