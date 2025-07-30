@@ -813,8 +813,8 @@ html {
 
 @media (max-width: 1024px) {
     .film-card {
-        width: 18vw !important;
-        height: 33vh !important;
+        width: 31vw !important;
+        height: 28vh !important;
         margin: 3vw !important;
     }
 

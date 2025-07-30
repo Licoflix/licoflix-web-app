@@ -14,8 +14,8 @@ const authModule = '/auth';
 const userModule = '/auth/user';
 const userFilmListModule = '/film/user/list';
 
-const BASE_URL_FILM = 'http://localhost:8080';
-const BASE_URL_AUTH_USER = 'http://localhost:8081';
+const BASE_URL_FILM = import.meta.env.VITE_BASE_URL_FILM;
+const BASE_URL_AUTH_USER = import.meta.env.VITE_BASE_URL_AUTH_USER;
 
 const response = <T>(response: AxiosResponse<T>) => response.data;
 
