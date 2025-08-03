@@ -26,6 +26,7 @@ const NavBar = () => {
 
     const menuItems = [
         {key: 'films', label: findTranslation('films', language)},
+        {key: 'sagas', label: findTranslation('Sagas', language)},
         {key: 'search', label: findTranslation('search', language)},
     ];
 
@@ -64,7 +65,7 @@ const NavBar = () => {
                                 active={activeItem === key}
                                 as={NavLink} to={`/${key}`}
                                 onClick={() => {
-                                    handleItemClick(key);
+                                    handleItemClick(key).then();
                                 }}
                             />
                         ))}
@@ -108,7 +109,8 @@ const NavBar = () => {
                                                 <div className='popup-item'>{findTranslation('Language', language)}</div>
                                             </Menu.Item>
                                             <Menu.Item className='navbar' onClick={() => {
-                                                userStore.logout(), handlePopupItemClick()
+                                                userStore.logout();
+                                                handlePopupItemClick()
                                             }}><Icon name='sign-out'/>
                                                 <div className='popup-item'>{findTranslation('signout', language)}</div>
                                             </Menu.Item>

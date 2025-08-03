@@ -62,6 +62,7 @@ const film = {
     create: (formData: FormData) => requests.post<DataResponse<Film>>(`${filmModule}`, formData, BASE_URL_FILM),
     listGrouped: (page: number, pageSize: number, category?: string) => requests.get<DataListResponse<FilmCategoryGroup>>(`${filmModule}/grouped?page=${page}&pageSize=${pageSize}&category=${category || ''}`, BASE_URL_FILM),
     list: (page?: number, pageSize?: number, search?: string, orderBy?: string, direction?: string) => requests.get<DataListResponse<Film>>(`${filmModule}?page=${page ?? 1}&pageSize=${pageSize ?? 2147483647}&search=${search ?? ''}&orderBy=${orderBy ?? ''}&direction=${direction ?? ''}`, BASE_URL_FILM),
+    listGroupedSagaFilms: ()  => requests.get<DataListResponse<FilmCategoryGroup>>(`${filmModule}/saga`, BASE_URL_FILM),
 };
 
 const category = {

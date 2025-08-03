@@ -16,6 +16,7 @@ export default class FilmStore implements IBaseStore<Film> {
     categories: Category[] = [];
     continueWatchingList: Film[] = [];
     groupedFilms: FilmCategoryGroup[] | null = null;
+    groupedSagaFilms: FilmCategoryGroup[] | null = null;
     userListChanging: { [filmId: number]: boolean } = {};
     entityList: DataListResponse<Film> = {data: [], totalElements: 0, totalPages: 0,};
     filteredFilms: DataListResponse<Film> = {data: [], totalElements: 0, totalPages: 0,};
@@ -55,6 +56,30 @@ export default class FilmStore implements IBaseStore<Film> {
         }
     };
 
+    listGroupedSagaFilms = async () => {
+        if (this.groupedSagaFilms === null) {
+            const response = await service.film.listGroupedSagaFilms();
+
+            const grouped = response.data
+                .map((group) => {
+                    const translatedCategory = findTranslation(group.category, store.commonStore.language);
+                    const translatedFilms = group.films.map((film) => ({
+                        ...film,
+                        category: translatedCategory,
+                    }));
+                    return {
+                        category: translatedCategory,
+                        films: translatedFilms,
+                    };
+                })
+                .sort((a, b) => a.category.localeCompare(b.category));
+
+            runInAction(() => {
+                this.groupedSagaFilms = grouped;
+            });
+        }
+    };
+
     loadMoreFilmsByCategory = async (category: string) => {
         if (!this.groupedFilms) return;
 
@@ -64,22 +89,25 @@ export default class FilmStore implements IBaseStore<Film> {
         const currentPage = Math.ceil(categoryGroup.films.length / 10);
         const nextPage = currentPage + 1;
 
-        if (nextPage > currentPage) {
-            const response = await service.film.listGrouped(nextPage, 10, category);
-            if (response.data && response.totalElements > 0) {
-                runInAction(() => {
-                    const newCategoryGroup = response.data.find(group => group.category === category);
+        const response = await service.film.listGrouped(nextPage, 10, category);
+        if (response.data && response.totalElements > 0) {
+            runInAction(() => {
+                const newCategoryGroup = response.data.find(group => group.category === category);
 
-                    if (newCategoryGroup) {
+                if (newCategoryGroup && newCategoryGroup.films.length > 0) {
+                    const existingFilmIds = new Set(categoryGroup.films.map(film => film.id));
+                    const newFilms = newCategoryGroup.films.filter(film => !existingFilmIds.has(film.id));
+
+                    if (newFilms.length > 0) {
                         this.groupedFilms = this.groupedFilms?.map(group => {
                             if (group.category === category) {
-                                return {...group, films: [...group.films, ...newCategoryGroup.films]};
+                                return {...group, films: [...group.films, ...newFilms]};
                             }
                             return group;
                         }) || [];
                     }
-                });
-            }
+                }
+            });
         }
     };
 
@@ -173,7 +201,7 @@ export default class FilmStore implements IBaseStore<Film> {
 
     listNewFilms = async (page: any, pageSize: any, searchTable?: boolean) => {
         if (this.newFilms.length === 0 || searchTable) {
-            const response = await service.film.list(page, pageSize);
+            const response = await service.film.list(page, pageSize, '', 'id', 'DESC',);
             runInAction(() => {
                 this.newFilms = response.data;
             });

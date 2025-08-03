@@ -21,6 +21,7 @@ export default class FilmFormStore {
         imdb: 0,
         id: null,
         cast: '',
+        saga: '',
         age: null,
         oscars: 0,
         title: '',
@@ -45,6 +46,7 @@ export default class FilmFormStore {
     formValues: FilmRequest = {
         imdb: 0,
         id: null,
+        saga: '',
         cast: '',
         age: null,
         title: '',
@@ -152,6 +154,7 @@ export default class FilmFormStore {
             age: entity.age,
             film: videoBlob,
             image: imageBlob,
+            saga: entity.saga,
             year: entity.year,
             cast: entity.cast,
             imdb: entity.imdb,
@@ -279,6 +282,7 @@ export default class FilmFormStore {
     private createFormData(request: FilmRequest): FormData {
         const formData = new FormData();
 
+        formData.append('saga', request.saga);
         formData.append('cast', request.cast);
         formData.append('title', request.title);
         formData.append('duration', request.duration);
@@ -308,7 +312,7 @@ export default class FilmFormStore {
     }
 
     private setLoading = (state: boolean) => {
-        store.commonStore.setLoading(state);
+        store.commonStore.setLoading(state).then();
     };
 
 }

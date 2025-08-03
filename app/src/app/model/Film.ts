@@ -5,6 +5,7 @@ export interface Film extends BaseEntity {
     age: number;
     year: number;
     imdb: string;
+    saga: string;
     path: string;
     cast: string;
     title: string;
@@ -28,6 +29,7 @@ export interface FilmCategoryGroup {
 }
 
 export interface FilmRequest {
+    saga: string;
     cast: string;
     title: string;
     language: string;

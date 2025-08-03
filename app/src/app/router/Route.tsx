@@ -11,11 +11,13 @@ import RegisterForm from "../../feature/user/RegisterForm";
 import LoginForm from "../../feature/user/LoginForm";
 import ProfilePage from "../../feature/configuration/profile/ProfilePage";
 import SubtitleStylePage from "../../feature/configuration/subtitle/SubtitleStylePage";
+import SagaPage from "../../feature/film/saga/SagaPage.tsx";
 
 const sideBarRoutes: RouteObject[] = [
     { path: '/', element: <HomePage /> },
     { path: '/my-area', element: <></> },
     { path: '/films', element: <HomePage /> },
+    { path: '/sagas', element: <SagaPage /> },
     { path: '/manage', element: <ManagePage /> },
     { path: '/search', element: <SearchPage /> },
     { path: '/profile', element: <ProfilePage /> },

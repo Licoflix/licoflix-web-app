@@ -220,6 +220,7 @@ const translations: TranslationSections = {
             confirmAction: 'Confirmar Ação',
             manageFilms: 'Gerenciar Filmes',
             yearPlaceholder: 'Digite o ano',
+            sagaPlaceholder: 'Digite a saga',
             originalTitle: 'Título Original',
             manageUsers: 'Gerenciar Usuários',
             rating: 'Classificação Indicativa',
@@ -279,9 +280,10 @@ const translations: TranslationSections = {
             baftaAwards: 'Bafta Awards',
             manageUsers: 'Manage Users',
             oscarsPlaceholder: 'Oscars',
-            goldenGlobes: 'Golden Globes',
             createFilm: 'Create Film 🎬',
+            sagaPlaceholder: 'Enter saga',
             yearPlaceholder: 'Enter year',
+            goldenGlobes: 'Golden Globes',
             confirmAction: 'Confirm Action',
             titlePlaceholder: 'Enter title',
             originalTitle: 'Original Title',
@@ -333,6 +335,20 @@ const translations: TranslationSections = {
             unexpectedError: 'Unexpected Error contact an administrator ',
             deletedUser: 'This user are deleted, contact an administrator',
             asyncSave: 'You will be notified as soon as the process completes',
+        }
+    },
+    sagas: {
+        ptbr: {
+            vhs: 'V.H.S',
+            theBlairWitch: 'A Bruxa de Blair',
+            tarantinoUniverse: 'Universo Tarantino',
+            hitchcockCollection: 'Coleção Hitchcock',
+        },
+        en: {
+            vhs: 'V.H.S',
+            theBlairWitch: 'The Blair Witch',
+            tarantinoUniverse: 'Tarantino Universe',
+            hitchcockCollection: 'Hitchcock Collection',
         }
     },
     button: {
@@ -417,10 +433,10 @@ const translations: TranslationSections = {
 
 const findTranslation = (title: string, language: 'ptbr' | 'en' = 'en') => {
     if (title) {
-        const lowerCaseTitle = title.toLowerCase().replace(" ", "");
+        const lowerCaseTitle = title.toLowerCase().split(" ").join("");
         for (const section in translations) {
             const translationSection = translations[section];
-            const translatedText = Object.keys(translationSection[language]).find(key => key.toLowerCase().replace(" ", "") === lowerCaseTitle);
+            const translatedText = Object.keys(translationSection[language]).find(key => key.toLowerCase().split(" ").join("") === lowerCaseTitle);
 
             if (translatedText)
                 return translationSection[language][translatedText];

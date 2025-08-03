@@ -12,7 +12,7 @@ import NumericFieldsSection from './section/NumericFieldsSection';
 import RatingAndCategorySection from './section/RatingAndCategorySection';
 import SubsUploadSection from './section/SubsUploadSection';
 import TeamFilmSection from './section/TeamFilmSection';
-import TitleDescriptionSection from './section/TitleDescriptionSection';
+import TitleDescriptionAndSagaSection from './section/TitleDescriptionAndSagaSection.tsx';
 
 const CreateFilmPage: React.FC = () => {
     const {
@@ -72,7 +72,7 @@ const CreateFilmPage: React.FC = () => {
                                     <div className="step">
                                         {currentStep === 0 && (
                                             <>
-                                                <TitleDescriptionSection
+                                                <TitleDescriptionAndSagaSection
                                                     saving={saving}
                                                     editFlow={selectedFilm != null}
                                                     values={values}

@@ -32,6 +32,7 @@ export default class CommonStore {
                 store.filmStore.listGroupedFilms(1, true),
                 store.playerStore.loadContinueWatchingList(),
                 store.filmStore.listNewFilms(1, 10),
+                store.filmStore.listGroupedSagaFilms(),
             ]);
         }
     };
