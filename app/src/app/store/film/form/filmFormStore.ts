@@ -166,6 +166,7 @@ export default class FilmFormStore {
             language: entity.language,
             duration: entity.duration,
             background: backgroundBlob,
+            orderSaga: entity.orderSaga,
             directors: entity.directors,
             producers: entity.producers,
             baftaAwards: entity.baftaAwards,

@@ -55,7 +55,6 @@ const TitleDescriptionAndSagaSection: React.FC<Props> = ({values, language, hand
                     </Grid.Column>
                     <Grid.Column width={4}>
                         <Form.Input
-                            type="number"
                             name="orderSaga"
                             disabled={saving}
                             onChange={handleChange}

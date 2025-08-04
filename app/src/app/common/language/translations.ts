@@ -343,13 +343,13 @@ const translations: TranslationSections = {
     },
     sagas: {
         ptbr: {
-            vhs: 'V.H.S',
+            vhs: 'V/H/S',
             theBlairWitch: 'A Bruxa de Blair',
             tarantinoUniverse: 'Universo Tarantino',
             hitchcockCollection: 'Coleção Hitchcock',
         },
         en: {
-            vhs: 'V.H.S',
+            vhs: 'V/H/S',
             theBlairWitch: 'The Blair Witch',
             tarantinoUniverse: 'Tarantino Universe',
             hitchcockCollection: 'Hitchcock Collection',
