@@ -21,11 +21,11 @@ export default class FilmFormStore {
         imdb: 0,
         id: null,
         cast: '',
-        saga: '',
         age: null,
         oscars: 0,
         title: '',
         year: null,
+        saga: null,
         film: null,
         image: null,
         duration: '',
@@ -36,6 +36,7 @@ export default class FilmFormStore {
         baftaAwards: 0,
         subtitle: null,
         goldenGlobes: 0,
+        orderSaga: null,
         description: '',
         subtitleEn: null,
         background: null,
@@ -46,12 +47,12 @@ export default class FilmFormStore {
     formValues: FilmRequest = {
         imdb: 0,
         id: null,
-        saga: '',
         cast: '',
         age: null,
         title: '',
         oscars: 0,
         year: null,
+        saga: null,
         film: null,
         image: null,
         language: '',
@@ -60,6 +61,7 @@ export default class FilmFormStore {
         producers: '',
         baftaAwards: 0,
         goldenGlobes: 0,
+        orderSaga: null,
         categories: [],
         subtitle: null,
         description: '',
@@ -282,7 +284,6 @@ export default class FilmFormStore {
     private createFormData(request: FilmRequest): FormData {
         const formData = new FormData();
 
-        formData.append('saga', request.saga);
         formData.append('cast', request.cast);
         formData.append('title', request.title);
         formData.append('duration', request.duration);
@@ -292,9 +293,11 @@ export default class FilmFormStore {
         formData.append('description', request.description);
         formData.append('originalTitle', request.originalTitle);
         formData.append('age', request.age ? request.age.toString() : '0');
+        formData.append('saga', request.saga ? request.saga.toString() : '');
         formData.append('year', request.year ? request.year.toString() : '0');
         formData.append('imdb', request.imdb ? request.imdb.toString() : '0');
         formData.append('oscars', request.oscars ? request.oscars.toString() : '0');
+        formData.append('orderSaga', request.orderSaga ? request.orderSaga.toString() : '');
         formData.append('baftaAwards', request.baftaAwards ? request.baftaAwards.toString() : '0');
         formData.append('goldenGlobes', request.goldenGlobes ? request.goldenGlobes.toString() : '0');
 

@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/layout/component/table/TableComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/component/table/TableComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/store/film/filmStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/film/filmStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/manage/section/ManageFilmPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/manage/section/ManageFilmPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/model/Film.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/model/Film.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/store/film/form/filmFormStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/film/form/filmFormStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/form/section/TitleDescriptionAndSagaSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/form/section/TitleDescriptionAndSagaSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +49,7 @@
     "git-widget-placeholder": "master",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/Administrator/Workspace/Visual Studio Code/licoflix-web-app/app/src/feature/film/saga",
+    "last_opened_file_path": "C:/Users/Administrator/Workspace/Visual Studio Code/licoflix-web-app",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -100,6 +102,7 @@
       <workItem from="1754110144206" duration="611000" />
       <workItem from="1754194229008" duration="650000" />
       <workItem from="1754235538746" duration="7365000" />
+      <workItem from="1754317292147" duration="1979000" />
     </task>
     <servers />
   </component>

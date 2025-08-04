@@ -13,6 +13,7 @@ export interface Film extends BaseEntity {
     oscars: number;
     language: string;
     duration: string;
+    orderSaga: number;
     directors: string;
     producers: string;
     background: string;
@@ -29,7 +30,6 @@ export interface FilmCategoryGroup {
 }
 
 export interface FilmRequest {
-    saga: string;
     cast: string;
     title: string;
     language: string;
@@ -41,12 +41,14 @@ export interface FilmRequest {
     id?: number | null;
     age: number | null;
     year: number | null;
+    saga: string | null;
     description: string;
     categories: string[];
     subtitle: File | null;
     originalTitle: string;
     subtitleEn: File | null;
     baftaAwards: number | 0;
+    orderSaga: number | null;
     goldenGlobes: number | 0;
     film: File | null | undefined;
     image: File | null | undefined;

@@ -1,5 +1,5 @@
 import {observer} from 'mobx-react-lite';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import {Dropdown, Icon, Image, Input, Loader, Segment} from "semantic-ui-react";
 import {findTranslation} from '../../../app/common/language/translations';
@@ -12,7 +12,7 @@ const SearchPage: React.FC = () => {
     const {commonStore: {language}} = useStore();
     const [currentPage, setCurrentPage] = useState(1);
     const [orderBy, setOrderBy] = useState<string>("id");
-    const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("desc");
+    const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("asc");
     const {filmStore: {listFiltredFilms, filteredFilms, searchTerm, setSearchTerm, setFilteredFilms}} = useStore();
 
     const handleFilmClick = (film: Film) => {

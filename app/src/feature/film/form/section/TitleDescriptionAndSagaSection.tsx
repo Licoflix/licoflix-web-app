@@ -1,7 +1,7 @@
-import { observer } from 'mobx-react-lite';
+import {observer} from 'mobx-react-lite';
 import React from 'react';
-import { Form, Grid } from 'semantic-ui-react';
-import { findTranslation } from '../../../../app/common/language/translations';
+import {Form, Grid} from 'semantic-ui-react';
+import {findTranslation} from '../../../../app/common/language/translations';
 
 interface Props {
     values: any;
@@ -10,10 +10,11 @@ interface Props {
     editFlow: boolean;
     handleChange: any;
 }
-const TitleDescriptionAndSagaSection: React.FC<Props> = ({ values, language, handleChange, editFlow, saving }) => {
+
+const TitleDescriptionAndSagaSection: React.FC<Props> = ({values, language, handleChange, editFlow, saving}) => {
     return (
         <>
-            <Grid style={{ marginBottom: '0.5vh' }}>
+            <Grid>
                 <Grid.Row>
                     <Grid.Column width={8}>
                         <Form.Input
@@ -39,15 +40,33 @@ const TitleDescriptionAndSagaSection: React.FC<Props> = ({ values, language, han
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
-            <Form.Input
-                name="saga"
-                disabled={saving}
-                onChange={handleChange}
-                className='create-input'
-                value={values.saga || ''}
-                label={findTranslation("Saga", language)}
-                placeholder={findTranslation("sagaPlaceholder", language)}
-            />
+            <Grid style={{marginBottom: '0.5vh'}}>
+                <Grid.Row>
+                    <Grid.Column width={12}>
+                        <Form.Input
+                            name="saga"
+                            disabled={saving}
+                            onChange={handleChange}
+                            className='create-input'
+                            value={values.saga ?? null}
+                            label={findTranslation("Saga", language)}
+                            placeholder={findTranslation("sagaPlaceholder", language)}
+                        />
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                        <Form.Input
+                            type="number"
+                            name="orderSaga"
+                            disabled={saving}
+                            onChange={handleChange}
+                            className='create-input'
+                            value={values.orderSaga ?? null}
+                            label={findTranslation("orderSaga", language)}
+                            placeholder={findTranslation("orderSagaPlaceholder", language)}
+                        />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
             <Form.TextArea
                 disabled={saving}
                 name="description"
