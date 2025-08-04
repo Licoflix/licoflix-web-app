@@ -111,9 +111,9 @@ export default class FilmStore implements IBaseStore<Film> {
         }
     };
 
-    list = async (page?: any, pageSize?: any, search?: any, searchTable?: boolean | null) => {
+    list = async (page?: any, pageSize?: any, search?: any, searchTable?: boolean | null, orderBy?: any, direction?: any) => {
         if (!this.entityList || searchTable) {
-            const response = await service.film.list(page, pageSize, search);
+            const response = await service.film.list(page, pageSize, search, orderBy, direction);
             runInAction(() => {
                 this.entityList = response;
             });

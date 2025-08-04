@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/feature/film/form/section/TitleDescriptionAndSagaSection.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/model/Film.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/model/Film.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/router/Route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/router/Route.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/service/service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/service/service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/layout/component/table/TableComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/component/table/TableComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/app/store/film/filmStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/film/filmStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/store/film/form/filmFormStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/film/form/filmFormStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/form/CreateFilmPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/form/CreateFilmPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/form/section/TitleDescriptionSection.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/manage/section/ManageFilmPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/manage/section/ManageFilmPage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +99,7 @@
       <workItem from="1753901554301" duration="7049000" />
       <workItem from="1754110144206" duration="611000" />
       <workItem from="1754194229008" duration="650000" />
-      <workItem from="1754235538746" duration="5693000" />
+      <workItem from="1754235538746" duration="7365000" />
     </task>
     <servers />
   </component>
