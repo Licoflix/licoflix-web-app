@@ -115,7 +115,6 @@ export default class FilmStore implements IBaseStore<Film> {
         if (!response?.data || response.totalElements <= 0) return;
 
         runInAction(() => {
-            // Alguns endpoints podem já retornar diretamente os filmes
             const filmsResponse = Array.isArray(response.data)
                 ? response.data.flatMap(item => item.films || [])
                 : [];
