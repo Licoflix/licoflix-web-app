@@ -39,19 +39,41 @@ export default class FilmStore implements IBaseStore<Film> {
             await this.getFilmCategories();
             const categoryPromises = this.categories.map(async (category) => {
                 const response = await service.film.listGrouped(page, 10, category.name);
-                return response && response.data ? {
-                    category: category.name,
-                    films: response.data.map((item) => item.films).flat()
-                } : null;
+                if (!response?.data) return null;
+
+                const seen = new Set<number>();
+                const films = response.data
+                    .map((item) => item.films)
+                    .flat()
+                    .filter((film) => !seen.has(film.id) && seen.add(film.id));
+
+                return { category: category.name, films };
             });
 
             const groupedFilmsResult = await Promise.all(categoryPromises);
-            const newGroupedFilms = groupedFilmsResult.filter((group) => group !== null) as FilmCategoryGroup[];
-            newGroupedFilms.sort((a, b) => findTranslation(a.category, store.commonStore.language)
-                .localeCompare(findTranslation(b.category, store.commonStore.language)));
+            const newGroupedFilms = (groupedFilmsResult.filter(Boolean) as FilmCategoryGroup[])
+                .sort((a, b) =>
+                    findTranslation(a.category, store.commonStore.language)
+                        .localeCompare(findTranslation(b.category, store.commonStore.language))
+                );
 
             runInAction(() => {
-                this.groupedFilms = page === 1 ? newGroupedFilms : [...(this.groupedFilms || []), ...newGroupedFilms];
+                const existing = this.groupedFilms || [];
+                const merged = page === 1 ? [] : [...existing];
+
+                newGroupedFilms.forEach((group) => {
+                    const existingGroup = merged.find((g) => g.category === group.category);
+                    if (existingGroup) {
+                        const seen = new Set(existingGroup.films.map((f) => f.id));
+                        existingGroup.films.push(
+                            ...group.films.filter((f) => !seen.has(f.id) && seen.add(f.id))
+                        );
+                    } else {
+                        merged.push(group);
+                    }
+                });
+
+                this.groupedFilms = merged;
             });
         }
     };
@@ -90,25 +112,26 @@ export default class FilmStore implements IBaseStore<Film> {
         const nextPage = currentPage + 1;
 
         const response = await service.film.listGrouped(nextPage, 10, category);
-        if (response.data && response.totalElements > 0) {
-            runInAction(() => {
-                const newCategoryGroup = response.data.find(group => group.category === category);
+        if (!response?.data || response.totalElements <= 0) return;
 
-                if (newCategoryGroup && newCategoryGroup.films.length > 0) {
-                    const existingFilmIds = new Set(categoryGroup.films.map(film => film.id));
-                    const newFilms = newCategoryGroup.films.filter(film => !existingFilmIds.has(film.id));
+        runInAction(() => {
+            // Alguns endpoints podem já retornar diretamente os filmes
+            const filmsResponse = Array.isArray(response.data)
+                ? response.data.flatMap(item => item.films || [])
+                : [];
 
-                    if (newFilms.length > 0) {
-                        this.groupedFilms = this.groupedFilms?.map(group => {
-                            if (group.category === category) {
-                                return {...group, films: [...group.films, ...newFilms]};
-                            }
-                            return group;
-                        }) || [];
-                    }
-                }
-            });
-        }
+            // Evitar duplicados
+            const existingIds = new Set(categoryGroup.films.map(f => f.id));
+            const uniqueFilms = filmsResponse.filter(f => !existingIds.has(f.id) && existingIds.add(f.id));
+
+            if (uniqueFilms.length > 0) {
+                this.groupedFilms = this.groupedFilms!.map(group =>
+                    group.category === category
+                        ? { ...group, films: [...group.films, ...uniqueFilms] }
+                        : group
+                );
+            }   
+        });
     };
 
     list = async (page?: any, pageSize?: any, search?: any, searchTable?: boolean | null, orderBy?: any, direction?: any) => {
