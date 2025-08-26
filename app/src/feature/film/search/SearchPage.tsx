@@ -1,5 +1,5 @@
 import {observer} from 'mobx-react-lite';
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {useNavigate} from 'react-router-dom';
 import {Dropdown, Icon, Image, Input, Loader, Segment} from "semantic-ui-react";
 import {findTranslation} from '../../../app/common/language/translations';
@@ -72,11 +72,6 @@ const SearchPage: React.FC = () => {
         setCurrentPage(1);
         await listFiltredFilms(1, 10, searchTerm, orderBy, newDirection);
     };
-
-    useEffect(() => {
-        setSearchTerm(null);
-        setFilteredFilms(null);
-    }, [setSearchTerm, setFilteredFilms]);
 
     const orderOptions = [
         {key: 'year', text: findTranslation('Year', language), value: 'year'},

@@ -1,17 +1,18 @@
-import { observer } from 'mobx-react-lite';
+import {observer} from 'mobx-react-lite';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Button, Header, Icon, Image, Segment } from 'semantic-ui-react';
-import { findTranslation } from '../../../app/common/language/translations';
-import { Film } from '../../../app/model/Film';
-import { useStore } from '../../../app/store/store';
+import {useNavigate} from 'react-router-dom';
+import {Button, Header, Icon, Image, Segment} from 'semantic-ui-react';
+import {findTranslation} from '../../../app/common/language/translations';
+import {Film} from '../../../app/model/Film';
+import {useStore} from '../../../app/store/store';
 
 interface Props {
     film: Film;
 }
-const FilmDetailsContent: React.FC<Props> = ({ film }) => {
+
+const FilmDetailsContent: React.FC<Props> = ({film}) => {
     const navigate = useNavigate();
-    const { commonStore: { language }, filmStore, playerStore: { isWatching, resetFilmProgress } } = useStore();
+    const {commonStore: {language}, filmStore, playerStore: {isWatching, resetFilmProgress}} = useStore();
 
     const handleWathNowClick = (film: Film) => {
         navigate(`/film/watch/${film.title}`);
@@ -48,9 +49,9 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                 </div>
                                 {(film.oscars > 0 || film.baftaAwards > 0 || film.goldenGlobes > 0) && (() => {
                                     const awards = [
-                                        { label: "OSCARS®", count: film.oscars },
-                                        { label: "BAFTA Awards®", count: film.baftaAwards },
-                                        { label: "Golden Globe®", count: film.goldenGlobes },
+                                        {label: "OSCARS®", count: film.oscars},
+                                        {label: "BAFTA Awards®", count: film.baftaAwards},
+                                        {label: "Golden Globe®", count: film.goldenGlobes},
                                     ];
 
                                     return (
@@ -94,7 +95,7 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                         className="film-component-button"
                                         onClick={() => handleWathNowClick(film)}
                                     >
-                                        <Icon className="plus-icon" name="play" />
+                                        <Icon className="plus-icon" name="play"/>
                                         {!isWatching(film.title)
                                             ? findTranslation('watchNow', language)
                                             : findTranslation('continueWatch', language)
@@ -112,28 +113,28 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                                 handleWathNowClick(film);
                                             }}
                                         >
-                                            <Icon className="undo-icon" name="undo alternate" />
+                                            <Icon className="undo-icon" name="undo alternate"/>
                                         </Button>
                                     }
 
                                     <Button size="big" color="grey" className="film-component-button" loading={filmStore.userListChanging[film.id]}
-                                        onClick={() =>
-                                            filmStore.userFilmList.length > 0 && someIncluded(film)
-                                                ? handleRemoveFilmClick(film)
-                                                : handleAddFilmClick(film)
-                                        }
+                                            onClick={() =>
+                                                filmStore.userFilmList.length > 0 && someIncluded(film)
+                                                    ? handleRemoveFilmClick(film)
+                                                    : handleAddFilmClick(film)
+                                            }
                                     >
-                                        <Icon className={filmStore.userFilmList.length > 0 && someIncluded(film) ? 'remove' : 'add circle'} />
+                                        <Icon className={filmStore.userFilmList.length > 0 && someIncluded(film) ? 'remove' : 'add circle'}/>
                                         {filmStore.userFilmList.length > 0 && someIncluded(film) ? findTranslation('removeList', language) : findTranslation('addList', language)}
                                     </Button>
                                 </div>
                             </Segment>
                             <p className='film-details-title'>{findTranslation("details", language)}</p>
-                            <div className='film-details-divider' />
+                            <div className='film-details-divider'/>
                             <Segment className="film-component-info-container">
                                 <p className='film-details-info-title'>{findTranslation('ratingInfo', language)}</p>
-                                <p className='film-details-info-desc' style={{ display: 'inline-flex', alignItems: 'center' }}>
-                                    <Image className="film-age-desc" src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`} />
+                                <p className='film-details-info-desc' style={{display: 'inline-flex', alignItems: 'center'}}>
+                                    <Image className="film-age-desc" src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`}/>
                                     {film.age === 0 && findTranslation('0', language)}
                                     {film.age === 10 && findTranslation('10', language)}
                                     {film.age === 12 && findTranslation('12', language)}
@@ -149,13 +150,43 @@ const FilmDetailsContent: React.FC<Props> = ({ film }) => {
                                 <p className='film-details-info-desc'>{findTranslation(film.language, language)} - Original</p>
 
                                 <p className='film-details-info-title'>{findTranslation('directors', language)}</p>
-                                <p className='film-details-info-desc'>{film.directors}</p>
+                                <p className='film-details-info-desc'>
+                                    {film.directors.split(',').map((director, index) => (
+                                        <React.Fragment key={index}>
+                                              <span style={{cursor: 'pointer', textDecoration: 'underline'}}
+                                                    onClick={() => filmStore.doSearch(director.trim())}>
+                                                {director.trim()}
+                                              </span>
+                                            {index < film.directors.split(',').length - 1 && ', '}
+                                        </React.Fragment>
+                                    ))}
+                                </p>
 
                                 <p className='film-details-info-title'>{findTranslation('producers', language)}</p>
-                                <p className='film-details-info-desc'>{film.producers}</p>
+                                <p className='film-details-info-desc'>
+                                    {film.producers.split(',').map((producer, index) => (
+                                        <React.Fragment key={index}>
+                                              <span style={{cursor: 'pointer', textDecoration: 'underline'}}
+                                                    onClick={() => filmStore.doSearch(producer.trim())}>
+                                                {producer.trim()}
+                                              </span>
+                                            {index < film.producers.split(',').length - 1 && ', '}
+                                        </React.Fragment>
+                                    ))}
+                                </p>
 
                                 <p className='film-details-info-title'>{findTranslation('cast', language)}</p>
-                                <p className='film-details-info-desc'>{film.cast}</p>
+                                <p className='film-details-info-desc'>
+                                    {film.cast.split(',').map((actor, index) => (
+                                        <React.Fragment key={index}>
+                                              <span style={{cursor: 'pointer', textDecoration: 'underline'}}
+                                                    onClick={() => filmStore.doSearch(actor.trim())}>
+                                                {actor.trim()}
+                                              </span>
+                                            {index < film.cast.split(',').length - 1 && ', '}
+                                        </React.Fragment>
+                                    ))}
+                                </p>
                             </Segment>
                         </Segment>
                     </div>

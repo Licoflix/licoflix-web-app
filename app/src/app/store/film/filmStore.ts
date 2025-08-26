@@ -7,6 +7,7 @@ import service from "../../service/service";
 import {IBaseStore} from "../IBaseStore";
 import {findTranslation} from "../../common/language/translations.ts";
 import {store} from "../store.tsx";
+import {router} from "../../router/Route.tsx";
 
 export default class FilmStore implements IBaseStore<Film> {
     searchTerm: any;
@@ -239,5 +240,10 @@ export default class FilmStore implements IBaseStore<Film> {
             });
 
         }
+    }
+
+    doSearch(director: any) {
+        this.setSearchTerm(director);
+        this.listFiltredFilms(1, 10, director, '', 'DESC').then(() => router.navigate("/search"));
     }
 }
