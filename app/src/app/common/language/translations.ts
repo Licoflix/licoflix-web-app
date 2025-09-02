@@ -344,15 +344,19 @@ const translations: TranslationSections = {
     sagas: {
         ptbr: {
             vhs: 'V/H/S',
+            theThreeMothers: 'As Três Mães',
             theBlairWitch: 'A Bruxa de Blair',
             tarantinoUniverse: 'Universo Tarantino',
             hitchcockCollection: 'Coleção Hitchcock',
+            USALandOfOpportunities: 'USA: Lugar de Oportunidades',
         },
         en: {
             vhs: 'V/H/S',
             theBlairWitch: 'The Blair Witch',
+            theThreeMothers: 'The Three Mothers',
             tarantinoUniverse: 'Tarantino Universe',
             hitchcockCollection: 'Hitchcock Collection',
+            USALandOfOpportunities: 'USA: Land of Opportunities',
         }
     },
     button: {
@@ -437,10 +441,9 @@ const translations: TranslationSections = {
 
 const findTranslation = (title: string, language: 'ptbr' | 'en' = 'en') => {
     if (title) {
-        const lowerCaseTitle = title.toLowerCase().split(" ").join("");
         for (const section in translations) {
             const translationSection = translations[section];
-            const translatedText = Object.keys(translationSection[language]).find(key => key.toLowerCase().split(" ").join("") === lowerCaseTitle);
+            const translatedText = Object.keys(translationSection[language]).find(key => normalize(key) === normalize(title));
 
             if (translatedText)
                 return translationSection[language][translatedText];
@@ -449,5 +452,13 @@ const findTranslation = (title: string, language: 'ptbr' | 'en' = 'en') => {
     return title;
 };
 
-export { findTranslation, translations };
+const normalize = (str: string) => {
+    return str
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-zA-Z0-9]/g, "")
+        .toLowerCase();
+}
+
+export {findTranslation, translations};
 

@@ -6,11 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/FilmAutoCarouselPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/FilmAutoCarouselPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/details/FilmDetailsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/details/FilmDetailsContent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/player/FilmPlayerPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/player/FilmPlayerPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +115,7 @@
       <workItem from="1756394827523" duration="1386000" />
       <workItem from="1756656678288" duration="1947000" />
       <workItem from="1756729926428" duration="38000" />
-      <workItem from="1756817475826" duration="2972000" />
+      <workItem from="1756817475826" duration="4810000" />
     </task>
     <servers />
   </component>
