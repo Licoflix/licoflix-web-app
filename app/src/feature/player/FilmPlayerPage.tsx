@@ -53,7 +53,7 @@ const FilmPlayerPage: React.FC = () => {
             if (plyrContainer) {
                 // Cria elementos para fullscreen usando as mesmas classes do CSS
                 const titleEl = document.createElement('div');
-                titleEl.textContent = title;
+                titleEl.textContent = title.replace(/\(\d{4}\)/g, "").trim();
                 titleEl.className = 'film-player-title';
                 titleEl.style.opacity = showHiddenItems ? '1' : '0';
                 titleEl.style.transition = 'opacity 0.3s ease';

@@ -1,10 +1,10 @@
-import { observer } from 'mobx-react-lite';
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate } from 'react-router-dom';
-import { Header, Icon, Image, Segment } from "semantic-ui-react";
-import { findTranslation } from "../../app/common/language/translations";
-import { Film } from '../../app/model/Film';
-import { useStore } from "../../app/store/store";
+import {observer} from 'mobx-react-lite';
+import React, {useEffect, useRef, useState} from "react";
+import {useNavigate} from 'react-router-dom';
+import {Header, Icon, Image, Segment} from "semantic-ui-react";
+import {findTranslation} from "../../app/common/language/translations";
+import {Film} from '../../app/model/Film';
+import {useStore} from "../../app/store/store";
 
 interface FilmCarouselPageProps {
     films: Film[];
@@ -12,10 +12,10 @@ interface FilmCarouselPageProps {
     continueWatching?: boolean;
 }
 
-const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, continueWatching }) => {
+const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({films, category, continueWatching}) => {
     const navigate = useNavigate();
     const carouselRef = useRef<HTMLDivElement>(null);
-    const { commonStore: { language }, playerStore: { loadProgress, getFilmDuration, isWatching }, filmStore: { loadMoreFilmsByCategory } } = useStore();
+    const {commonStore: {language}, playerStore: {loadProgress, getFilmDuration, isWatching}, filmStore: {loadMoreFilmsByCategory}} = useStore();
 
     const [showLeftArrow, setShowLeftArrow] = useState(false);
     const [showRightArrow, setShowRightArrow] = useState(true);
@@ -36,7 +36,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
 
             if (cardRight > rightEdge - 50) {
                 const scrollDistance = cardRight - rightEdge + 50;
-                carousel.scrollBy({ left: scrollDistance, behavior: 'smooth' });
+                carousel.scrollBy({left: scrollDistance, behavior: 'smooth'});
             }
         }
     };
@@ -75,8 +75,8 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
     return (
         <Segment className="film-carousel-segment">
             {films && films.length > 0 ? (
-                <div className="film-carousel-container" style={{ position: 'relative', overflow: 'hidden' }}>
-                    <Header className="film-category" content={findTranslation(category, language)} />
+                <div className="film-carousel-container" style={{position: 'relative', overflow: 'hidden'}}>
+                    <Header className="film-category" content={findTranslation(category, language)}/>
                     <div
                         ref={carouselRef}
                         className="film-carousel"
@@ -113,9 +113,9 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                             className="film-hover-image"
                                             src={`data:image/jpeg;base64,${film.background}`}
                                         />
-                                        <div className="film-hover-title">{film.title}</div>
+                                        <div className="film-hover-title">{film.title.replace(/\(\d{4}\)/g, "").trim()}</div>
                                         <div className="film-hover-age">
-                                            <Image className="film-age-hover" src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`} />
+                                            <Image className="film-age-hover" src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`}/>
                                             <p className="film-hover-imdb">IMDb {String(film.imdb).includes('.') ? film.imdb : `${film.imdb}.0`}</p>
                                             <p className="film-hover-duration">{film.duration}</p>
                                             <p className="film-hover-year">{film.year}</p>
@@ -128,7 +128,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
 
                                 {isWatching(film.title) && continueWatching && (
                                     <div className="progress-container">
-                                        <div className="progress-bar" style={{ width: `${(loadProgress(film.title) / getFilmDuration(film.title)) * 100}%` }} />
+                                        <div className="progress-bar" style={{width: `${(loadProgress(film.title) / getFilmDuration(film.title)) * 100}%`}}/>
                                     </div>
                                 )}
                             </Segment>
@@ -145,7 +145,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 }
                             }}
                         >
-                            <Icon name="chevron left" size="large" color="brown" />
+                            <Icon name="chevron left" size="large" color="brown"/>
                         </div>
                     )}
                     {showRightArrow && (
@@ -160,7 +160,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 }
                             }}
                         >
-                            <Icon name="chevron right" size="large" color="brown" />
+                            <Icon name="chevron right" size="large" color="brown"/>
                         </div>
                     )}
                 </div>

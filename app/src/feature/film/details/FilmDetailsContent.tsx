@@ -44,7 +44,7 @@ const FilmDetailsContent: React.FC<Props> = ({film}) => {
                         <Segment className="film-component-segment">
                             <Segment className="film-component-description-container">
                                 <div className="film-titles-container">
-                                    <Header className="film-component-header">{film.title}</Header>
+                                    <Header className="film-component-header">{film.title.replace(/\(\d{4}\)/g, "").trim()}</Header>
                                     <Header className="film-component-original-title">({film.originalTitle})</Header>
                                 </div>
                                 {(film.oscars > 0 || film.baftaAwards > 0 || film.goldenGlobes > 0) && (() => {

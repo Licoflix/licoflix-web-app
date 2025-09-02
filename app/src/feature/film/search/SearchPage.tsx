@@ -137,7 +137,7 @@ const SearchPage: React.FC = () => {
                                                     className="film-hover-image"
                                                     src={`data:image/jpeg;base64,${film.background}`}
                                                 />
-                                                <div className="film-hover-title">{film.title}</div>
+                                                <div className="film-hover-title">{film.title.replace(/\(\d{4}\)/g, "").trim()}</div>
                                                 <div className="film-hover-age">
                                                     <Image className='film-age-hover' src={`/image/age/${film.age}.png`} alt={`Age restriction ${film.age}`}/>
                                                     <p className="film-hover-imdb">IMDb {film.imdb}</p>
