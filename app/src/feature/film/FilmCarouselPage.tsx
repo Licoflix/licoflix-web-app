@@ -141,7 +141,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 e.stopPropagation();
                                 e.preventDefault();
                                 if (carouselRef.current) {
-                                    smoothScrollBy(carouselRef.current, -400, 400);
+                                    smoothScrollBy(carouselRef.current, -500, 500);
                                 }
                             }}
                         >
@@ -155,7 +155,7 @@ const FilmCarouselPage: React.FC<FilmCarouselPageProps> = ({ films, category, co
                                 e.stopPropagation();
                                 e.preventDefault();
                                 if (carouselRef.current) {
-                                    smoothScrollBy(carouselRef.current, 400, 400);
+                                    smoothScrollBy(carouselRef.current, 500, 500);
                                     loadMoreFilmsByCategory(category);
                                 }
                             }}
