@@ -104,6 +104,7 @@ export default class FilmFormStore {
         { key: 'noir', text: 'Noir', value: 'Noir' },
         { key: 'experimental', text: 'Experimental', value: 'Experimental' },
         { key: 'cult', text: 'Cult', value: 'Cult' },
+        { key: 'slasher', text: 'Slasher', value: 'Slasher' },
         { key: 'japaneseAnimation', text: 'japaneseAnimation', value: 'JapaneseAnimation' },
     ];
 
