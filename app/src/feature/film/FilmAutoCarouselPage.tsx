@@ -52,9 +52,7 @@ const FilmAutoCarouselPage: React.FC<FilmAutoCarouselPageProps> = ({films}) => {
                         />
                         <div className="overlay-content">
                             <p className='overlay-title'>
-                                {film.title.replace(/\(\d{4}\)/g, "").trim().split('-').map((part, index) => (
-                                    <span key={index}>{part.trim()}<br/></span>
-                                ))}
+                                {film.title.replace(/\(\d{4}\)/g, "")}
                             </p>
                             <p className='overlay-category'>
                                 {film.categories.map((category) => findTranslation(category, language)).join(', ')}
