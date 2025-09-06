@@ -19,11 +19,11 @@ const FilmDetailsContent: React.FC<Props> = ({film}) => {
     };
 
     const handleAddFilmClick = (film: Film) => {
-        filmStore.addFilmInUserList(film.id);
+        filmStore.addFilmInUserList(film.id).then();
     };
 
     const handleRemoveFilmClick = (film: Film) => {
-        filmStore.removeFilmInUserList(film.id);
+        filmStore.removeFilmInUserList(film.id).then();
     };
 
     const someIncluded = (film: Film) => filmStore.userFilmList.some((userFilm) => userFilm.id === film.id);

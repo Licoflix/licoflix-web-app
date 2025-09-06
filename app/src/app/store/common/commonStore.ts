@@ -37,15 +37,6 @@ export default class CommonStore {
         }
     };
 
-    scrollTop = (key: string) => {
-        if (key) {
-            const container = document.querySelector(`#${key}`);
-            if (container) {
-                container.scrollTo({top: 0, behavior: 'smooth'});
-            }
-        }
-    }
-
     changeLanguage = (language: 'ptbr' | 'en') => {
         localStorage.setItem('language', language);
         this.getLanguageFromLocalStorage();

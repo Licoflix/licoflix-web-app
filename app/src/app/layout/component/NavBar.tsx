@@ -8,14 +8,11 @@ import {useStore} from '../../store/store';
 const NavBar = () => {
     const location = useLocation();
     const [popupOpen, setPopupOpen] = useState(false);
-    const {commonStore: {language, scrollTop, setLoading, changeLanguage, activeItem, setActiveItem}, userStore, filmStore: {list, entityList}} = useStore();
+    const {commonStore: {language, setLoading, changeLanguage, activeItem, setActiveItem}, userStore, filmStore: {list, entityList}} = useStore();
 
     const handleItemClick = async (name: string) => {
         await setLoading(true);
-
-        scrollTop(name);
         setActiveItem(name);
-
         await setLoading(false);
     };
 

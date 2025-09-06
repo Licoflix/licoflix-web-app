@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/search/SearchPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/details/FilmDetailsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/details/FilmDetailsContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/home/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/home/HomePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +125,7 @@
       <workItem from="1756925003633" duration="1985000" />
       <workItem from="1756987672620" duration="40000" />
       <workItem from="1757022370177" duration="1921000" />
+      <workItem from="1757169496482" duration="2894000" />
     </task>
     <servers />
   </component>

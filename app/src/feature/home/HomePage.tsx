@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import {Key} from "react";
+import React, {Key} from "react";
 import {Segment} from "semantic-ui-react";
 import {Film} from "../../app/model/Film";
 import {useStore} from "../../app/store/store";
