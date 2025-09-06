@@ -12,7 +12,7 @@ const SearchPage: React.FC = () => {
     const {commonStore: {language}} = useStore();
     const [currentPage, setCurrentPage] = useState(1);
     const [orderBy, setOrderBy] = useState<string>("id");
-    const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("asc");
+    const [orderDirection, setOrderDirection] = useState<"asc" | "desc">("desc");
     const {filmStore: {listFiltredFilms, filteredFilms, searchTerm, setSearchTerm, setFilteredFilms}} = useStore();
 
     const handleFilmClick = (film: Film) => {
@@ -74,6 +74,7 @@ const SearchPage: React.FC = () => {
     };
 
     const orderOptions = [
+        {key: 'createdIn', text: findTranslation('inclusion', language), value: 'createdIn'},
         {key: 'year', text: findTranslation('Year', language), value: 'year'},
         {key: 'imdb', text: findTranslation('IMDb', language), value: 'imdb'}
     ];
@@ -100,6 +101,7 @@ const SearchPage: React.FC = () => {
                         value={orderBy}
                         options={orderOptions}
                         className='order-by-dropdown'
+                        style={{minWidth: '10rem', textAlign: 'center'}}
                         placeholder={findTranslation('OrderBy', language)}
                         onChange={(_e, data) => handleOrderByChange(data.value as string)}
                     />
