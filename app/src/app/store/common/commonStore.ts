@@ -27,12 +27,20 @@ export default class CommonStore {
 
     initApp = async () => {
         if (this.token) {
+            setTimeout(() => {
+                store.filmStore.listGroupedFilms(1, true);
+            }, 0);
+
+            const userFilmListPromise = store.filmStore.listUserFilmList();
+            const continueWatchingPromise = store.playerStore.loadContinueWatchingList();
+            const newFilmsPromise = store.filmStore.listNewFilms(1, 10);
+            const sagaFilmsPromise = store.filmStore.listGroupedSagaFilms();
+
             await Promise.all([
-                store.filmStore.listUserFilmList(),
-                store.filmStore.listGroupedFilms(1, true),
-                store.playerStore.loadContinueWatchingList(),
-                store.filmStore.listNewFilms(1, 10),
-                store.filmStore.listGroupedSagaFilms(),
+                userFilmListPromise,
+                continueWatchingPromise,
+                newFilmsPromise,
+                sagaFilmsPromise,
             ]);
         }
     };

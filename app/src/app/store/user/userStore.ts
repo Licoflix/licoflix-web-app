@@ -102,7 +102,7 @@ export default class UserStore implements IBaseStore<UserResponse> {
                 });
             }
             catch {
-                store.commonStore.setLoading(false);
+                await store.commonStore.setLoading(false);
                 router.navigate("/login");
             }
         }
@@ -112,9 +112,9 @@ export default class UserStore implements IBaseStore<UserResponse> {
         if (store.commonStore.token) {
             await this.get();
         } else if (store.commonStore.token == null) {
-            store.commonStore.setLoading(true);
+            await store.commonStore.setLoading(true);
             router.navigate("/login");
-            store.commonStore.setLoading(false);
+            await store.commonStore.setLoading(false);
         }
     }
 

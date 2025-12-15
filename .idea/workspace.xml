@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="8ab7f0d4-65e5-43a7-ad88-4d13c1980a96" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/.env" beforeDir="false" afterPath="$PROJECT_DIR$/app/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/common/language/translations.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/layout/component/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/router/Route.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/router/Route.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/common/commonStore.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/FilmCarouselPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/feature/film/details/FilmDetailsContent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/film/details/FilmDetailsContent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/app/store/user/userStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/app/store/user/userStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/feature/film/saga/SagaPage.tsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/feature/home/HomePage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/feature/home/HomePage.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -125,7 +128,24 @@
       <workItem from="1756925003633" duration="1985000" />
       <workItem from="1756987672620" duration="40000" />
       <workItem from="1757022370177" duration="1921000" />
-      <workItem from="1757169496482" duration="2894000" />
+      <workItem from="1757169496482" duration="3523000" />
+      <workItem from="1757261060847" duration="1235000" />
+      <workItem from="1757373069645" duration="608000" />
+      <workItem from="1757425227974" duration="45000" />
+      <workItem from="1760887286396" duration="94000" />
+      <workItem from="1760888401230" duration="1286000" />
+      <workItem from="1761650001244" duration="683000" />
+      <workItem from="1762553810374" duration="2510000" />
+      <workItem from="1762622316487" duration="227000" />
+      <workItem from="1762623352168" duration="18000" />
+      <workItem from="1762623807527" duration="932000" />
+      <workItem from="1763177618986" duration="661000" />
+      <workItem from="1763239195208" duration="1317000" />
+      <workItem from="1763319465084" duration="6526000" />
+      <workItem from="1764254968066" duration="205000" />
+      <workItem from="1764266389195" duration="15000" />
+      <workItem from="1764789964358" duration="418000" />
+      <workItem from="1765827695203" duration="2008000" />
     </task>
     <servers />
   </component>

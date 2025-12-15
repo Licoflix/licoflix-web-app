@@ -23,7 +23,6 @@ const NavBar = () => {
 
     const menuItems = [
         {key: 'films', label: findTranslation('films', language)},
-        {key: 'sagas', label: findTranslation('Sagas', language)},
         {key: 'search', label: findTranslation('search', language)},
     ];
 

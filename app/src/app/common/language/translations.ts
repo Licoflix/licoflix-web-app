@@ -346,19 +346,17 @@ const translations: TranslationSections = {
     sagas: {
         ptbr: {
             vhs: 'V/H/S',
-            theThreeMothers: 'As Três Mães',
-            theBlairWitch: 'A Bruxa de Blair',
+            diseasedCinema: 'Cinema Adoecido',
             tarantinoUniverse: 'Universo Tarantino',
             hitchcockCollection: 'Coleção Hitchcock',
-            USALandOfOpportunities: 'USA: Lugar de Oportunidades',
+            larsVonTrierFilmography: 'Filmografia Lars von Trier',
         },
         en: {
             vhs: 'V/H/S',
-            theBlairWitch: 'The Blair Witch',
-            theThreeMothers: 'The Three Mothers',
+            diseasedCinema: 'Cinema Adoecido',
             tarantinoUniverse: 'Tarantino Universe',
             hitchcockCollection: 'Hitchcock Collection',
-            USALandOfOpportunities: 'USA: Land of Opportunities',
+            larsVonTrierFilmography: 'Lars von Trier Filmography',
         }
     },
     button: {
