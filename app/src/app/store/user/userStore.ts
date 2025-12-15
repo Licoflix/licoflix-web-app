@@ -1,23 +1,19 @@
-import { makeAutoObservable, runInAction } from "mobx";
-import { DataListResponse } from "../../model/DataListResponse";
-import { UserFormValues, UserResponse } from "../../model/UserResponse";
-import { router } from "../../router/Route";
+import {makeAutoObservable, runInAction} from "mobx";
+import {DataListResponse} from "../../model/DataListResponse";
+import {UserFormValues, UserResponse} from "../../model/UserResponse";
+import {router} from "../../router/Route";
 import service from "../../service/service";
-import { IBaseStore } from "../IBaseStore";
-import { store } from "../store";
+import {IBaseStore} from "../IBaseStore";
+import {store} from "../store";
 
 export default class UserStore implements IBaseStore<UserResponse> {
     searchTerm: string | null = '';
     onlyDeletedFilter: boolean = false;
     entity: UserResponse | undefined | null = null;
-    entityList: DataListResponse<UserResponse> = { data: [], totalElements: 0, totalPages: 0, };
+    entityList: DataListResponse<UserResponse> = {data: [], totalElements: 0, totalPages: 0,};
 
     constructor() {
         makeAutoObservable(this);
-    }
-
-    setDeletedFilter = (bool: boolean) => {
-        this.onlyDeletedFilter = bool;
     }
 
     setSearchTerm = (text: string) => {
@@ -25,7 +21,7 @@ export default class UserStore implements IBaseStore<UserResponse> {
     }
 
     login = async (creds: UserFormValues) => {
-        store.commonStore.setLoading(true);
+        await store.commonStore.setLoading(true);
         store.commonStore.setToken(null);
 
         try {
@@ -34,12 +30,8 @@ export default class UserStore implements IBaseStore<UserResponse> {
             store.commonStore.setToken(entity.data.token);
             router.navigate("/films");
         } catch {
-            store.commonStore.setLoading(false);
+            await store.commonStore.setLoading(false);
             router.navigate("/login");
-        } finally {
-            store.commonStore.setLoading(true);
-            await store.commonStore.initApp();
-            store.commonStore.setLoading(false);
         }
     }
 
@@ -65,18 +57,11 @@ export default class UserStore implements IBaseStore<UserResponse> {
                 store.commonStore.setToken(entity.data.token);
             if (overwriteToken)
                 router.navigate("/films");
-            store.commonStore.setLoading(false);
+            await store.commonStore.setLoading(false);
         } catch {
-            store.commonStore.setLoading(false);
+            await store.commonStore.setLoading(false);
             router.navigate("/register");
         }
-    }
-
-    edit = async (creds: UserFormValues) => {
-        await service.auth.edit(creds);
-        runInAction(() => {
-            this.list(1, null);
-        });
     }
 
     list = async (page?: any, pageSize?: any, search?: string) => {
@@ -100,8 +85,7 @@ export default class UserStore implements IBaseStore<UserResponse> {
                 runInAction(() => {
                     this.entity = response.data;
                 });
-            }
-            catch {
+            } catch {
                 await store.commonStore.setLoading(false);
                 router.navigate("/login");
             }
