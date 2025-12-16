@@ -1,11 +1,11 @@
-import { makeAutoObservable } from "mobx";
-import { toast } from 'react-toastify';
+import {makeAutoObservable} from "mobx";
+import {toast} from 'react-toastify';
 import * as Yup from 'yup';
-import { findTranslation } from "../../../common/language/translations";
-import { CategoryOption } from "../../../model/CategoryOption";
-import { Film, FilmRequest } from "../../../model/Film";
+import {findTranslation} from "../../../common/language/translations";
+import {CategoryOption} from "../../../model/CategoryOption";
+import {Film, FilmRequest} from "../../../model/Film";
 import service from "../../../service/service";
-import { store } from "../../store";
+import {store} from "../../store";
 
 export default class FilmFormStore {
 
@@ -71,77 +71,78 @@ export default class FilmFormStore {
     };
 
     ageOptions = [
-        { key: 0, text: 'L', value: 0 },
-        { key: 10, text: '10', value: 10 },
-        { key: 12, text: '12', value: 12 },
-        { key: 14, text: '14', value: 14 },
-        { key: 16, text: '16', value: 16 },
-        { key: 18, text: '18', value: 18 },
+        {key: 0, text: 'L', value: 0},
+        {key: 10, text: '10', value: 10},
+        {key: 12, text: '12', value: 12},
+        {key: 14, text: '14', value: 14},
+        {key: 16, text: '16', value: 16},
+        {key: 18, text: '18', value: 18},
     ];
 
     categoryOptions: CategoryOption[] = [
-        { key: 'action', text: 'Action', value: 'Action' },
-        { key: 'adventure', text: 'Adventure', value: 'Adventure' },
-        { key: 'comedy', text: 'Comedy', value: 'Comedy' },
-        { key: 'drama', text: 'Drama', value: 'Drama' },
-        { key: 'horror', text: 'Horror', value: 'Horror' },
-        { key: 'animation', text: 'Animation', value: 'Animation' },
-        { key: 'romance', text: 'Romance', value: 'Romance' },
-        { key: 'scienceFiction', text: 'scienceFiction', value: 'ScienceFiction' },
-        { key: 'fantasy', text: 'Fantasy', value: 'Fantasy' },
-        { key: 'thriller', text: 'Thriller', value: 'Thriller' },
-        { key: 'foundFootage ', text: 'foundFootage ', value: 'FoundFootage ' },
-        { key: 'mystery', text: 'Mystery', value: 'Mystery' },
-        { key: 'crime', text: 'Crime', value: 'Crime' },
-        { key: 'documentary', text: 'Documentary', value: 'Documentary' },
-        { key: 'biography', text: 'Biography', value: 'Biography' },
-        { key: 'war', text: 'War', value: 'War' },
-        { key: 'western', text: 'Western', value: 'Western' },
-        { key: 'family', text: 'Family', value: 'Family' },
-        { key: 'history', text: 'History', value: 'History' },
-        { key: 'sports', text: 'Sports', value: 'Sports' },
-        { key: 'musical', text: 'Musical', value: 'Musical' },
-        { key: 'noir', text: 'Noir', value: 'Noir' },
-        { key: 'experimental', text: 'Experimental', value: 'Experimental' },
-        { key: 'cult', text: 'Cult', value: 'Cult' },
-        { key: 'slasher', text: 'Slasher', value: 'Slasher' },
-        { key: 'japaneseAnimation', text: 'japaneseAnimation', value: 'JapaneseAnimation' },
+        {key: 'action', text: 'Action', value: 'Action'},
+        {key: 'adventure', text: 'Adventure', value: 'Adventure'},
+        {key: 'comedy', text: 'Comedy', value: 'Comedy'},
+        {key: 'drama', text: 'Drama', value: 'Drama'},
+        {key: 'horror', text: 'Horror', value: 'Horror'},
+        {key: 'animation', text: 'Animation', value: 'Animation'},
+        {key: 'romance', text: 'Romance', value: 'Romance'},
+        {key: 'scienceFiction', text: 'scienceFiction', value: 'ScienceFiction'},
+        {key: 'fantasy', text: 'Fantasy', value: 'Fantasy'},
+        {key: 'thriller', text: 'Thriller', value: 'Thriller'},
+        {key: 'foundFootage ', text: 'foundFootage ', value: 'FoundFootage '},
+        {key: 'mystery', text: 'Mystery', value: 'Mystery'},
+        {key: 'crime', text: 'Crime', value: 'Crime'},
+        {key: 'documentary', text: 'Documentary', value: 'Documentary'},
+        {key: 'biography', text: 'Biography', value: 'Biography'},
+        {key: 'war', text: 'War', value: 'War'},
+        {key: 'western', text: 'Western', value: 'Western'},
+        {key: 'family', text: 'Family', value: 'Family'},
+        {key: 'history', text: 'History', value: 'History'},
+        {key: 'sports', text: 'Sports', value: 'Sports'},
+        {key: 'musical', text: 'Musical', value: 'Musical'},
+        {key: 'noir', text: 'Noir', value: 'Noir'},
+        {key: 'experimental', text: 'Experimental', value: 'Experimental'},
+        {key: 'cult', text: 'Cult', value: 'Cult'},
+        {key: 'slasher', text: 'Slasher', value: 'Slasher'},
+        {key: 'japaneseAnimation', text: 'japaneseAnimation', value: 'JapaneseAnimation'},
+        {key: 'zombie', text: 'Zombie', value: 'Zombie'}
     ];
 
     getLanguageOptions = (): { key: string, text: string, value: string }[] => {
         return [
-            { key: 'arabic', text: 'Arabic', value: 'Arabic' },
-            { key: 'german', text: 'German', value: 'German' },
-            { key: 'bengali', text: 'Bengali', value: 'Bengali' },
-            { key: 'chinese', text: 'Chinese', value: 'Chinese' },
-            { key: 'korean', text: 'Korean', value: 'Korean' },
-            { key: 'danish', text: 'Danish', value: 'Danish' },
-            { key: 'spanish', text: 'Spanish', value: 'Spanish' },
-            { key: 'french', text: 'French', value: 'French' },
-            { key: 'greek', text: 'Greek', value: 'Greek' },
-            { key: 'hebrew', text: 'Hebrew', value: 'Hebrew' },
-            { key: 'english', text: 'English', value: 'English' },
-            { key: 'hindi', text: 'Hindi', value: 'Hindi' },
-            { key: 'dutch', text: 'Dutch', value: 'Dutch' },
-            { key: 'hungarian', text: 'Hungarian', value: 'Hungarian' },
-            { key: 'indonesian', text: 'Indonesian', value: 'Indonesian' },
-            { key: 'italian', text: 'Italian', value: 'Italian' },
-            { key: 'japanese', text: 'Japanese', value: 'Japanese' },
-            { key: 'norwegian', text: 'Norwegian', value: 'Norwegian' },
-            { key: 'persian', text: 'Persian', value: 'Persian' },
-            { key: 'polish', text: 'Polish', value: 'Polish' },
-            { key: 'portuguesePortugal', text: 'portuguesePortugal', value: 'portuguesePortugal' },
-            { key: 'romanian', text: 'Romanian', value: 'Romanian' },
-            { key: 'russian', text: 'Russian', value: 'Russian' },
-            { key: 'swedish', text: 'Swedish', value: 'Swedish' },
-            { key: 'thai', text: 'Thai', value: 'Thai' },
-            { key: 'tamil', text: 'Tamil', value: 'Tamil' },
-            { key: 'telugu', text: 'Telugu', value: 'Telugu' },
-            { key: 'turkish', text: 'Turkish', value: 'Turkish' },
-            { key: 'ukrainian', text: 'Ukrainian', value: 'Ukrainian' },
-            { key: 'urdu', text: 'Urdu', value: 'Urdu' },
-            { key: 'vietnamese', text: 'Vietnamese', value: 'Vietnamese' },
-            { key: 'portugueseBrazil', text: 'portugueseBrazil', value: 'portugueseBrazil' }
+            {key: 'arabic', text: 'Arabic', value: 'Arabic'},
+            {key: 'german', text: 'German', value: 'German'},
+            {key: 'bengali', text: 'Bengali', value: 'Bengali'},
+            {key: 'chinese', text: 'Chinese', value: 'Chinese'},
+            {key: 'korean', text: 'Korean', value: 'Korean'},
+            {key: 'danish', text: 'Danish', value: 'Danish'},
+            {key: 'spanish', text: 'Spanish', value: 'Spanish'},
+            {key: 'french', text: 'French', value: 'French'},
+            {key: 'greek', text: 'Greek', value: 'Greek'},
+            {key: 'hebrew', text: 'Hebrew', value: 'Hebrew'},
+            {key: 'english', text: 'English', value: 'English'},
+            {key: 'hindi', text: 'Hindi', value: 'Hindi'},
+            {key: 'dutch', text: 'Dutch', value: 'Dutch'},
+            {key: 'hungarian', text: 'Hungarian', value: 'Hungarian'},
+            {key: 'indonesian', text: 'Indonesian', value: 'Indonesian'},
+            {key: 'italian', text: 'Italian', value: 'Italian'},
+            {key: 'japanese', text: 'Japanese', value: 'Japanese'},
+            {key: 'norwegian', text: 'Norwegian', value: 'Norwegian'},
+            {key: 'persian', text: 'Persian', value: 'Persian'},
+            {key: 'polish', text: 'Polish', value: 'Polish'},
+            {key: 'portuguesePortugal', text: 'portuguesePortugal', value: 'portuguesePortugal'},
+            {key: 'romanian', text: 'Romanian', value: 'Romanian'},
+            {key: 'russian', text: 'Russian', value: 'Russian'},
+            {key: 'swedish', text: 'Swedish', value: 'Swedish'},
+            {key: 'thai', text: 'Thai', value: 'Thai'},
+            {key: 'tamil', text: 'Tamil', value: 'Tamil'},
+            {key: 'telugu', text: 'Telugu', value: 'Telugu'},
+            {key: 'turkish', text: 'Turkish', value: 'Turkish'},
+            {key: 'ukrainian', text: 'Ukrainian', value: 'Ukrainian'},
+            {key: 'urdu', text: 'Urdu', value: 'Urdu'},
+            {key: 'vietnamese', text: 'Vietnamese', value: 'Vietnamese'},
+            {key: 'portugueseBrazil', text: 'portugueseBrazil', value: 'portugueseBrazil'}
         ];
     };
 
@@ -200,7 +201,7 @@ export default class FilmFormStore {
         const base64Content = base64Data.split(',')[1];
         const blob = this.base64ToBlob(base64Content, mimeString);
 
-        return new File([blob], filename, { type: mimeString });
+        return new File([blob], filename, {type: mimeString});
     }
 
     base64ToBlob(base64Data: string, mimeType: string): Blob {
@@ -212,7 +213,7 @@ export default class FilmFormStore {
             uintArray[i] = byteString.charCodeAt(i);
         }
 
-        return new Blob([uintArray], { type: mimeType });
+        return new Blob([uintArray], {type: mimeType});
     }
 
     get validationSchema() {
@@ -266,7 +267,7 @@ export default class FilmFormStore {
     }
 
     setFormValues = (newValues: Partial<FilmRequest>) => {
-        this.formValues = { ...this.formValues, ...newValues };
+        this.formValues = {...this.formValues, ...newValues};
     }
 
     onSubmit = async (request: FilmRequest, language: any) => {
