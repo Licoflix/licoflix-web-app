@@ -1335,8 +1335,20 @@ img {
     margin: 0 !important;
     padding: 0 !important;
     font-size: 5em !important;
-    max-width: fit-content !important;
     font-weight: bold !important;
+    max-width: fit-content !important;
+}
+
+.overlay-title-small {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    font-size: 0.5em !important;
+    margin-bottom: 2rem !important;
+    font-weight: normal !important;
+    line-height: initial !important;
+    max-width: fit-content !important;
+    max-height: fit-content !important;
 }
 
 .overlay-description {
