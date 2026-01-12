@@ -898,7 +898,7 @@ html {
     margin: 0 !important;
     border: none !important;
     color: white !important;
-    font-size: 4rem !important;
+    font-size: 3.4rem !important;
     margin-right: 1rem !important;
     display: inline-block !important;
 }
@@ -928,7 +928,7 @@ html {
     width: auto !important;
     height: auto !important;
     display: flex !important;
-    font-size: 1.2rem !important;
+    font-size: 1rem !important;
     text-align: start !important;
     margin-bottom: 0px !important;
     justify-content: start !important;

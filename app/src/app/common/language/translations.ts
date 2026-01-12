@@ -351,6 +351,7 @@ const translations: TranslationSections = {
             diseasedCinema: 'Cinema Adoecido',
             tarantinoUniverse: 'Universo Tarantino',
             hitchcockCollection: 'Coleção Hitchcock',
+            middleEarthCollection: 'Coleção Terra Média',
             larsVonTrierFilmography: 'Filmografia Lars von Trier',
         },
         en: {
@@ -358,6 +359,7 @@ const translations: TranslationSections = {
             diseasedCinema: 'Cinema Adoecido',
             tarantinoUniverse: 'Tarantino Universe',
             hitchcockCollection: 'Hitchcock Collection',
+            middleEarthCollection: 'Middle Earth Collection',
             larsVonTrierFilmography: 'Lars von Trier Filmography',
         }
     },
