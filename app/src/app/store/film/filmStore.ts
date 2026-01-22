@@ -194,7 +194,7 @@ export default class FilmStore implements IBaseStore<Film> {
     deleteEntity = async (id: any) => {
         await service.film.delete(id);
         await runInAction(async () => {
-            await this.list(1, 10, undefined, true);
+            await this.list(1, 10, undefined, true, "id", "desc");
         });
     }
 

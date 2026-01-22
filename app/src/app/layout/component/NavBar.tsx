@@ -37,7 +37,7 @@ const NavBar = () => {
         const loadData = async () => {
             if (location.pathname.includes("manage")) {
                 if (entityList.data.length === 0)
-                    await list(1, 10);
+                    await list(1, 10, undefined, true, "id", "desc");
                 if (userStore.entityList.data.length === 0)
                     await userStore.list(1, 10);
             }

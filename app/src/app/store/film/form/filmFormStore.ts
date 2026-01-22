@@ -278,7 +278,7 @@ export default class FilmFormStore {
             await service.film.create(formData);
         } finally {
             await store.filmStore.listGroupedSagaFilms();
-            await store.filmStore.list(1, 10, undefined, true);
+            await store.filmStore.list(1, 10, undefined, true, "id", "desc");
             await store.filmStore.listNewFilms(1, 10, true);
             toast.success(`${request.title} ${findTranslation("operationSuccess", language)}`);
             this.saving = false;
